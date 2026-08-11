@@ -1,148 +1,149 @@
-# Paul Napoleon Phiri — Portfolio
+# Paul Napoleon Phiri — Software Developer Portfolio
 
-Paul Napoleon Phiri's personal software-development portfolio, showcasing selected web
-and mobile projects, technical skills, work experience, qualifications, and
-engagement options.
+A responsive portfolio presenting my work across full-stack web development,
+mobile applications, APIs, payment integrations, and operational software.
 
-The active application is built with Next.js and lives in the `app/`,
-`components/`, and `data/` directories.
+Built with Next.js, React, and TypeScript, the site includes selected case
+studies, professional experience, technical skills, engagement options, and a
+downloadable résumé.
 
-## Tech stack
+[LinkedIn](https://linkedin.com/in/paul-phiri-2574281b0) ·
+[GitHub](https://github.com/MustbePaul) ·
+[Résumé](public/resume.pdf) ·
+[Email](mailto:phiri6paul@gmail.com)
 
-- Next.js 16 with the App Router
-- React 19
-- TypeScript
-- Framer Motion
-- React Hook Form and Zod
-- Lucide React
-- CSS
+## Portfolio highlights
 
-## Getting started
+- Five selected projects with clear ownership and contribution attribution
+- Responsive, accessible interface with reduced-motion support
+- Data-driven project, experience, qualification, and skills content
+- Client-side contact validation using React Hook Form and Zod
+- Static rendering with canonical, Open Graph, robots, sitemap, and structured metadata
+- Automated formatting, linting, type checking, and production build commands
 
-Requirements:
+## Selected projects
 
-- Node.js 20 or later
-- npm
+### Serenity Hub — Personal Project
 
-Install the dependencies and start the development server:
+<img src="public/images/serenity-hub.png" alt="Serenity Hub mobile welcome screen" width="320">
 
-```bash
-npm install
-npm run dev
-```
+A Flutter mental-wellness application backed by a Laravel API. I built the
+mobile experience and API workflows for authentication, guided media,
+progress tracking, therapist discovery, booking, mood check-ins, bookmarks,
+and support requests.
 
-Open [http://localhost:3000](http://localhost:3000) in a browser.
+- **Stack:** Flutter, Laravel 13, PHP 8.3, Provider, SQLite, REST API
+- **Source:** [MustbePaul/Serenity-Hub](https://github.com/MustbePaul/Serenity-Hub)
 
-## Available commands
+### Story Workshop Website — Client Project
 
-```bash
-npm run dev
-npm run build
-npm run start
-npm run lint
-npm run typecheck
-```
+<img src="public/images/story-workshop.png" alt="Story Workshop website homepage preview" width="720">
 
-- `dev` starts the local development server.
-- `build` creates and validates an optimized production build.
-- `start` serves the production build after `npm run build`.
-- `lint` runs ESLint and fails on warnings.
-- `typecheck` checks the TypeScript project without emitting files.
+Contributed to Story Workshop's public storytelling platform and protected CMS
+for articles, events, vacancies, bookings, newsletters, and submissions.
+
+**Stack:** React 19, Laravel 13, Sanctum, MySQL, React Query, Framer Motion
+
+### ZikoSpace — Terex Innovation Lab In-House Project
+
+<img src="public/images/zikospace.png" alt="ZikoSpace accommodation listings interface" width="720">
+
+As a Terex Innovation Lab developer, rebuilt authentication and routing,
+corrected persistent theming, and delivered accommodation-booking workflows.
+
+**Stack:** Laravel, PHP, JavaScript, MySQL, Tailwind CSS
+
+### TaxiHire / SWIFTR — Terex Innovation Lab In-House Project
+
+<img src="public/images/taxihire.png" alt="TaxiHire passenger ride-booking interface with demonstration data" width="720">
+
+Contributed passenger, driver, and administrator experiences plus PayChangu and
+OneKhusa payment integrations as part of the Terex Innovation Lab team.
+
+**Stack:** Flutter, Angular, Node.js, PayChangu, OneKhusa
+
+### Terex Website Redesign — Terex Innovation Lab In-House Project
+
+<img src="public/images/terex-website.png" alt="Preview of the new Terex Innovation Lab website under review" width="720">
+
+Contributed refreshed hero, partner, and initiative content with responsive
+layouts and purposeful scroll interactions. The redesign is **under review and
+not yet in production**; the existing Terex website remains the production site.
+
+**Stack:** React, JavaScript, CSS
+
+## Technology
+
+| Area        | Tools                                              |
+| ----------- | -------------------------------------------------- |
+| Application | Next.js 16, React 19, TypeScript                   |
+| Interface   | CSS, Framer Motion, Lucide React                   |
+| Forms       | React Hook Form, Zod                               |
+| Quality     | ESLint, Prettier, TypeScript                       |
+| Deployment  | Static Next.js output on a Node.js-compatible host |
 
 ## Project structure
 
 ```text
-app/
-  globals.css       Global styles
-  layout.tsx        Metadata, document layout, and structured data
-  page.tsx          Home page entry point
-components/
-  Portfolio.tsx     Portfolio sections and client-side interactions
-data/
-  portfolio.ts      Profile, skills, experience, projects, and pricing content
-public/
-  images/           Portrait and project screenshots
+app/                 Routes, metadata, sitemap, robots, and global styles
+components/          Portfolio interface and client-side interactions
+data/                Typed portfolio content
+public/images/       Portrait and project previews
+public/resume.pdf    Downloadable résumé
+resume/              Résumé source and GitHub profile copy
 ```
 
-## Updating portfolio content
+Routine portfolio content changes belong in `data/portfolio.ts`. UI behavior
+belongs in `components/Portfolio.tsx`.
 
-Routine content changes should be made in `data/portfolio.ts`. It contains:
+## Run locally
 
-- Profile and contact information
-- Navigation items
-- Skills and technologies
-- Work experience
-- Qualifications
-- Featured projects
-- Engagement options
-
-Project images belong in `public/images/`. Reference them from the project data
-with a root-relative path:
-
-```ts
-{
-  image: '/images/project-name.png',
-  imageAlt: 'A concise description of the project screenshot'
-}
-```
-
-Projects support optional `liveUrl`, `walkthroughUrl`, and `caseStudyUrl`
-properties. Links appear on a project card when a value is provided. Repository
-links are intentionally replaced with a confidentiality notice for private
-client and company work.
-
-Project names, branding, screenshots, artwork, and other intellectual property
-remain subject to their respective owners' rights. Public visibility of this
-portfolio does not grant permission to reuse those materials; see
-[`ASSET_RIGHTS.md`](ASSET_RIGHTS.md) for attribution categories.
-
-## Résumé download
-
-The résumé is stored at `public/resume.pdf` and linked from the hero. Replace
-that file with an updated PDF to publish a new version without changing the
-component.
-
-## Contact form
-
-The contact form validates input in the browser and opens the visitor's default
-email application with a prepared message. It does not send or store form data
-on a server.
-
-## Production validation
-
-Before deploying, create a production build:
-
-```bash
-npm run build
-```
-
-The application is statically rendered at `/`, so it does not currently require
-a database. Set `NEXT_PUBLIC_SITE_URL` to the full production origin so canonical,
-Open Graph, robots, and sitemap URLs point to the deployed site:
-
-```bash
-NEXT_PUBLIC_SITE_URL=https://your-domain.example
-```
-
-## Deployment
-
-### Vercel
-
-1. Push the project to a Git repository.
-2. Import it into Vercel.
-3. Keep the detected Next.js build settings.
-4. Deploy.
-
-### Other Node.js hosts
-
-Run:
+Requirements: Node.js 20.9 or later and npm.
 
 ```bash
 npm install
-npm run build
-npm run start
+cp .env.example .env
+npm run dev
 ```
 
-The host must support a current Node.js runtime. Add a custom domain through
-the selected host and update the site's canonical and social metadata when the
-final production URL is known.
+On Windows PowerShell, replace the copy command with:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Quality checks
+
+```bash
+npm run format:check
+npm run lint
+npm run typecheck
+npm run build
+npm audit --omit=dev
+```
+
+The application is statically rendered and does not require a database or
+server-side contact endpoint. Form submission opens the visitor's email client;
+no message is stored by the site.
+
+## Deployment configuration
+
+Set the public production origin before building:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://your-domain.example
+```
+
+This value drives canonical, Open Graph, robots, and sitemap URLs.
+
+## Ownership and reuse
+
+Serenity Hub is my personal project. Story Workshop is a client project.
+ZikoSpace, TaxiHire/SWIFTR, and the Terex website redesign belong to Terex
+Innovation Lab and are presented to document my professional contributions.
+
+This repository is intentionally unlicensed. Public visibility does not grant
+permission to reuse client/employer branding, screenshots, artwork, interfaces,
+or other intellectual property. See [ASSET_RIGHTS.md](ASSET_RIGHTS.md).
