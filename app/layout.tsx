@@ -69,7 +69,7 @@ export default function RootLayout({
     },
     sameAs: [
       "https://github.com/MustbePaul",
-      "https://linkedin.com/in/paul-phiri-2574281b0",
+      "https://www.linkedin.com/in/paul-napoleon-phiri",
     ],
   };
   const fontVariables = `${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`;

@@ -67,5 +67,5 @@ Technology — graduated 6 August 2026.
 [Portfolio](https://paul-phiri-portfolio.vercel.app) ·
 
 [Email](mailto:phiri6paul@gmail.com) ·
-[LinkedIn](https://linkedin.com/in/paul-phiri-2574281b0) ·
+[LinkedIn](https://www.linkedin.com/in/paul-napoleon-phiri) ·
 [GitHub](https://github.com/MustbePaul)

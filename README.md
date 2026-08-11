@@ -8,7 +8,7 @@ studies, professional experience, technical skills, engagement options, and a
 downloadable résumé.
 
 [Live Portfolio](https://paul-phiri-portfolio.vercel.app) ·
-[LinkedIn](https://linkedin.com/in/paul-phiri-2574281b0) ·
+[LinkedIn](https://www.linkedin.com/in/paul-napoleon-phiri) ·
 [GitHub](https://github.com/MustbePaul) ·
 [Résumé](public/resume.pdf) ·
 [Email](mailto:phiri6paul@gmail.com)

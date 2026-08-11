@@ -43,7 +43,7 @@ export const profile = {
   location: "Blantyre, Malawi",
   email: "phiri6paul@gmail.com",
   github: "https://github.com/MustbePaul",
-  linkedin: "https://linkedin.com/in/paul-phiri-2574281b0",
+  linkedin: "https://www.linkedin.com/in/paul-napoleon-phiri",
   roles: [
     "Full-Stack Software Developer",
     "Flutter Developer",
