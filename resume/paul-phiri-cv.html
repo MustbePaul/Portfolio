@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paul Napoleon Phiri — CV</title>
+  <style>
+    :root {
+      --color-paper: oklch(99% 0.004 90); --color-ink: oklch(20% 0.025 255);
+      --color-soft: oklch(43% 0.025 255); --color-rule: oklch(84% 0.02 255);
+      --color-accent: oklch(48% 0.15 255); --color-accent-soft: oklch(95% 0.025 255);
+      --font-display: Georgia, serif; --font-body: Arial, sans-serif;
+      --space-xs: 4px; --space-sm: 8px; --space-md: 12px; --space-lg: 16px; --space-xl: 24px;
+      --text-xs: 8.5pt; --text-sm: 9.4pt; --text-md: 10pt; --text-lg: 13pt; --text-xl: 20pt;
+      --rule-hair: 1px; --radius-sm: 3px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-sm); line-height: 1.42; }
+    body { padding: 14mm 16mm; }
+    header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-xl); align-items: end; padding-bottom: var(--space-lg); border-bottom: 2px solid var(--color-ink); }
+    h1 { margin: 0; font-family: var(--font-display); font-size: 27pt; line-height: 1; letter-spacing: -.6px; }
+    .title { margin: var(--space-sm) 0 0; color: var(--color-accent); font-weight: 700; font-size: var(--text-lg); }
+    .contact { text-align: right; font-size: var(--text-xs); line-height: 1.65; }
+    a { color: inherit; text-decoration: none; }
+    main { display: grid; grid-template-columns: 2.15fr 1fr; gap: 7mm; padding-top: var(--space-lg); }
+    section { break-inside: avoid; margin-bottom: var(--space-lg); }
+    h2 { margin: 0 0 var(--space-sm); padding-bottom: var(--space-xs); border-bottom: var(--rule-hair) solid var(--color-rule); color: var(--color-accent); font-size: var(--text-xs); letter-spacing: 1.1px; text-transform: uppercase; }
+    h3 { margin: 0; font-size: var(--text-md); line-height: 1.25; }
+    p { margin: 0; }
+    .summary { font-size: var(--text-md); line-height: 1.5; }
+    .entry { break-inside: avoid; margin-bottom: var(--space-md); }
+    .entry-head { display: flex; justify-content: space-between; gap: var(--space-md); align-items: baseline; }
+    .entry-meta { color: var(--color-soft); font-size: var(--text-xs); white-space: nowrap; }
+    .organisation { margin: 2px 0 var(--space-xs); color: var(--color-soft); font-weight: 700; }
+    ul { margin: var(--space-xs) 0 0; padding-left: 15px; }
+    li { margin: 0 0 3px; }
+    .stack { margin-top: var(--space-xs); color: var(--color-soft); font-size: var(--text-xs); }
+    .skill-group { margin-bottom: var(--space-sm); }
+    .skill-group strong { display: block; margin-bottom: 2px; }
+    .pill { display: inline-block; margin: 0 3px 3px 0; padding: 2px 5px; border-radius: var(--radius-sm); background: var(--color-accent-soft); font-size: var(--text-xs); }
+    .small { color: var(--color-soft); font-size: var(--text-xs); }
+    @page { size: A4; margin: 0; }
+    @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+    @media (max-width: 700px) { body { padding: 24px; } header, main { grid-template-columns: 1fr; } .contact { text-align: left; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Paul Napoleon Phiri</h1>
+      <p class="title">Full-Stack Software Developer</p>
+    </div>
+    <div class="contact">
+      Blantyre, Malawi · +265 997 765 664<br>
+      <a href="mailto:phiri6paul@gmail.com">phiri6paul@gmail.com</a><br>
+      <a href="https://github.com/MustbePaul">github.com/MustbePaul</a><br>
+      <a href="https://linkedin.com/in/paul-phiri-2574281b0">linkedin.com/in/paul-phiri-2574281b0</a>
+    </div>
+  </header>
+
+  <main>
+    <div>
+      <section>
+        <h2>Profile</h2>
+        <p class="summary">Business Information Technology graduate and full-stack developer building dependable web and mobile systems with Laravel, React, Next.js and Flutter. Experienced across booking platforms, content systems, payment integrations, offline-first applications and operational dashboards for financial institutions, NGOs and growing businesses.</p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        <article class="entry">
+          <div class="entry-head"><h3>Software Developer</h3><span class="entry-meta">2026 — Present</span></div>
+          <p class="organisation">Terex Innovation Lab Limited · Blantyre, Malawi</p>
+          <ul>
+            <li>Develop frontend and backend systems using Laravel, PHP, JavaScript, React and Flutter.</li>
+            <li>Delivered a dual payment-gateway integration after hosting constraints required a mid-build technical pivot.</li>
+            <li>Contribute to ZikoSpace, TaxiHire/SWIFTR and the new Terex website currently under review.</li>
+            <li>Build role-specific booking, payment and content-management workflows across web and mobile interfaces.</li>
+          </ul>
+        </article>
+        <article class="entry">
+          <div class="entry-head"><h3>Operations &amp; Financial Records Assistant</h3><span class="entry-meta">Ongoing</span></div>
+          <p class="organisation">Naporcas Business Center · Lilongwe, Malawi</p>
+          <ul>
+            <li>Manage rental fee collection and maintain accurate financial records.</li>
+            <li>Track income, expenditure and payment documentation for reliable reconciliation.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Selected Projects</h2>
+        <article class="entry">
+          <h3>Serenity Hub · Personal Project</h3>
+          <ul>
+            <li>Built a Flutter client and versioned Laravel 13 API covering authentication, searchable resources, guided audio/video sessions and playback progress.</li>
+            <li>Implemented mood-informed recommendations, therapist availability, appointment booking, bookmarks, mood check-ins and support requests.</li>
+          </ul>
+          <p class="stack">Flutter · Dart · Laravel 13 · PHP 8.3 · Provider · SQLite · REST API · <a href="https://github.com/MustbePaul/Serenity-Hub">Public repository</a></p>
+        </article>
+        <article class="entry">
+          <h3>Story Workshop Website &amp; CMS · Client Project</h3>
+          <p>Contributed to Story Workshop's public storytelling platform and protected CMS for articles, events, vacancies, bookings, newsletters and submissions.</p>
+          <p class="stack">React 19 · Laravel 13 · Sanctum · MySQL · React Query · Framer Motion</p>
+        </article>
+        <article class="entry">
+          <h3>ZikoSpace &amp; TaxiHire / SWIFTR · Terex In-House Projects</h3>
+          <p>Contributed as a Terex Innovation Lab developer: delivered authentication, routing and accommodation booking workflows for ZikoSpace; developed passenger, driver and administrator booking experiences plus PayChangu and OneKhusa payment integrations for TaxiHire.</p>
+          <p class="stack">Laravel · PHP · JavaScript · MySQL · Flutter · Angular · Node.js</p>
+        </article>
+      </section>
+    </div>
+
+    <aside>
+      <section>
+        <h2>Education</h2>
+        <article class="entry">
+          <h3>BSc Business Information and Technology</h3>
+          <p class="organisation">Malawi University of Science and Technology</p>
+          <p>2022 — August 2026</p>
+          <p class="small">Graduated 6 August 2026</p>
+        </article>
+        <article class="entry">
+          <h3>AS Level</h3>
+          <p class="organisation">Kamuzu Academy</p>
+          <p class="small">2020 — 2021</p>
+        </article>
+        <article class="entry">
+          <h3>IGCSE</h3>
+          <p class="organisation">Kamuzu Academy</p>
+          <p class="small">2015 — 2020</p>
+        </article>
+      </section>
+
+      <section>
+        <h2>Technical Skills</h2>
+        <div class="skill-group"><strong>Backend</strong><span class="pill">Laravel</span><span class="pill">PHP</span><span class="pill">Node.js</span><span class="pill">REST APIs</span></div>
+        <div class="skill-group"><strong>Frontend &amp; Mobile</strong><span class="pill">React</span><span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">Angular</span><span class="pill">Flutter</span><span class="pill">Tailwind CSS</span></div>
+        <div class="skill-group"><strong>Data</strong><span class="pill">MySQL</span><span class="pill">PostgreSQL</span><span class="pill">SQLite</span><span class="pill">SQL</span></div>
+        <div class="skill-group"><strong>Tools</strong><span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">Postman</span><span class="pill">Figma</span><span class="pill">VS Code</span></div>
+      </section>
+
+      <section>
+        <h2>Core Strengths</h2>
+        <ul>
+          <li>Full-stack product delivery</li>
+          <li>API design and integration</li>
+          <li>Booking and payment workflows</li>
+          <li>Offline-first applications</li>
+          <li>CMS and dashboard development</li>
+          <li>Database-backed systems</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Additional Work</h2>
+        <p>Terex Innovation Lab in-house project: contributed to a new website experience with refreshed partner and initiative content, responsive interfaces and scroll interactions. Under review and not yet in production; the existing website remains in production.</p>
+      </section>
+    </aside>
+  </main>
+</body>
+</html>

@@ -1,0 +1,15 @@
+node_modules/
+.node_modules-*
+.next/
+.next-*
+out
+dist/
+.vercel
+.env*
+!.env.example
+npm-debug.log*
+*.log
+*.tsbuildinfo
+coverage/
+.DS_Store
+.hallmark/
