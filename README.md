@@ -7,6 +7,7 @@ Built with Next.js, React, and TypeScript, the site includes selected case
 studies, professional experience, technical skills, engagement options, and a
 downloadable résumé.
 
+[Live Portfolio](https://paul-phiri-portfolio.vercel.app) ·
 [LinkedIn](https://linkedin.com/in/paul-phiri-2574281b0) ·
 [GitHub](https://github.com/MustbePaul) ·
 [Résumé](public/resume.pdf) ·

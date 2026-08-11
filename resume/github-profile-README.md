@@ -8,6 +8,8 @@ Currently working as a Software Developer at **Terex Innovation Lab Limited**
 and open to software-engineering roles, collaborations, and selected freelance
 projects.
 
+**Portfolio:** [paul-phiri-portfolio.vercel.app](https://paul-phiri-portfolio.vercel.app)
+
 ## Selected work
 
 ### [Serenity Hub](https://github.com/MustbePaul/Serenity-Hub) — Personal Project
@@ -61,6 +63,8 @@ BSc in Business Information and Technology, Malawi University of Science and
 Technology — graduated 6 August 2026.
 
 ## Contact
+
+[Portfolio](https://paul-phiri-portfolio.vercel.app) ·
 
 [Email](mailto:phiri6paul@gmail.com) ·
 [LinkedIn](https://linkedin.com/in/paul-phiri-2574281b0) ·
