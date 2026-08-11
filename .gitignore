@@ -11,5 +11,8 @@ npm-debug.log*
 *.log
 *.tsbuildinfo
 coverage/
+test-results/
+playwright-report/
+.lighthouseci/
 .DS_Store
 .hallmark/

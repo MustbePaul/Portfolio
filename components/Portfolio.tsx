@@ -1,46 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  LazyMotion,
+  domAnimation,
+  m,
+  useReducedMotion,
+} from "framer-motion";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { contactSchema, type ContactValues } from "@/lib/contact";
 import {
   ArrowDown,
   ArrowUp,
   ArrowUpRight,
   Check,
-  Database,
   Github,
   Linkedin,
   Mail,
   Menu,
-  Server,
   X,
-  Cloud,
-  Code2,
   MapPin,
   MessageCircle,
 } from "lucide-react";
 import {
   engagementOptions,
   experiences,
-  marqueeSkills,
   navigation,
   profile,
   projects,
   qualifications,
   skillCategories,
 } from "@/data/portfolio";
-
-const formSchema = z.object({
-  name: z.string().min(2, "Enter at least 2 characters."),
-  email: z.string().email("Enter a valid email address."),
-  message: z.string().min(5, "Enter at least 5 characters."),
-});
-type ContactValues = z.infer<typeof formSchema>;
-const icons = [Server, Code2, Database, Cloud];
 
 function Reveal({
   children,
@@ -49,21 +42,12 @@ function Reveal({
   children: React.ReactNode;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
-  const canLift = className.includes("glass-card");
-  return (
-    <motion.div
-      className={className}
-      initial={reduce ? false : { opacity: 0, y: 24 }}
-      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-      whileHover={!reduce && canLift ? { y: -4 } : undefined}
-      viewport={{ once: true, amount: 0.16 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
+
+const headerNavigation = navigation.filter((item) =>
+  ["Home", "Experience", "Projects", "Contact"].includes(item),
+);
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -99,7 +83,7 @@ function Header() {
           PP<span>.</span>
         </a>
         <nav className="desktop-nav" aria-label="Primary">
-          {navigation.map((item) => {
+          {headerNavigation.map((item) => {
             const id = item.toLowerCase();
             return (
               <a
@@ -126,7 +110,7 @@ function Header() {
       </div>
       <AnimatePresence>
         {open && (
-          <motion.nav
+          <m.nav
             id="mobile-navigation"
             className="mobile-nav"
             aria-label="Mobile navigation"
@@ -135,7 +119,7 @@ function Header() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
           >
-            {navigation.map((item) => (
+            {headerNavigation.map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -145,7 +129,7 @@ function Header() {
                 <ArrowUpRight aria-hidden="true" />
               </a>
             ))}
-          </motion.nav>
+          </m.nav>
         )}
       </AnimatePresence>
     </header>
@@ -180,18 +164,18 @@ function Hero() {
   };
   return (
     <section id="home" className="hero section">
-      <motion.div
+      <m.div
         className="container hero-grid"
         variants={parent}
-        initial="hidden"
+        initial={false}
         animate="visible"
       >
         <div className="hero-main">
-          <motion.p variants={child} className="eyebrow">
+          <m.p variants={child} className="eyebrow">
             Hello, I’m
-          </motion.p>
-          <motion.h1 variants={child}>{profile.name}</motion.h1>
-          <motion.div
+          </m.p>
+          <m.h1 variants={child}>{profile.name}</m.h1>
+          <m.div
             variants={child}
             className="role-line"
             aria-live="polite"
@@ -204,7 +188,7 @@ function Hero() {
           >
             <span>I’m a </span>
             <AnimatePresence mode="wait">
-              <motion.strong
+              <m.strong
                 key={profile.roles[role]}
                 initial={reduce ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -212,21 +196,21 @@ function Hero() {
                 transition={{ duration: 0.25 }}
               >
                 {profile.roles[role]}
-              </motion.strong>
+              </m.strong>
             </AnimatePresence>
-          </motion.div>
-          <motion.p variants={child} className="hero-copy">
+          </m.div>
+          <m.p variants={child} className="hero-copy">
             {profile.biography}
-          </motion.p>
-          <motion.div variants={child} className="button-row">
+          </m.p>
+          <m.div variants={child} className="button-row">
             <a className="button primary" href="#contact">
               Get in touch <ArrowUpRight />
             </a>
             <a className="button secondary" href="/resume.pdf" download>
               Download résumé <ArrowDown />
             </a>
-          </motion.div>
-          <motion.div variants={child} className="socials">
+          </m.div>
+          <m.div variants={child} className="socials">
             <a
               href={profile.github}
               target="_blank"
@@ -249,27 +233,27 @@ function Hero() {
             >
               <Mail />
             </a>
-          </motion.div>
+          </m.div>
         </div>
-        <motion.aside
+        <m.aside
           variants={child}
           className="hero-visual"
           aria-label="Portrait and availability"
         >
-          <motion.figure
+          <m.figure
             className="portrait-frame"
             whileHover={reduce ? undefined : { y: -6 }}
             transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
           >
             <Image
               className="portrait-image"
-              src="/images/paul-phiri.png"
+              src="/images/paul-phiri.webp"
               alt="Paul Napoleon Phiri wearing a navy suit and glasses"
               fill
               priority
               sizes="(max-width: 640px) 100vw, 34vw"
             />
-          </motion.figure>
+          </m.figure>
           <div className="hero-status">
             <span className="status-dot" />
             <div>
@@ -277,11 +261,11 @@ function Hero() {
               <span>{profile.location}</span>
             </div>
           </div>
-        </motion.aside>
-        <motion.a variants={child} className="scroll-cue" href="#skills">
+        </m.aside>
+        <m.a variants={child} className="scroll-cue" href="#skills">
           Scroll to explore <ArrowDown />
-        </motion.a>
-      </motion.div>
+        </m.a>
+      </m.div>
     </section>
   );
 }
@@ -291,13 +275,13 @@ function SectionHead({
   title,
   copy,
 }: {
-  label: string;
+  label?: string;
   title: string;
   copy: string;
 }) {
   return (
     <Reveal className="section-head">
-      <p className="eyebrow">{label}</p>
+      {label && <p className="eyebrow">{label}</p>}
       <h2>{title}</h2>
       <p>{copy}</p>
     </Reveal>
@@ -309,35 +293,23 @@ function Skills() {
     <section id="skills" className="section">
       <div className="container">
         <SectionHead
-          label="Capabilities"
           title="Skills & technologies"
           copy="A pragmatic toolkit for building reliable products from interface to integration."
         />
-        <div
-          className="marquee"
-          aria-label={`Technologies: ${marqueeSkills.join(", ")}`}
-        >
-          <div className="marquee-track" aria-hidden="true">
-            {[...marqueeSkills, ...marqueeSkills].map((item, index) => (
-              <span key={`${item}-${index}`}>{item}</span>
-            ))}
-          </div>
-        </div>
-        <div className="skill-grid">
-          {skillCategories.map((group, index) => {
-            const Icon = icons[index];
-            return (
-              <Reveal key={group.id} className="glass-card skill-card">
-                <Icon aria-hidden="true" />
-                <h3>{group.title}</h3>
-                <div className="tags">
-                  {group.technologies.map((technology) => (
-                    <span key={technology}>{technology}</span>
-                  ))}
-                </div>
-              </Reveal>
-            );
-          })}
+        <div className="capability-list">
+          {skillCategories.map((group, index) => (
+            <div key={group.id} className="capability-row">
+              <span className="capability-index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3>{group.title}</h3>
+              <div className="tags">
+                {group.technologies.map((technology) => (
+                  <span key={technology}>{technology}</span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -349,7 +321,6 @@ function Experience() {
     <section id="experience" className="section section-alt">
       <div className="container">
         <SectionHead
-          label="Career"
           title="Work experience"
           copy="Roles where software delivery, operational care and communication meet."
         />
@@ -387,7 +358,6 @@ function Qualifications() {
     <section id="qualification" className="section">
       <div className="container">
         <SectionHead
-          label="Foundation"
           title="Education & qualifications"
           copy="Academic grounding across technology, systems and business."
         />
@@ -535,7 +505,6 @@ function Pricing() {
     <section id="pricing" className="section">
       <div className="container">
         <SectionHead
-          label="Ways to work together"
           title="Engagement options"
           copy="Every project is scoped around the problem. These starting points make the first conversation concrete—rates follow a confirmed brief."
         />
@@ -564,21 +533,51 @@ function Pricing() {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [delivery, setDelivery] = useState<
+    | { state: "idle" }
+    | { state: "success"; message: string }
+    | { state: "error"; message: string }
+  >({ state: "idle" });
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
-  } = useForm<ContactValues>({ resolver: zodResolver(formSchema) });
-  const submit = (values: ContactValues) => {
-    setSent(true);
-    const subject = encodeURIComponent(`Portfolio enquiry from ${values.name}`);
-    const body = encodeURIComponent(
-      `${values.message}\n\nReply to: ${values.email}`,
-    );
-    window.location.assign(
-      `mailto:${profile.email}?subject=${subject}&body=${body}`,
-    );
+  } = useForm<ContactValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+      website: "",
+    },
+  });
+  const submit = async (values: ContactValues) => {
+    setDelivery({ state: "idle" });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const result = (await response.json()) as { error?: string };
+      if (!response.ok)
+        throw new Error(result.error ?? "Message delivery failed.");
+      reset();
+      setDelivery({
+        state: "success",
+        message: "Message sent. I’ll get back to you as soon as I can.",
+      });
+    } catch (error) {
+      setDelivery({
+        state: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Message delivery failed. Please use the email link instead.",
+      });
+    }
   };
   const whatsApp = `https://wa.me/265997765664?text=${encodeURIComponent(`Hello Paul, I found your portfolio and would like to discuss a project.`)}`;
   return (
@@ -648,6 +647,7 @@ function Contact() {
                 <input
                   id="name"
                   autoComplete="name"
+                  maxLength={80}
                   aria-invalid={!!errors.name}
                   aria-describedby="name-error"
                   {...register("name")}
@@ -662,6 +662,7 @@ function Contact() {
                   id="email"
                   type="email"
                   autoComplete="email"
+                  maxLength={254}
                   aria-invalid={!!errors.email}
                   aria-describedby="email-error"
                   {...register("email")}
@@ -675,6 +676,7 @@ function Contact() {
                 <textarea
                   id="message"
                   rows={6}
+                  maxLength={5000}
                   aria-invalid={!!errors.message}
                   aria-describedby="message-error"
                   {...register("message")}
@@ -683,21 +685,44 @@ function Contact() {
                   {errors.message?.message}
                 </p>
               </div>
+              <div className="field">
+                <label htmlFor="subject">Subject</label>
+                <input
+                  id="subject"
+                  autoComplete="off"
+                  maxLength={120}
+                  aria-invalid={!!errors.subject}
+                  aria-describedby="subject-error"
+                  {...register("subject")}
+                />
+                <p id="subject-error" className="field-message">
+                  {errors.subject?.message}
+                </p>
+              </div>
+              <div className="honeypot" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  {...register("website")}
+                />
+              </div>
               <button
                 className="button primary submit"
                 disabled={isSubmitting}
                 type="submit"
               >
-                {isSubmitting
-                  ? "Preparing…"
-                  : sent
-                    ? "Open email app"
-                    : "Send message"}{" "}
-                <ArrowUpRight />
+                {isSubmitting ? "Sending…" : "Send message"} <ArrowUpRight />
               </button>
-              <p className="form-note">
-                Submitting opens your email app. No message is stored on this
-                site.
+              <p
+                className={`form-note ${delivery.state === "error" ? "form-note-error" : ""}`}
+                role={delivery.state === "error" ? "alert" : "status"}
+                aria-live="polite"
+              >
+                {delivery.state === "idle"
+                  ? "Your message is delivered securely by email."
+                  : delivery.message}
               </p>
             </form>
           </Reveal>
@@ -709,7 +734,7 @@ function Contact() {
 
 export default function Portfolio() {
   return (
-    <>
+    <LazyMotion features={domAnimation} strict>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -736,6 +761,6 @@ export default function Portfolio() {
           </a>
         </div>
       </footer>
-    </>
+    </LazyMotion>
   );
 }

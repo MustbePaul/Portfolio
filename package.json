@@ -11,8 +11,10 @@
     "start": "next start",
     "lint": "eslint app components data next.config.mjs eslint.config.mjs --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write components/Portfolio.tsx data/portfolio.ts",
-    "format:check": "prettier --check components/Portfolio.tsx data/portfolio.ts"
+    "format": "prettier --write app/layout.tsx app/robots.ts app/sitemap.ts app/opengraph-image.tsx app/twitter-image.tsx app/social-card.tsx app/api/contact/route.ts app/globals.css components data lib tests playwright.config.ts lighthouserc.json package.json README.md",
+    "format:check": "prettier --check app/layout.tsx app/robots.ts app/sitemap.ts app/opengraph-image.tsx app/twitter-image.tsx app/social-card.tsx app/api/contact/route.ts app/globals.css components data lib tests playwright.config.ts lighthouserc.json package.json README.md",
+    "test:e2e": "playwright test",
+    "lighthouse": "lhci autorun"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -22,9 +24,12 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-hook-form": "^7.54.2",
+    "resend": "^6.19.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.62.1",
     "@types/node": "^22.10.5",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
@@ -33,6 +38,7 @@
     "eslint-config-next": "^16.3.0",
     "postcss": "^8.4.47",
     "prettier": "3.6.2",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.7.2"
   }

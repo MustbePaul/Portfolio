@@ -211,7 +211,7 @@ export const projects: Project[] = [
       "React Query",
       "Framer Motion",
     ],
-    image: "/images/story-workshop.png",
+    image: "/images/story-workshop.webp",
     imageAlt:
       "Story Workshop website hero presenting its changing lives through storytelling mission",
   },
@@ -229,7 +229,7 @@ export const projects: Project[] = [
       "Theme persistence",
     ],
     technologies: ["Laravel", "PHP", "JavaScript", "MySQL", "Tailwind CSS"],
-    image: "/images/zikospace.png",
+    image: "/images/zikospace.webp",
     imageAlt: "ZikoSpace accommodation listings interface",
   },
   {
@@ -246,7 +246,7 @@ export const projects: Project[] = [
       "Passenger, driver and admin experiences",
     ],
     technologies: ["Flutter", "Angular", "Node.js", "PayChangu", "OneKhusa"],
-    image: "/images/taxihire.png",
+    image: "/images/taxihire.webp",
     imageAlt: "TaxiHire route booking interface",
   },
   {
@@ -264,7 +264,7 @@ export const projects: Project[] = [
       "Scroll interactions",
     ],
     technologies: ["React", "JavaScript", "CSS"],
-    image: "/images/terex-website.png",
+    image: "/images/terex-website.webp",
     imageAlt:
       "Preview of the new Terex Innovation Lab website currently under review",
   },

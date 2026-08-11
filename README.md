@@ -37,7 +37,7 @@ and support requests.
 
 ### Story Workshop Website — Client Project
 
-<img src="public/images/story-workshop.png" alt="Story Workshop website homepage preview" width="720">
+<img src="public/images/story-workshop.webp" alt="Story Workshop website homepage preview" width="720">
 
 Contributed to Story Workshop's public storytelling platform and protected CMS
 for articles, events, vacancies, bookings, newsletters, and submissions.
@@ -46,7 +46,7 @@ for articles, events, vacancies, bookings, newsletters, and submissions.
 
 ### ZikoSpace — Terex Innovation Lab In-House Project
 
-<img src="public/images/zikospace.png" alt="ZikoSpace accommodation listings interface" width="720">
+<img src="public/images/zikospace.webp" alt="ZikoSpace accommodation listings interface" width="720">
 
 As a Terex Innovation Lab developer, rebuilt authentication and routing,
 corrected persistent theming, and delivered accommodation-booking workflows.
@@ -55,7 +55,7 @@ corrected persistent theming, and delivered accommodation-booking workflows.
 
 ### TaxiHire / SWIFTR — Terex Innovation Lab In-House Project
 
-<img src="public/images/taxihire.png" alt="TaxiHire passenger ride-booking interface with demonstration data" width="720">
+<img src="public/images/taxihire.webp" alt="TaxiHire passenger ride-booking interface with demonstration data" width="720">
 
 Contributed passenger, driver, and administrator experiences plus PayChangu and
 OneKhusa payment integrations as part of the Terex Innovation Lab team.
@@ -64,7 +64,7 @@ OneKhusa payment integrations as part of the Terex Innovation Lab team.
 
 ### Terex Website Redesign — Terex Innovation Lab In-House Project
 
-<img src="public/images/terex-website.png" alt="Preview of the new Terex Innovation Lab website under review" width="720">
+<img src="public/images/terex-website.webp" alt="Preview of the new Terex Innovation Lab website under review" width="720">
 
 Contributed refreshed hero, partner, and initiative content with responsive
 layouts and purposeful scroll interactions. The redesign is **under review and
@@ -121,22 +121,37 @@ npm run format:check
 npm run lint
 npm run typecheck
 npm run build
+npm run test:e2e
+npm run lighthouse
 npm audit --omit=dev
 ```
 
-The application is statically rendered and does not require a database or
-server-side contact endpoint. Form submission opens the visitor's email client;
-no message is stored by the site.
+The portfolio pages are statically rendered. Contact delivery uses a Next.js
+route handler and Resend; no database is required.
 
 ## Deployment configuration
 
-Set the public production origin before building:
+Import the repository into Vercel. If the repository contains a parent folder,
+set the Vercel root directory to `portfolio`. The first Vercel build can use
+Vercel's automatically supplied production hostname. Once Vercel assigns the
+permanent `*.vercel.app` URL, add it to all production environments and
+redeploy:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://your-domain.example
+NEXT_PUBLIC_SITE_URL=https://your-project.vercel.app
+RESEND_API_KEY=re_your_api_key
+CONTACT_TO_EMAIL=phiri6paul@gmail.com
+CONTACT_FROM_EMAIL=Portfolio <hello@your-verified-sending-domain.example>
 ```
 
-This value drives canonical, Open Graph, robots, and sitemap URLs.
+`NEXT_PUBLIC_SITE_URL` drives canonical, Open Graph, Twitter, structured-data,
+robots, and sitemap URLs. It must be an HTTPS origin without a path. A future
+custom domain only requires changing this environment variable and redeploying.
+
+`RESEND_API_KEY` is server-only. Verify the domain used by
+`CONTACT_FROM_EMAIL` in Resend before enabling production delivery. Until all
+three contact variables are configured, the API intentionally responds with
+HTTP 503 and the interface offers direct email and WhatsApp alternatives.
 
 ## Ownership and reuse
 
