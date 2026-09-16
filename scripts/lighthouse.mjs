@@ -81,7 +81,11 @@ function stopServer(child) {
     });
     return;
   }
-  child.kill();
+  try {
+    process.kill(-child.pid, "SIGTERM");
+  } catch {
+    child.kill("SIGTERM");
+  }
 }
 
 mkdirSync(reportDir, { recursive: true });
@@ -91,6 +95,7 @@ mkdirSync(profileDir, { recursive: true });
 const server = spawn("npm run start", {
   cwd: root,
   env: { ...process.env, PORT: serverPort },
+  detached: process.platform !== "win32",
   shell: true,
   stdio: ["ignore", "pipe", "pipe"],
 });
