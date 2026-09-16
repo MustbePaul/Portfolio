@@ -7,7 +7,7 @@ export default function ResumePage() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+  }, [mounted]);
 
   const handlePrint = () => {
     window.print();
@@ -27,7 +27,7 @@ export default function ResumePage() {
             Paul Napoleon Phiri
           </h1>
           <p className="text-lg sm:text-xl text-paper-300 mb-6">
-            I'm a <span className="font-semibold text-paper-100">Full-Stack Software Developer</span> — Laravel · React · Flutter
+            I&apos;m a <span className="font-semibold text-paper-100">Full-Stack Software Developer</span> — Laravel · React · Flutter
           </p>
           
           {/* Contact Info */}
