@@ -172,7 +172,7 @@ function Hero() {
       >
         <div className="hero-main">
           <m.p variants={child} className="eyebrow">
-            Hello, I’m
+            Hello, I'm
           </m.p>
           <m.h1 variants={child}>{profile.name}</m.h1>
           <m.div
@@ -186,7 +186,7 @@ function Hero() {
             onBlur={() => setRolePaused(false)}
             aria-label={`${profile.roles[role]}. Animated role; focus or hover pauses rotation.`}
           >
-            <span>I’m a </span>
+            <span>I'm a </span>
             <AnimatePresence mode="wait">
               <m.strong
                 key={profile.roles[role]}
@@ -206,7 +206,7 @@ function Hero() {
             <a className="button primary" href="#contact">
               Get in touch <ArrowUpRight />
             </a>
-            <a className="button secondary" href="/resume.pdf" download>
+            <a className="button secondary" href="/resume">
               Download résumé <ArrowDown />
             </a>
           </m.div>
@@ -567,7 +567,7 @@ function Contact() {
       reset();
       setDelivery({
         state: "success",
-        message: "Message sent. I’ll get back to you as soon as I can.",
+        message: "Message sent. I'll get back to you as soon as I can.",
       });
     } catch (error) {
       setDelivery({
@@ -585,7 +585,7 @@ function Contact() {
       <div className="container">
         <SectionHead
           label="Contact"
-          title="Let’s build something useful"
+          title="Let's build something useful"
           copy="Tell me what you are working on, where it is stuck and what a good outcome looks like."
         />
         <div className="contact-grid">
