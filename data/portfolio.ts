@@ -51,7 +51,7 @@ export const profile = {
     "Business IT Graduate",
   ],
   biography:
-    "I am a Business Information Technology graduate who builds dependable web and mobile systems for banks, NGOs and growing businesses—from booking platforms and content systems to payment integrations.",
+    "I am a Business Information Technology graduate who builds dependable web and mobile systems for banks, NGOs and growing businesses—from booking platforms and content systems to payment integrations and operational tools.",
 };
 
 export const navigation = [
@@ -137,8 +137,8 @@ export const experiences: Experience[] = [
 export const qualifications: Qualification[] = [
   {
     id: "degree",
-    level: "Bachelor’s degree",
-    programme: "BSc in Business Information and Technology",
+    level: "Bachelor's degree",
+    programme: "BSc in Business Information Technology",
     institution: "Malawi University of Science and Technology",
     period: "2022 — August 2026",
     detail:
@@ -170,7 +170,7 @@ export const projects: Project[] = [
     problem:
       "People seeking mental-wellness support need one place to discover resources, track their progress and connect with therapists.",
     solution:
-      "Built a Flutter client and versioned Laravel API for guided audio and video sessions, mood-informed recommendations, therapist discovery, appointment booking, bookmarks and support requests.",
+      "Built a Flutter client and versioned Laravel API for guided audio and video sessions, mood-informed recommendations, therapist discovery, appointment booking, bookmarks and support request ticketing.",
     contribution: [
       "Built the Flutter mobile experience and Laravel 13 API",
       "Implemented authentication, media playback and progress tracking",
@@ -257,7 +257,7 @@ export const projects: Project[] = [
     problem:
       "The corporate website needed a clearer first impression and stronger presentation of partners and initiatives.",
     solution:
-      "Implemented a new website experience with refreshed hero, partner and initiative content. The redesign is currently under review and awaiting production approval; the existing website remains in production.",
+      "Implemented a new website experience with refreshed hero, partner and initiative content. The redesign is currently under review and awaiting production approval; the existing website remains live.",
     contribution: [
       "Hero redesign",
       "Partner and initiative pages",
