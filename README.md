@@ -5,12 +5,12 @@ mobile applications, APIs, payment integrations, and operational software.
 
 Built with Next.js, React, and TypeScript, the site includes selected case
 studies, professional experience, technical skills, engagement options, and a
-downloadable résumé.
+print-ready résumé route.
 
 [Live Portfolio](https://paul-phiri-portfolio.vercel.app) ·
 [LinkedIn](https://www.linkedin.com/in/paul-napoleon-phiri) ·
 [GitHub](https://github.com/MustbePaul) ·
-[Résumé](public/resume.pdf) ·
+[Résumé](/resume) ·
 [Email](mailto:phiri6paul@gmail.com)
 
 ## Portfolio highlights
@@ -19,6 +19,7 @@ downloadable résumé.
 - Responsive, accessible interface with reduced-motion support
 - Data-driven project, experience, qualification, and skills content
 - Client-side contact validation using React Hook Form and Zod
+- Self-hosted Space Grotesk, IBM Plex Sans, and IBM Plex Mono fonts
 - Static rendering with canonical, Open Graph, robots, sitemap, and structured metadata
 - Automated formatting, linting, type checking, and production build commands
 
@@ -87,10 +88,10 @@ not yet in production**; the existing Terex website remains the production site.
 
 ```text
 app/                 Routes, metadata, sitemap, robots, and global styles
+app/resume/          Print-ready résumé page and print action
 components/          Portfolio interface and client-side interactions
 data/                Typed portfolio content
 public/images/       Portrait and project previews
-public/resume.pdf    Downloadable résumé
 resume/              Résumé source and GitHub profile copy
 ```
 
@@ -133,13 +134,14 @@ route handler and Resend; no database is required.
 ## Deployment configuration
 
 Import the repository into Vercel. If the repository contains a parent folder,
-set the Vercel root directory to `portfolio`. The first Vercel build can use
-Vercel's automatically supplied production hostname. Once Vercel assigns the
-permanent `*.vercel.app` URL, add it to all production environments and
-redeploy:
+set the Vercel root directory to `portfolio`. The site uses
+`NEXT_PUBLIC_SITE_URL` when present, falls back to Vercel's
+`VERCEL_PROJECT_PRODUCTION_URL`, and finally uses the current live URL
+`https://paul-phiri-portfolio.vercel.app` for non-Vercel production builds.
+Set the explicit production URL when a custom domain is added:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://your-project.vercel.app
+NEXT_PUBLIC_SITE_URL=https://paul-phiri-portfolio.vercel.app
 RESEND_API_KEY=re_your_api_key
 CONTACT_TO_EMAIL=phiri6paul@gmail.com
 CONTACT_FROM_EMAIL=Portfolio <hello@your-verified-sending-domain.example>

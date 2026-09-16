@@ -51,7 +51,12 @@ export const profile = {
     "Business IT Graduate",
   ],
   biography:
-    "I am a Business Information Technology graduate who builds dependable web and mobile systems for banks, NGOs and growing businesses—from booking platforms and content systems to payment integrations and operational tools.",
+    "I build dependable web and mobile systems for banks, NGOs and growing businesses, turning booking workflows, content operations, payment integrations and internal tools into products people can actually run.",
+  highlights: [
+    "Web and mobile development",
+    "Payment integrations",
+    "Booking and CMS systems",
+  ],
 };
 
 export const navigation = [
@@ -113,12 +118,11 @@ export const experiences: Experience[] = [
     title: "Software Developer",
     company: "Terex Innovation Lab Limited",
     location: "Blantyre, Malawi",
-    period: "2026 — Present",
-    current: true,
+    period: "February 2026 — September 2026",
     responsibilities: [
       "Develop frontend and backend systems using Laravel, PHP, JavaScript and Flutter.",
       "Delivered dual payment-gateway integration after a hosting constraint forced a mid-build pivot.",
-      "Contribute across ZikoSpace, TaxiHire/SWIFTR and the new Terex website currently under review.",
+      "Contributed across ZikoSpace, TaxiHire/SWIFTR and the new Terex website currently under review.",
     ],
   },
   {

@@ -29,9 +29,9 @@
   --color-success: oklch(52% 0.12 150);
   --color-error: oklch(53% 0.19 27);
   --color-focus: oklch(53% 0.19 255);
-  --font-display: var(--font-space-grotesk), "Segoe UI", sans-serif;
-  --font-body: var(--font-ibm-plex-sans), "Segoe UI", sans-serif;
-  --font-mono: var(--font-ibm-plex-mono), "Cascadia Code", monospace;
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Code", monospace;
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;

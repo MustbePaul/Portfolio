@@ -229,6 +229,32 @@ img {
   color: var(--color-text-soft);
   font-size: clamp(1rem, 1.6vw, 1.18rem);
 }
+.hero-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.hero-highlights li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 40px;
+  padding: 0.45rem 0.75rem;
+  border: var(--rule-hair) solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text-soft);
+  font: 600 var(--text-xs) / 1.2 var(--font-body);
+  white-space: nowrap;
+}
+.hero-highlights svg {
+  width: 0.95rem;
+  color: var(--color-accent-bright);
+  flex: 0 0 auto;
+}
 .button-row {
   display: flex;
   flex-wrap: wrap;
@@ -637,20 +663,39 @@ img {
   color: var(--color-accent-bright);
   font: var(--text-sm) / 1 var(--font-mono);
 }
-.project-attribution,
-.project-status {
-  margin: var(--space-sm) 0 0;
-  font: 650 var(--text-sm) / 1.4 var(--font-mono);
+.project-details {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0 0 var(--space-md);
 }
-.project-attribution {
+.project-details div {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, auto) minmax(0, 1fr);
+  gap: var(--space-sm);
+  padding-block: var(--space-xs);
+  border-block-start: var(--rule-hair) solid var(--color-line);
+}
+.project-details dt {
+  color: var(--color-text-muted);
+  font: 600 var(--text-xs) / 1.4 var(--font-mono);
+  text-transform: uppercase;
+}
+.project-details dd {
+  min-width: 0;
+  margin: 0;
   color: var(--color-text);
-}
-.project-status {
-  color: var(--color-accent-bright);
+  font: 650 var(--text-sm) / 1.4 var(--font-body);
 }
 .case-study-block {
   padding-block: var(--space-md);
   border-block-start: var(--rule-hair) solid var(--color-line);
+}
+.case-study-feature {
+  border-block-start-color: var(--color-line-strong);
+}
+.case-study-grid {
+  display: grid;
+  gap: 0;
 }
 .case-study-block h4 {
   margin: 0 0 var(--space-xs);
@@ -918,6 +963,10 @@ footer {
   .contact-grid {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: clamp(3rem, 8vw, 7rem);
+  }
+  .case-study-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
   }
   .timeline {
     padding-inline-start: 2.5rem;

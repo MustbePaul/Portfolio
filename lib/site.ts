@@ -1,7 +1,8 @@
 const DEVELOPMENT_URL = "http://localhost:3000";
+const PRODUCTION_FALLBACK_URL = "https://paul-phiri-portfolio.vercel.app";
 
 function normalizeSiteUrl(value: string) {
-  const url = new URL(value);
+  const url = new URL(value.startsWith("http") ? value : `https://${value}`);
   url.pathname = url.pathname.replace(/\/$/, "");
   url.search = "";
   url.hash = "";
@@ -11,13 +12,11 @@ function normalizeSiteUrl(value: string) {
 function resolveSiteUrl() {
   if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+    return process.env.VERCEL_PROJECT_PRODUCTION_URL;
   }
   if (process.env.NODE_ENV !== "production") return DEVELOPMENT_URL;
 
-  throw new Error(
-    "NEXT_PUBLIC_SITE_URL is required for production builds outside Vercel.",
-  );
+  return PRODUCTION_FALLBACK_URL;
 }
 
 export const siteUrl = normalizeSiteUrl(resolveSiteUrl());

@@ -1,30 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import { absoluteUrl, siteUrl } from "@/lib/site";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-mono/400.css";
 import "./globals.css";
-
-const displayFont = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
-
-const bodyFont = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: "normal",
-  variable: "--font-ibm-plex-sans",
-  display: "swap",
-});
-
-const monoFont = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-ibm-plex-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -72,9 +54,8 @@ export default function RootLayout({
       "https://www.linkedin.com/in/paul-napoleon-phiri",
     ],
   };
-  const fontVariables = `${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`;
   return (
-    <html lang="en" className={fontVariables}>
+    <html lang="en">
       <body>
         {children}
         <Script

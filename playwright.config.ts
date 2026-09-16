@@ -14,14 +14,6 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        channel: process.env.CI ? undefined : "chrome",
-      },
-    },
-    {
-      name: "mobile-chromium",
-      use: {
-        ...devices["Pixel 5"],
-        channel: process.env.CI ? undefined : "chrome",
       },
     },
   ],

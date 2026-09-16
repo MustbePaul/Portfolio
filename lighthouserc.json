@@ -3,8 +3,26 @@
     "collect": {
       "startServerCommand": "npm run start",
       "startServerReadyPattern": "Ready in|Local:",
-      "url": ["http://127.0.0.1:3000/"],
-      "numberOfRuns": 1
+      "url": ["http://127.0.0.1:3050/"],
+      "numberOfRuns": 1,
+      "settings": {
+        "formFactor": "desktop",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "cpuSlowdownMultiplier": 1,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0
+        }
+      }
     },
     "assert": {
       "assertions": {

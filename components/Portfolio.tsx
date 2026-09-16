@@ -1,17 +1,7 @@
-"use client";
-
 import Image from "next/image";
-import {
-  AnimatePresence,
-  LazyMotion,
-  domAnimation,
-  m,
-  useReducedMotion,
-} from "framer-motion";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { contactSchema, type ContactValues } from "@/lib/contact";
+import { createElement } from "react";
+import ContactForm from "@/components/ContactForm";
+import HeaderClient from "@/components/HeaderClient";
 import {
   ArrowDown,
   ArrowUp,
@@ -20,20 +10,72 @@ import {
   Github,
   Linkedin,
   Mail,
-  Menu,
-  X,
-  MapPin,
-  MessageCircle,
 } from "lucide-react";
 import {
   engagementOptions,
   experiences,
-  navigation,
   profile,
   projects,
   qualifications,
   skillCategories,
 } from "@/data/portfolio";
+
+type MotionlessProps<T extends keyof React.JSX.IntrinsicElements> =
+  React.JSX.IntrinsicElements[T] & {
+    variants?: unknown;
+    initial?: unknown;
+    animate?: unknown;
+    exit?: unknown;
+    transition?: unknown;
+    whileHover?: unknown;
+  };
+
+function motionless<T extends keyof React.JSX.IntrinsicElements>(Tag: T) {
+  return function Motionless({
+    variants,
+    initial,
+    animate,
+    exit,
+    transition,
+    whileHover,
+    ...props
+  }: MotionlessProps<T>) {
+    void variants;
+    void initial;
+    void animate;
+    void exit;
+    void transition;
+    void whileHover;
+    return createElement(Tag, props);
+  };
+}
+
+const m = {
+  a: motionless("a"),
+  aside: motionless("aside"),
+  div: motionless("div"),
+  figure: motionless("figure"),
+  h1: motionless("h1"),
+  nav: motionless("nav"),
+  p: motionless("p"),
+  strong: motionless("strong"),
+  ul: motionless("ul"),
+};
+
+function AnimatePresence({
+  children,
+  mode,
+}: {
+  children: React.ReactNode;
+  mode?: string;
+}) {
+  void mode;
+  return <>{children}</>;
+}
+
+function LazyMotion({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
 
 function Reveal({
   children,
@@ -45,113 +87,16 @@ function Reveal({
   return <div className={className}>{children}</div>;
 }
 
-const headerNavigation = navigation.filter((item) =>
-  ["Home", "Experience", "Projects", "Contact"].includes(item),
-);
-
 function Header() {
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("home");
-  useEffect(() => {
-    const sections = navigation
-      .map((item) => document.getElementById(item.toLowerCase()))
-      .filter(Boolean) as HTMLElement[];
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach(
-          (entry) => entry.isIntersecting && setActive(entry.target.id),
-        ),
-      { rootMargin: "-35% 0px -55%", threshold: 0 },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-  useEffect(() => {
-    document.body.dataset.menuOpen = String(open);
-    return () => {
-      delete document.body.dataset.menuOpen;
-    };
-  }, [open]);
-  return (
-    <header className="site-header">
-      <div className="container header-inner">
-        <a
-          href="#home"
-          className="brand"
-          aria-label="Paul Napoleon Phiri, home"
-        >
-          PP<span>.</span>
-        </a>
-        <nav className="desktop-nav" aria-label="Primary">
-          {headerNavigation.map((item) => {
-            const id = item.toLowerCase();
-            return (
-              <a
-                key={item}
-                href={`#${id}`}
-                className={active === id ? "active" : ""}
-                aria-current={active === id ? "page" : undefined}
-              >
-                {item}
-              </a>
-            );
-          })}
-        </nav>
-        <button
-          className="menu-button"
-          type="button"
-          onClick={() => setOpen(!open)}
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-      <AnimatePresence>
-        {open && (
-          <m.nav
-            id="mobile-navigation"
-            className="mobile-nav"
-            aria-label="Mobile navigation"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18 }}
-          >
-            {headerNavigation.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                onClick={() => setOpen(false)}
-              >
-                {item}
-                <ArrowUpRight aria-hidden="true" />
-              </a>
-            ))}
-          </m.nav>
-        )}
-      </AnimatePresence>
-    </header>
-  );
+  return <HeaderClient />;
 }
 
 function Hero() {
-  const [role, setRole] = useState(0);
-  const [rolePaused, setRolePaused] = useState(false);
-  const reduce = useReducedMotion();
-  useEffect(() => {
-    if (reduce || rolePaused) return;
-    const timer = window.setInterval(
-      () => setRole((value) => (value + 1) % profile.roles.length),
-      2400,
-    );
-    return () => window.clearInterval(timer);
-  }, [reduce, rolePaused]);
+  const role = 0;
   const parent = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: reduce ? 0 : 0.09, delayChildren: 0.08 },
+      transition: { staggerChildren: 0, delayChildren: 0 },
     },
   };
   const child = {
@@ -172,7 +117,7 @@ function Hero() {
       >
         <div className="hero-main">
           <m.p variants={child} className="eyebrow">
-            Hello, I'm
+            Hello, I&apos;m
           </m.p>
           <m.h1 variants={child}>{profile.name}</m.h1>
           <m.div
@@ -180,19 +125,15 @@ function Hero() {
             className="role-line"
             aria-live="polite"
             tabIndex={0}
-            onMouseEnter={() => setRolePaused(true)}
-            onMouseLeave={() => setRolePaused(false)}
-            onFocus={() => setRolePaused(true)}
-            onBlur={() => setRolePaused(false)}
-            aria-label={`${profile.roles[role]}. Animated role; focus or hover pauses rotation.`}
+            aria-label={profile.roles[role]}
           >
-            <span>I'm a </span>
+            <span>I&apos;m a </span>
             <AnimatePresence mode="wait">
               <m.strong
                 key={profile.roles[role]}
-                initial={reduce ? false : { opacity: 0, y: 10 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: -10 }}
+                exit={undefined}
                 transition={{ duration: 0.25 }}
               >
                 {profile.roles[role]}
@@ -202,12 +143,24 @@ function Hero() {
           <m.p variants={child} className="hero-copy">
             {profile.biography}
           </m.p>
+          <m.ul
+            variants={child}
+            className="hero-highlights"
+            aria-label="Core capabilities"
+          >
+            {profile.highlights.map((highlight) => (
+              <li key={highlight}>
+                <Check aria-hidden="true" />
+                {highlight}
+              </li>
+            ))}
+          </m.ul>
           <m.div variants={child} className="button-row">
             <a className="button primary" href="#contact">
-              Get in touch <ArrowUpRight />
+              Contact Paul <ArrowUpRight />
             </a>
             <a className="button secondary" href="/resume">
-              Download résumé <ArrowDown />
+              View résumé <ArrowUpRight />
             </a>
           </m.div>
           <m.div variants={child} className="socials">
@@ -242,7 +195,7 @@ function Hero() {
         >
           <m.figure
             className="portrait-frame"
-            whileHover={reduce ? undefined : { y: -6 }}
+            whileHover={undefined}
             transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
           >
             <Image
@@ -415,26 +368,36 @@ function Projects() {
                 <span className="project-number">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="project-attribution">{project.ownership}</p>
-                {project.status && (
-                  <p className="project-status">{project.status}</p>
-                )}
                 <h3>{project.title}</h3>
-                <div className="case-study-block">
+                <dl className="project-details">
+                  <div>
+                    <dt>Ownership</dt>
+                    <dd>{project.ownership}</dd>
+                  </div>
+                  {project.status && (
+                    <div>
+                      <dt>Status</dt>
+                      <dd>{project.status}</dd>
+                    </div>
+                  )}
+                </dl>
+                <div className="case-study-block case-study-feature">
                   <h4>Problem</h4>
                   <p>{project.problem}</p>
                 </div>
-                <div className="case-study-block">
-                  <h4>Solution</h4>
-                  <p>{project.solution}</p>
-                </div>
-                <div className="case-study-block">
-                  <h4>My contribution</h4>
-                  <ul>
-                    {project.contribution.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                <div className="case-study-grid">
+                  <div className="case-study-block">
+                    <h4>Solution</h4>
+                    <p>{project.solution}</p>
+                  </div>
+                  <div className="case-study-block">
+                    <h4>My contribution</h4>
+                    <ul>
+                      {project.contribution.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
                 <div className="tags">
                   {project.technologies.map((technology) => (
@@ -513,7 +476,7 @@ function Pricing() {
             <Reveal key={option.title} className="glass-card pricing-card">
               <h3>{option.title}</h3>
               <p>{option.description}</p>
-              <ul>
+              <ul aria-label={`${option.title} includes`}>
                 {option.includes.map((item) => (
                   <li key={item}>
                     <Check />
@@ -533,208 +496,12 @@ function Pricing() {
 }
 
 function Contact() {
-  const [delivery, setDelivery] = useState<
-    | { state: "idle" }
-    | { state: "success"; message: string }
-    | { state: "error"; message: string }
-  >({ state: "idle" });
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-      website: "",
-    },
-  });
-  const submit = async (values: ContactValues) => {
-    setDelivery({ state: "idle" });
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      const result = (await response.json()) as { error?: string };
-      if (!response.ok)
-        throw new Error(result.error ?? "Message delivery failed.");
-      reset();
-      setDelivery({
-        state: "success",
-        message: "Message sent. I'll get back to you as soon as I can.",
-      });
-    } catch (error) {
-      setDelivery({
-        state: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Message delivery failed. Please use the email link instead.",
-      });
-    }
-  };
-  const whatsApp = `https://wa.me/265997765664?text=${encodeURIComponent(`Hello Paul, I found your portfolio and would like to discuss a project.`)}`;
-  return (
-    <section id="contact" className="section section-alt">
-      <div className="container">
-        <SectionHead
-          label="Contact"
-          title="Let's build something useful"
-          copy="Tell me what you are working on, where it is stuck and what a good outcome looks like."
-        />
-        <div className="contact-grid">
-          <Reveal className="contact-details">
-            <div className="detail">
-              <Mail />
-              <div>
-                <span>Email</span>
-                <a href={`mailto:${profile.email}`}>{profile.email}</a>
-              </div>
-            </div>
-            <div className="detail">
-              <MapPin />
-              <div>
-                <span>Location</span>
-                <p>{profile.location}</p>
-              </div>
-            </div>
-            <div className="quick-actions">
-              <a className="button secondary" href={`mailto:${profile.email}`}>
-                Quick email <Mail />
-              </a>
-              <a
-                className="button secondary"
-                href={whatsApp}
-                target="_blank"
-                rel="noreferrer"
-              >
-                WhatsApp <MessageCircle />
-              </a>
-            </div>
-            <div className="socials">
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-              >
-                <Github />
-              </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-              >
-                <Linkedin />
-              </a>
-            </div>
-          </Reveal>
-          <Reveal>
-            <form
-              className="glass-card contact-form"
-              onSubmit={handleSubmit(submit)}
-              noValidate
-            >
-              <div className="field">
-                <label htmlFor="name">Name</label>
-                <input
-                  id="name"
-                  autoComplete="name"
-                  maxLength={80}
-                  aria-invalid={!!errors.name}
-                  aria-describedby="name-error"
-                  {...register("name")}
-                />
-                <p id="name-error" className="field-message">
-                  {errors.name?.message}
-                </p>
-              </div>
-              <div className="field">
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  maxLength={254}
-                  aria-invalid={!!errors.email}
-                  aria-describedby="email-error"
-                  {...register("email")}
-                />
-                <p id="email-error" className="field-message">
-                  {errors.email?.message}
-                </p>
-              </div>
-              <div className="field">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  rows={6}
-                  maxLength={5000}
-                  aria-invalid={!!errors.message}
-                  aria-describedby="message-error"
-                  {...register("message")}
-                />
-                <p id="message-error" className="field-message">
-                  {errors.message?.message}
-                </p>
-              </div>
-              <div className="field">
-                <label htmlFor="subject">Subject</label>
-                <input
-                  id="subject"
-                  autoComplete="off"
-                  maxLength={120}
-                  aria-invalid={!!errors.subject}
-                  aria-describedby="subject-error"
-                  {...register("subject")}
-                />
-                <p id="subject-error" className="field-message">
-                  {errors.subject?.message}
-                </p>
-              </div>
-              <div className="honeypot" aria-hidden="true">
-                <label htmlFor="website">Website</label>
-                <input
-                  id="website"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  {...register("website")}
-                />
-              </div>
-              <button
-                className="button primary submit"
-                disabled={isSubmitting}
-                type="submit"
-              >
-                {isSubmitting ? "Sending…" : "Send message"} <ArrowUpRight />
-              </button>
-              <p
-                className={`form-note ${delivery.state === "error" ? "form-note-error" : ""}`}
-                role={delivery.state === "error" ? "alert" : "status"}
-                aria-live="polite"
-              >
-                {delivery.state === "idle"
-                  ? "Your message is delivered securely by email."
-                  : delivery.message}
-              </p>
-            </form>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
+  return <ContactForm />;
 }
 
 export default function Portfolio() {
   return (
-    <LazyMotion features={domAnimation} strict>
+    <LazyMotion>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
