@@ -22,5 +22,11 @@ export default defineConfig({
     url: "http://127.0.0.1:3000",
     reuseExistingServer: false,
     timeout: 120_000,
+    // Empty credentials force the API's 503 path so tests never send real email.
+    env: {
+      RESEND_API_KEY: "",
+      CONTACT_TO_EMAIL: "",
+      CONTACT_FROM_EMAIL: "",
+    },
   },
 });

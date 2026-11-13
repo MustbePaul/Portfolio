@@ -74,11 +74,32 @@ test("homepage loads without console errors and exposes production metadata", as
   expect(errors).toEqual([]);
 });
 
-test("hero résumé CTA points to the résumé route", async ({ page }) => {
+test("hero CV actions point to the résumé route and PDF", async ({ page }) => {
   await page.goto("/");
+  await expect(page.getByRole("link", { name: /View CV/i })).toHaveAttribute(
+    "href",
+    "/resume",
+  );
   await expect(
-    page.getByRole("link", { name: /View résumé/i }),
-  ).toHaveAttribute("href", "/resume");
+    page.getByRole("link", { name: /Download CV/i }),
+  ).toHaveAttribute("href", "/resume.pdf");
+});
+
+test("employment timeline matches the CV and labels NBC as concurrent", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const cards = page.locator("#experience .experience-card");
+  await expect(cards).toHaveCount(3);
+  await expect(cards.nth(0)).toContainText("Country Club Limbe");
+  await expect(cards.nth(0)).toContainText("October 2026 — Present");
+  await expect(cards.nth(1)).toContainText("February 2026 — September 2026");
+  await expect(cards.nth(2)).toContainText("November 2025 — Present");
+  await expect(cards.nth(2)).toContainText("Family Business — Concurrent Role");
+  await page.goto("/resume");
+  await expect(
+    page.getByText("Country Club Limbe · Limbe, Malawi"),
+  ).toBeVisible();
 });
 
 test("desktop navigation moves to project content", async ({ page }) => {
@@ -86,6 +107,49 @@ test("desktop navigation moves to project content", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Projects", exact: true }).click();
   await expect(page.locator("#projects")).toBeInViewport();
+});
+
+test("all homepage anchors resolve and project images load", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/");
+  const hrefs = await page
+    .locator("a[href]")
+    .evaluateAll((links) =>
+      links.map((link) => link.getAttribute("href") ?? ""),
+    );
+  const localPaths = new Set<string>();
+  for (const href of hrefs) {
+    if (href.startsWith("#")) {
+      expect(await page.locator(href).count(), `Missing target ${href}`).toBe(
+        1,
+      );
+    } else if (href.startsWith("/")) {
+      localPaths.add(href);
+    } else {
+      expect(["https:", "mailto:", "tel:"], `Invalid link ${href}`).toContain(
+        new URL(href).protocol,
+      );
+    }
+  }
+  for (const path of localPaths) {
+    expect((await request.get(path)).status(), `Broken path ${path}`).toBe(200);
+  }
+  const images = page.locator("img");
+  for (let index = 0; index < (await images.count()); index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate((element) =>
+          element instanceof HTMLImageElement
+            ? element.complete && element.naturalWidth > 0
+            : false,
+        ),
+      )
+      .toBe(true);
+  }
 });
 
 test("mobile menu opens, closes, and navigates", async ({ page }) => {
@@ -165,16 +229,50 @@ test("shows contact delivery errors", async ({ page }) => {
 });
 
 test("engagement-option items are not duplicated", async ({ page }) => {
-  await page.goto("/#pricing");
+  await page.goto("/#services");
   for (const option of [
-    "Focused build",
-    "Product sprint",
-    "Ongoing engineering",
+    "Full-Stack Web Application Development",
+    "Mobile Application Development",
+    "API Development and Integration",
+    "Business Systems and Workflow Automation",
+    "Software Maintenance and Improvement",
   ]) {
-    const list = page.getByRole("list", { name: `${option} includes` });
+    const list = page.getByRole("list", { name: `${option} covers` });
     const labels = await list.getByRole("listitem").allTextContents();
     expect(labels).toEqual([...new Set(labels)]);
   }
+});
+
+test("résumé PDF downloads from /resume.pdf", async ({ request }) => {
+  const response = await request.get("/resume.pdf");
+  expect(response.status()).toBe(200);
+  expect(response.headers()["content-type"]).toContain("application/pdf");
+  const body = await response.body();
+  expect(body.subarray(0, 5).toString()).toBe("%PDF-");
+  expect(body.length).toBeGreaterThan(10_000);
+  expect(
+    (body.toString("latin1").match(/\/Type\s*\/Page\b/g) ?? []).length,
+  ).toBe(1);
+});
+
+test("contact API rate-limits excessive submissions", async ({ request }) => {
+  const payload = {
+    name: "Rate Limit Check",
+    email: "visitor@example.com",
+    subject: "Automated check",
+    message: "This automated message should be rate limited after five sends.",
+    website: "",
+  };
+  let limited = false;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    const response = await request.post("/api/contact", { data: payload });
+    if (response.status() === 429) {
+      limited = true;
+      break;
+    }
+    expect([503, 422]).toContain(response.status());
+  }
+  expect(limited).toBe(true);
 });
 
 for (const size of responsiveSizes) {

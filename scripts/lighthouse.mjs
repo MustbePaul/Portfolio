@@ -88,6 +88,28 @@ function stopServer(child) {
   }
 }
 
+function stopChromeUsingProfile() {
+  if (process.platform !== "win32") return;
+  // chrome-launcher's original PID can exit while a child Chrome process remains.
+  // Match only this audit's isolated profile, leaving other Chrome windows alone.
+  const command =
+    "$profilePath = $env:LIGHTHOUSE_CHROME_PROFILE; " +
+    "Get-CimInstance Win32_Process -Filter \"name='chrome.exe'\" | " +
+    'Where-Object { $_.CommandLine -like "*$profilePath*" } | ' +
+    "ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }";
+  const result = spawnSync(
+    "powershell.exe",
+    ["-NoProfile", "-Command", command],
+    {
+      env: { ...process.env, LIGHTHOUSE_CHROME_PROFILE: profileDir },
+      encoding: "utf8",
+    },
+  );
+  if (result.status !== 0) {
+    console.warn(`Chrome profile cleanup warning: ${result.stderr.trim()}`);
+  }
+}
+
 mkdirSync(reportDir, { recursive: true });
 rmSync(profileDir, { recursive: true, force: true });
 mkdirSync(profileDir, { recursive: true });
@@ -133,10 +155,25 @@ try {
     try {
       await chrome.kill();
     } catch (error) {
-      console.warn(
-        `Chrome cleanup warning: ${error instanceof Error ? error.message : String(error)}`,
-      );
+      const message = error instanceof Error ? error.message : String(error);
+      // Chrome can exit by itself after the audit, before chrome-launcher cleans up.
+      if (!/process .* not found/i.test(message)) {
+        console.warn(`Chrome cleanup warning: ${message}`);
+      }
     }
   }
+  stopChromeUsingProfile();
   stopServer(server);
+  try {
+    rmSync(profileDir, {
+      recursive: true,
+      force: true,
+      maxRetries: 5,
+      retryDelay: 200,
+    });
+  } catch (error) {
+    console.warn(
+      `Chrome profile cleanup warning: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
 }

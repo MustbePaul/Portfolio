@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { createElement } from "react";
 import ContactForm from "@/components/ContactForm";
 import HeaderClient from "@/components/HeaderClient";
 import {
@@ -12,192 +11,76 @@ import {
   Mail,
 } from "lucide-react";
 import {
-  engagementOptions,
   experiences,
   profile,
   projects,
   qualifications,
+  services,
   skillCategories,
 } from "@/data/portfolio";
 
-type MotionlessProps<T extends keyof React.JSX.IntrinsicElements> =
-  React.JSX.IntrinsicElements[T] & {
-    variants?: unknown;
-    initial?: unknown;
-    animate?: unknown;
-    exit?: unknown;
-    transition?: unknown;
-    whileHover?: unknown;
-  };
-
-function motionless<T extends keyof React.JSX.IntrinsicElements>(Tag: T) {
-  return function Motionless({
-    variants,
-    initial,
-    animate,
-    exit,
-    transition,
-    whileHover,
-    ...props
-  }: MotionlessProps<T>) {
-    void variants;
-    void initial;
-    void animate;
-    void exit;
-    void transition;
-    void whileHover;
-    return createElement(Tag, props);
-  };
-}
-
-const m = {
-  a: motionless("a"),
-  aside: motionless("aside"),
-  div: motionless("div"),
-  figure: motionless("figure"),
-  h1: motionless("h1"),
-  nav: motionless("nav"),
-  p: motionless("p"),
-  strong: motionless("strong"),
-  ul: motionless("ul"),
-};
-
-function AnimatePresence({
-  children,
-  mode,
-}: {
-  children: React.ReactNode;
-  mode?: string;
-}) {
-  void mode;
-  return <>{children}</>;
-}
-
-function LazyMotion({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
-
-function Reveal({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={className}>{children}</div>;
-}
-
-function Header() {
-  return <HeaderClient />;
-}
-
 function Hero() {
-  const role = 0;
-  const parent = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0, delayChildren: 0 },
-    },
-  };
-  const child = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
   return (
     <section id="home" className="hero section">
-      <m.div
-        className="container hero-grid"
-        variants={parent}
-        initial={false}
-        animate="visible"
-      >
+      <div className="container hero-grid">
         <div className="hero-main">
-          <m.p variants={child} className="eyebrow">
-            Hello, I&apos;m
-          </m.p>
-          <m.h1 variants={child}>{profile.name}</m.h1>
-          <m.div
-            variants={child}
-            className="role-line"
-            aria-live="polite"
-            tabIndex={0}
-            aria-label={profile.roles[role]}
-          >
-            <span>I&apos;m a </span>
-            <AnimatePresence mode="wait">
-              <m.strong
-                key={profile.roles[role]}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                exit={undefined}
-                transition={{ duration: 0.25 }}
-              >
-                {profile.roles[role]}
-              </m.strong>
-            </AnimatePresence>
-          </m.div>
-          <m.p variants={child} className="hero-copy">
-            {profile.biography}
-          </m.p>
-          <m.ul
-            variants={child}
-            className="hero-highlights"
-            aria-label="Core capabilities"
-          >
+          <p className="eyebrow">
+            {profile.role} · {profile.location}
+          </p>
+          <h1>{profile.name}</h1>
+          <p className="hero-headline">{profile.headline}</p>
+          <p className="hero-copy">{profile.biography}</p>
+          <ul className="hero-highlights" aria-label="Core capabilities">
             {profile.highlights.map((highlight) => (
               <li key={highlight}>
                 <Check aria-hidden="true" />
                 {highlight}
               </li>
             ))}
-          </m.ul>
-          <m.div variants={child} className="button-row">
-            <a className="button primary" href="#contact">
-              Contact Paul <ArrowUpRight />
+          </ul>
+          <div className="button-row">
+            <a className="button primary" href="#projects">
+              View Projects <ArrowUpRight aria-hidden="true" />
             </a>
-            <a className="button secondary" href="/resume">
-              View résumé <ArrowUpRight />
+            <a className="button secondary" href="#contact">
+              Contact Me <ArrowUpRight aria-hidden="true" />
             </a>
-          </m.div>
-          <m.div variants={child} className="socials">
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Paul Napoleon Phiri on GitHub"
-            >
-              <Github />
+          </div>
+          <div className="hero-secondary-row">
+            <a className="text-link" href="/resume.pdf" download>
+              Download CV (PDF) <ArrowUpRight aria-hidden="true" />
             </a>
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Paul Napoleon Phiri on LinkedIn"
-            >
-              <Linkedin />
+            <a className="text-link" href="/resume">
+              View CV <ArrowUpRight aria-hidden="true" />
             </a>
-            <a
-              href={`mailto:${profile.email}`}
-              aria-label="Email Paul Napoleon Phiri"
-            >
-              <Mail />
-            </a>
-          </m.div>
+            <div className="socials" aria-label="Professional profiles">
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Paul Napoleon Phiri on GitHub"
+              >
+                <Github />
+              </a>
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Paul Napoleon Phiri on LinkedIn"
+              >
+                <Linkedin />
+              </a>
+              <a
+                href={`mailto:${profile.email}`}
+                aria-label="Email Paul Napoleon Phiri"
+              >
+                <Mail />
+              </a>
+            </div>
+          </div>
         </div>
-        <m.aside
-          variants={child}
-          className="hero-visual"
-          aria-label="Portrait and availability"
-        >
-          <m.figure
-            className="portrait-frame"
-            whileHover={undefined}
-            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-          >
+        <aside className="hero-visual" aria-label="Portrait and availability">
+          <figure className="portrait-frame">
             <Image
               className="portrait-image"
               src="/images/paul-phiri.webp"
@@ -206,19 +89,19 @@ function Hero() {
               priority
               sizes="(max-width: 640px) 100vw, 34vw"
             />
-          </m.figure>
+          </figure>
           <div className="hero-status">
-            <span className="status-dot" />
+            <span className="status-dot" aria-hidden="true" />
             <div>
-              <strong>Available for selected work</strong>
+              <strong>{profile.availability}</strong>
               <span>{profile.location}</span>
             </div>
           </div>
-        </m.aside>
-        <m.a variants={child} className="scroll-cue" href="#skills">
-          Scroll to explore <ArrowDown />
-        </m.a>
-      </m.div>
+        </aside>
+        <a className="scroll-cue" href="#about">
+          Scroll to explore <ArrowDown aria-hidden="true" />
+        </a>
+      </div>
     </section>
   );
 }
@@ -233,21 +116,39 @@ function SectionHead({
   copy: string;
 }) {
   return (
-    <Reveal className="section-head">
+    <div className="section-head">
       {label && <p className="eyebrow">{label}</p>}
       <h2>{title}</h2>
       <p>{copy}</p>
-    </Reveal>
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="section">
+      <div className="container">
+        <SectionHead
+          title="About me"
+          copy="A developer who starts from the business problem and builds the software behind it."
+        />
+        <div className="about-body">
+          {profile.aboutParagraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function Skills() {
   return (
-    <section id="skills" className="section">
+    <section id="skills" className="section section-alt">
       <div className="container">
         <SectionHead
-          title="Skills & technologies"
-          copy="A pragmatic toolkit for building reliable products from interface to integration."
+          title="Technical expertise"
+          copy="Technologies I use, grouped by the work they actually do."
         />
         <div className="capability-list">
           {skillCategories.map((group, index) => (
@@ -256,10 +157,13 @@ function Skills() {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <h3>{group.title}</h3>
-              <div className="tags">
-                {group.technologies.map((technology) => (
-                  <span key={technology}>{technology}</span>
-                ))}
+              <div className="capability-detail">
+                <div className="tags">
+                  {group.technologies.map((technology) => (
+                    <span key={technology}>{technology}</span>
+                  ))}
+                </div>
+                <p className="capability-evidence">{group.evidence}</p>
               </div>
             </div>
           ))}
@@ -271,7 +175,7 @@ function Skills() {
 
 function Experience() {
   return (
-    <section id="experience" className="section section-alt">
+    <section id="experience" className="section">
       <div className="container">
         <SectionHead
           title="Work experience"
@@ -279,13 +183,16 @@ function Experience() {
         />
         <div className="timeline">
           {experiences.map((item) => (
-            <Reveal key={item.id} className="timeline-item">
-              <div className="timeline-dot" />
+            <div key={item.id} className="timeline-item">
+              <div className="timeline-dot" aria-hidden="true" />
               <article className="glass-card experience-card">
                 <div className="card-meta">
                   <span>{item.period}</span>
                   {item.current && (
                     <span className="current">Current role</span>
+                  )}
+                  {item.classification && (
+                    <span className="current">{item.classification}</span>
                   )}
                 </div>
                 <h3>{item.title}</h3>
@@ -298,7 +205,7 @@ function Experience() {
                   ))}
                 </ul>
               </article>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
@@ -308,15 +215,15 @@ function Experience() {
 
 function Qualifications() {
   return (
-    <section id="qualification" className="section">
+    <section id="qualification" className="section section-alt">
       <div className="container">
         <SectionHead
-          title="Education & qualifications"
+          title="Education"
           copy="Academic grounding across technology, systems and business."
         />
         <div className="qualification-grid">
           {qualifications.map((item) => (
-            <Reveal key={item.id} className="glass-card qualification-card">
+            <div key={item.id} className="glass-card qualification-card">
               <p className="card-meta">
                 <span>{item.level}</span>
                 <span>{item.period}</span>
@@ -324,7 +231,7 @@ function Qualifications() {
               <h3>{item.programme}</h3>
               <p className="company">{item.institution}</p>
               <p>{item.detail}</p>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
@@ -334,7 +241,7 @@ function Qualifications() {
 
 function Projects() {
   return (
-    <section id="projects" className="section section-alt">
+    <section id="projects" className="section">
       <div className="container">
         <SectionHead
           label="Selected systems"
@@ -343,7 +250,7 @@ function Projects() {
         />
         <div className="projects-grid">
           {projects.map((project, index) => (
-            <Reveal key={project.id} className="glass-card project-card">
+            <article key={project.id} className="glass-card project-card">
               {project.image && project.imageAlt ? (
                 <div
                   className={`project-image${project.imageContain ? " project-image-contain" : ""}`}
@@ -399,6 +306,12 @@ function Projects() {
                     </ul>
                   </div>
                 </div>
+                {project.engineering && (
+                  <div className="case-study-block project-engineering">
+                    <h4>Engineering decision</h4>
+                    <p>{project.engineering}</p>
+                  </div>
+                )}
                 <div className="tags">
                   {project.technologies.map((technology) => (
                     <span key={technology}>{technology}</span>
@@ -412,7 +325,7 @@ function Projects() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      View public source <ArrowUpRight />
+                      View public source <ArrowUpRight aria-hidden="true" />
                     </a>
                   </p>
                 ) : (
@@ -431,7 +344,7 @@ function Projects() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Live project <ArrowUpRight />
+                        Live project <ArrowUpRight aria-hidden="true" />
                       </a>
                     )}
                     {project.walkthroughUrl && (
@@ -440,7 +353,7 @@ function Projects() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Walkthrough <ArrowUpRight />
+                        Walkthrough <ArrowUpRight aria-hidden="true" />
                       </a>
                     )}
                     {project.caseStudyUrl && (
@@ -449,13 +362,13 @@ function Projects() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Case study <ArrowUpRight />
+                        Case study <ArrowUpRight aria-hidden="true" />
                       </a>
                     )}
                   </div>
                 )}
               </div>
-            </Reveal>
+            </article>
           ))}
         </div>
       </div>
@@ -463,31 +376,31 @@ function Projects() {
   );
 }
 
-function Pricing() {
+function Services() {
   return (
-    <section id="pricing" className="section">
+    <section id="services" className="section section-alt">
       <div className="container">
         <SectionHead
-          title="Engagement options"
-          copy="Every project is scoped around the problem. These starting points make the first conversation concrete—rates follow a confirmed brief."
+          title="Services"
+          copy="What I can take responsibility for, based on work I have already delivered."
         />
-        <div className="pricing-grid">
-          {engagementOptions.map((option) => (
-            <Reveal key={option.title} className="glass-card pricing-card">
-              <h3>{option.title}</h3>
-              <p>{option.description}</p>
-              <ul aria-label={`${option.title} includes`}>
-                {option.includes.map((item) => (
+        <div className="services-grid">
+          {services.map((service) => (
+            <article key={service.id} className="glass-card service-card">
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <ul aria-label={`${service.title} covers`}>
+                {service.delivers.map((item) => (
                   <li key={item}>
-                    <Check />
+                    <Check aria-hidden="true" />
                     {item}
                   </li>
                 ))}
               </ul>
               <a className="text-link" href="#contact">
-                Discuss scope <ArrowUpRight />
+                Discuss this service <ArrowUpRight aria-hidden="true" />
               </a>
-            </Reveal>
+            </article>
           ))}
         </div>
       </div>
@@ -495,25 +408,22 @@ function Pricing() {
   );
 }
 
-function Contact() {
-  return <ContactForm />;
-}
-
 export default function Portfolio() {
   return (
-    <LazyMotion>
+    <>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Header />
+      <HeaderClient />
       <main id="main">
         <Hero />
+        <About />
         <Skills />
         <Experience />
         <Qualifications />
         <Projects />
-        <Pricing />
-        <Contact />
+        <Services />
+        <ContactForm />
       </main>
       <footer>
         <div className="container footer-inner">
@@ -528,6 +438,6 @@ export default function Portfolio() {
           </a>
         </div>
       </footer>
-    </LazyMotion>
+    </>
   );
 }

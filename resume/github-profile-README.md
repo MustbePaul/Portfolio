@@ -4,9 +4,12 @@ Full-Stack Software Developer based in Blantyre, Malawi. I build dependable web
 and mobile products across APIs, booking systems, payment integrations, content
 platforms, and offline-capable applications.
 
-Currently working as a Software Developer at **Terex Innovation Lab Limited**
-and open to software-engineering roles, collaborations, and selected freelance
-projects.
+Currently working as a Software Developer at **Country Club Limbe** (October
+2026–present), developing components of its digital ecosystem and Club Management
+System. Previously a Software Developer at **Terex Innovation Lab Limited**
+(February–September 2026). I also remain involved in **Naporcas Business Center**,
+a family business, in a concurrent operations and financial records role
+(November 2025–present).
 
 **Portfolio:** [paul-phiri-portfolio.vercel.app](https://paul-phiri-portfolio.vercel.app)
 

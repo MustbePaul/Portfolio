@@ -19,11 +19,11 @@ export function SocialCard() {
             display: "flex",
             alignItems: "center",
             gap: 18,
-            color: "#83e68d",
+            color: "#7dbdfe",
             fontSize: 26,
           }}
         >
-          <span style={{ width: 46, height: 4, background: "#83e68d" }} />
+          <span style={{ width: 46, height: 4, background: "#7dbdfe" }} />
           Blantyre, Malawi · Available for selected work
         </div>
         <div
@@ -68,7 +68,7 @@ export function SocialCard() {
           }}
         >
           <span>Web · Mobile · APIs · Integrations</span>
-          <span style={{ color: "#83e68d", fontWeight: 700 }}>PP.</span>
+          <span style={{ color: "#7dbdfe", fontWeight: 700 }}>PP.</span>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ export type SkillCategory = {
   id: string;
   title: string;
   technologies: string[];
+  evidence: string;
 };
 export type Experience = {
   id: string;
@@ -10,6 +11,7 @@ export type Experience = {
   location: string;
   period: string;
   current?: boolean;
+  classification?: string;
   responsibilities: string[];
 };
 export type Qualification = {
@@ -28,6 +30,7 @@ export type Project = {
   problem: string;
   solution: string;
   contribution: string[];
+  engineering?: string;
   technologies: string[];
   image?: string;
   imageAlt?: string;
@@ -37,21 +40,30 @@ export type Project = {
   caseStudyUrl?: string;
   repositoryUrl?: string;
 };
+export type Service = {
+  id: string;
+  title: string;
+  description: string;
+  delivers: string[];
+};
 
 export const profile = {
   name: "Paul Napoleon Phiri",
+  role: "Full-Stack Software Developer",
+  headline:
+    "Building reliable digital systems for businesses and organisations.",
   location: "Blantyre, Malawi",
+  availability: "Available for selected work",
   email: "phiri6paul@gmail.com",
+  phone: "+265 997 765 664",
   github: "https://github.com/MustbePaul",
   linkedin: "https://www.linkedin.com/in/paul-napoleon-phiri",
-  roles: [
-    "Full-Stack Software Developer",
-    "Flutter Developer",
-    "Laravel Developer",
-    "Business IT Graduate",
-  ],
   biography:
-    "I build dependable web and mobile systems for banks, NGOs and growing businesses, turning booking workflows, content operations, payment integrations and internal tools into products people can actually run.",
+    "Business Information Technology graduate developing full-stack web and mobile systems with Laravel, React and Flutter — from booking platforms and CMS-backed websites to payment integrations for real organisational workflows.",
+  aboutParagraphs: [
+    "My Business Information Technology background shapes how I work: understand the business problem first, then build the software that solves it. That means asking what a booking clerk, a driver or an editor actually needs to get their job done before writing a line of code.",
+    "I am comfortable across the whole stack — designing the database, building the Laravel API behind it, and delivering the React or Flutter interface in front of it. I care about maintainability and reliability, and I have shipped work inside team codebases under real constraints, including a mid-build payment-provider pivot.",
+  ],
   highlights: [
     "Web and mobile development",
     "Payment integrations",
@@ -61,58 +73,86 @@ export const profile = {
 
 export const navigation = [
   "Home",
-  "Skills",
+  "About",
   "Experience",
-  "Qualification",
   "Projects",
-  "Pricing",
   "Contact",
 ] as const;
 
 export const skillCategories: SkillCategory[] = [
   {
-    id: "backend",
-    title: "Backend Technologies",
-    technologies: [
-      "Laravel",
-      "PHP",
-      "Node.js",
-      "REST APIs",
-      "PayChangu",
-      "OneKhusa",
-    ],
-  },
-  {
     id: "frontend",
-    title: "Frontend Technologies",
+    title: "Frontend Development",
     technologies: [
       "React",
       "Next.js",
-      "Angular",
-      "Flutter",
       "TypeScript",
       "JavaScript",
       "HTML5",
       "CSS3",
       "Tailwind CSS",
     ],
+    evidence:
+      "Interfaces delivered for a client storytelling platform, in-house products and this portfolio.",
   },
   {
-    id: "database",
-    title: "Database Technologies",
-    technologies: ["MySQL", "PostgreSQL", "SQL"],
+    id: "backend",
+    title: "Backend Development",
+    technologies: ["Laravel", "PHP", "Node.js", "Sanctum"],
+    evidence:
+      "Laravel services and authentication workflows for web and mobile products.",
   },
   {
-    id: "devops",
-    title: "DevOps & Cloud",
-    technologies: ["Git", "GitHub", "Postman", "VS Code", "Figma", "Laragon"],
+    id: "mobile",
+    title: "Mobile Application Development",
+    technologies: ["Flutter", "Dart", "Provider"],
+    evidence:
+      "A complete mental-wellness mobile client and passenger booking experiences built on Flutter.",
+  },
+  {
+    id: "databases",
+    title: "Database Management",
+    technologies: ["MySQL", "PostgreSQL", "SQLite", "SQL"],
+    evidence:
+      "Database design behind booking, content and records workflows across personal and team projects.",
+  },
+  {
+    id: "apis",
+    title: "API Integration",
+    technologies: ["REST APIs", "PayChangu", "OneKhusa"],
+    evidence:
+      "Client/server integration and payment workflows in team projects.",
+  },
+  {
+    id: "testing",
+    title: "Software Testing and Debugging",
+    technologies: ["Postman", "Playwright", "ESLint"],
+    evidence:
+      "API checks, application debugging and automated checks in this portfolio.",
+  },
+  {
+    id: "tools",
+    title: "Deployment and Development Tools",
+    technologies: ["Git", "GitHub", "Laragon", "VS Code", "Figma", "Vercel"],
+    evidence:
+      "Daily tooling for version control, API testing, debugging and deployment support.",
   },
 ];
-export const marqueeSkills = skillCategories.flatMap(
-  (group) => group.technologies,
-);
 
 export const experiences: Experience[] = [
+  {
+    id: "ccl",
+    title: "Software Developer",
+    company: "Country Club Limbe",
+    location: "Limbe, Malawi",
+    period: "October 2026 — Present",
+    current: true,
+    responsibilities: [
+      "Developing and implementing components of the Country Club Limbe Digital Ecosystem, including the Club Management System.",
+      "Building backend services and API integrations for membership and operational workflows.",
+      "Testing, troubleshooting and preparing applications for deployment while supporting technical and digital infrastructure improvements.",
+    ],
+  },
   {
     id: "terex",
     title: "Software Developer",
@@ -120,9 +160,10 @@ export const experiences: Experience[] = [
     location: "Blantyre, Malawi",
     period: "February 2026 — September 2026",
     responsibilities: [
-      "Develop frontend and backend systems using Laravel, PHP, JavaScript and Flutter.",
-      "Delivered dual payment-gateway integration after a hosting constraint forced a mid-build pivot.",
-      "Contributed across ZikoSpace, TaxiHire/SWIFTR and the new Terex website currently under review.",
+      "Developed frontend and backend systems for in-house products using Laravel, PHP, JavaScript, React, Angular and Flutter.",
+      "Delivered dual payment-gateway integration (PayChangu and OneKhusa) after a hosting constraint forced a mid-build pivot.",
+      "Rebuilt authentication, routing and theme persistence for ZikoSpace and delivered its accommodation booking flow end to end.",
+      "Built role-specific passenger, driver and administrator experiences for TaxiHire / SWIFTR.",
     ],
   },
   {
@@ -130,7 +171,8 @@ export const experiences: Experience[] = [
     title: "Operations & Financial Records Assistant",
     company: "Naporcas Business Center",
     location: "Lilongwe, Malawi",
-    period: "Ongoing",
+    period: "November 2025 — Present",
+    classification: "Family Business — Concurrent Role",
     responsibilities: [
       "Manage rental fee collection and accurate financial records.",
       "Track income, expenditure and payment documentation for reliable reconciliation.",
@@ -149,19 +191,11 @@ export const qualifications: Qualification[] = [
       "Graduated 6 August 2026 with a foundation spanning software, information systems and business technology.",
   },
   {
-    id: "as",
-    level: "Advanced Subsidiary",
-    programme: "AS Level",
+    id: "secondary",
+    level: "Secondary education",
+    programme: "AS Level & IGCSE",
     institution: "Kamuzu Academy",
-    period: "2020 — 2021",
-    detail: "Advanced secondary education.",
-  },
-  {
-    id: "igcse",
-    level: "Secondary qualification",
-    programme: "IGCSE",
-    institution: "Kamuzu Academy",
-    period: "2015 — 2020",
+    period: "2015 — 2021",
     detail: "International secondary education.",
   },
 ];
@@ -171,6 +205,7 @@ export const projects: Project[] = [
     id: "serenity-hub",
     title: "Serenity Hub",
     ownership: "Personal Project",
+    status: "Personal project — deployment status unverified",
     problem:
       "People seeking mental-wellness support need one place to discover resources, track their progress and connect with therapists.",
     solution:
@@ -180,6 +215,8 @@ export const projects: Project[] = [
       "Implemented authentication, media playback and progress tracking",
       "Created therapist availability, booking, mood check-in and support workflows",
     ],
+    engineering:
+      "A versioned Laravel API separates the Flutter client from the backend and supports progress and booking workflows.",
     technologies: [
       "Flutter",
       "Laravel 13",
@@ -198,6 +235,7 @@ export const projects: Project[] = [
     id: "story-workshop",
     title: "Story Workshop Website",
     ownership: "Client Project — Story Workshop",
+    status: "Client project — deployment status unverified",
     problem:
       "A public-facing organisation needed to publish varied programme content while keeping editorial and operational workflows protected.",
     solution:
@@ -207,6 +245,8 @@ export const projects: Project[] = [
       "Protected CMS workflows",
       "Frontend data and motion integration",
     ],
+    engineering:
+      "The public content interface and protected editorial workflows were separated through authenticated CMS access.",
     technologies: [
       "React 19",
       "Laravel 13",
@@ -223,6 +263,7 @@ export const projects: Project[] = [
     id: "zikospace",
     title: "ZikoSpace",
     ownership: "Terex Innovation Lab — In-House Project",
+    status: "In-house project — deployment status unverified",
     problem:
       "The accommodation platform needed a more dependable sign-in journey, routing and booking experience.",
     solution:
@@ -232,6 +273,8 @@ export const projects: Project[] = [
       "Booking workflow",
       "Theme persistence",
     ],
+    engineering:
+      "Authentication, routing and theme persistence were repaired alongside the booking flow.",
     technologies: ["Laravel", "PHP", "JavaScript", "MySQL", "Tailwind CSS"],
     image: "/images/zikospace.webp",
     imageAlt: "ZikoSpace accommodation listings interface",
@@ -240,6 +283,7 @@ export const projects: Project[] = [
     id: "swiftr",
     title: "TaxiHire / SWIFTR",
     ownership: "Terex Innovation Lab — In-House Project",
+    status: "In-house project — deployment status unverified",
     problem:
       "Passengers and operators needed a shared system for managing ride bookings and payments across distinct user roles.",
     solution:
@@ -249,6 +293,8 @@ export const projects: Project[] = [
       "Payment integration",
       "Passenger, driver and admin experiences",
     ],
+    engineering:
+      "A hosting constraint required a change to the payment integration approach during development.",
     technologies: ["Flutter", "Angular", "Node.js", "PayChangu", "OneKhusa"],
     image: "/images/taxihire.webp",
     imageAlt: "TaxiHire route booking interface",
@@ -267,6 +313,8 @@ export const projects: Project[] = [
       "Partner and initiative pages",
       "Scroll interactions",
     ],
+    engineering:
+      "The redesign remains under review, so this preview is clearly separated from the existing live site.",
     technologies: ["React", "JavaScript", "CSS"],
     image: "/images/terex-website.webp",
     imageAlt:
@@ -274,27 +322,60 @@ export const projects: Project[] = [
   },
 ];
 
-export const engagementOptions = [
+export const services: Service[] = [
   {
-    title: "Focused build",
+    id: "full-stack-web",
+    title: "Full-Stack Web Application Development",
     description:
-      "A defined feature, integration or interface with a clear delivery boundary.",
-    includes: ["Scoped implementation", "Responsive UI", "Handover notes"],
-  },
-  {
-    title: "Product sprint",
-    description:
-      "A compact web or mobile product taken from requirements through a working release.",
-    includes: [
-      "Technical planning",
-      "Full-stack delivery",
+      "Complete web applications from database schema to interface, built with Laravel and React.",
+    delivers: [
+      "Database-backed web applications",
+      "Responsive interfaces",
       "Deployment support",
     ],
   },
   {
-    title: "Ongoing engineering",
+    id: "mobile-apps",
+    title: "Mobile Application Development",
     description:
-      "Embedded development support for evolving platforms and product teams.",
-    includes: ["Flexible scope", "Iteration cadence", "Team collaboration"],
+      "Cross-platform mobile applications built with Flutter and connected to real backends.",
+    delivers: [
+      "Flutter applications",
+      "API-connected mobile clients",
+      "Authentication flows",
+    ],
+  },
+  {
+    id: "api-integration",
+    title: "API Development and Integration",
+    description:
+      "REST APIs and third-party integrations, including payment gateways such as PayChangu and OneKhusa.",
+    delivers: [
+      "REST API development",
+      "Payment gateway integration",
+      "Authenticated client integrations",
+    ],
+  },
+  {
+    id: "business-systems",
+    title: "Business Systems and Workflow Automation",
+    description:
+      "Software for real organisational workflows: bookings, content operations and record keeping.",
+    delivers: [
+      "Booking and scheduling systems",
+      "CMS-backed websites",
+      "Records and reporting tools",
+    ],
+  },
+  {
+    id: "maintenance",
+    title: "Software Maintenance and Improvement",
+    description:
+      "Stabilising and improving existing systems — from auth rebuilds to interface refreshes.",
+    delivers: [
+      "Bug fixing and stabilisation",
+      "Interface redesigns",
+      "Incremental improvements",
+    ],
   },
 ];

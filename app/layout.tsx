@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Paul Napoleon Phiri | Full-Stack Software Developer",
   description:
-    "Paul Napoleon Phiri builds reliable web and mobile systems for banks, NGOs, government agencies and growing businesses.",
+    "Full-stack software developer in Blantyre, Malawi building web and mobile systems with Laravel, React and Flutter — booking platforms, content systems and payment integrations for real organisational workflows.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Paul Napoleon Phiri | Full-Stack Software Developer",
     description:
-      "Selected software engineering work and case studies by Paul Napoleon Phiri.",
+      "Full-stack web and mobile case studies: Flutter and Laravel systems, booking workflows, content platforms and payment integrations.",
     type: "profile",
     url: siteUrl,
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Paul Napoleon Phiri | Full-Stack Software Developer",
     description:
-      "Selected software engineering work and case studies by Paul Napoleon Phiri.",
+      "Full-stack web and mobile case studies: Flutter and Laravel systems, booking workflows, content platforms and payment integrations.",
   },
 };
 

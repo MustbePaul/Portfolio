@@ -61,8 +61,11 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      const result = (await response.json()) as { error?: string };
-      if (!response.ok)
+      const result = (await response.json()) as {
+        ok?: boolean;
+        error?: string;
+      };
+      if (!response.ok || result.ok !== true)
         throw new Error(result.error ?? "Message delivery failed.");
       form.reset();
       setDelivery({

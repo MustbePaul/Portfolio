@@ -2,7 +2,55 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { contactSchema } from "@/lib/contact";
 
+// Per-instance sliding-window limiter. Good enough to blunt simple abuse;
+// a durable store (e.g. Upstash) would be needed for strict global limits.
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const recentAttempts = new Map<string, number[]>();
+
+function clientIp(request: Request) {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0]!.trim();
+  return request.headers.get("x-real-ip") ?? "unknown";
+}
+
+function isRateLimited(ip: string) {
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+  const attempts = (recentAttempts.get(ip) ?? []).filter(
+    (time) => time > windowStart,
+  );
+  if (attempts.length >= RATE_LIMIT_MAX) {
+    recentAttempts.set(ip, attempts);
+    return true;
+  }
+  attempts.push(now);
+  recentAttempts.set(ip, attempts);
+  if (recentAttempts.size > 1000) {
+    for (const [key, times] of recentAttempts) {
+      if (times.every((time) => time <= windowStart))
+        recentAttempts.delete(key);
+    }
+  }
+  return false;
+}
+
 export async function POST(request: Request) {
+  if (isRateLimited(clientIp(request))) {
+    return NextResponse.json(
+      {
+        error:
+          "Too many messages sent recently. Please wait a few minutes or email directly.",
+      },
+      { status: 429 },
+    );
+  }
+
+  const contentLength = Number(request.headers.get("content-length") ?? 0);
+  if (contentLength > 20_000) {
+    return NextResponse.json({ error: "Invalid request." }, { status: 413 });
+  }
+
   let payload: unknown;
   try {
     payload = await request.json();

@@ -11,29 +11,29 @@
       --color-accent: oklch(48% 0.15 255); --color-accent-soft: oklch(95% 0.025 255);
       --font-display: Georgia, serif; --font-body: Arial, sans-serif;
       --space-xs: 4px; --space-sm: 8px; --space-md: 12px; --space-lg: 16px; --space-xl: 24px;
-      --text-xs: 8.5pt; --text-sm: 9.4pt; --text-md: 10pt; --text-lg: 13pt; --text-xl: 20pt;
+      --text-xs: 8.2pt; --text-sm: 9pt; --text-md: 9.6pt; --text-lg: 12.5pt; --text-xl: 20pt;
       --rule-hair: 1px; --radius-sm: 3px;
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-sm); line-height: 1.42; }
-    body { padding: 14mm 16mm; }
+    html, body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-sm); line-height: 1.34; }
+    body { padding: 8mm 13mm; }
     header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-xl); align-items: end; padding-bottom: var(--space-lg); border-bottom: 2px solid var(--color-ink); }
     h1 { margin: 0; font-family: var(--font-display); font-size: 27pt; line-height: 1; letter-spacing: -.6px; }
     .title { margin: var(--space-sm) 0 0; color: var(--color-accent); font-weight: 700; font-size: var(--text-lg); }
     .contact { text-align: right; font-size: var(--text-xs); line-height: 1.65; }
     a { color: inherit; text-decoration: none; }
     main { display: grid; grid-template-columns: 2.15fr 1fr; gap: 7mm; padding-top: var(--space-lg); }
-    section { break-inside: avoid; margin-bottom: var(--space-lg); }
+    section { break-inside: avoid; margin-bottom: var(--space-md); }
     h2 { margin: 0 0 var(--space-sm); padding-bottom: var(--space-xs); border-bottom: var(--rule-hair) solid var(--color-rule); color: var(--color-accent); font-size: var(--text-xs); letter-spacing: 1.1px; text-transform: uppercase; }
     h3 { margin: 0; font-size: var(--text-md); line-height: 1.25; }
     p { margin: 0; }
     .summary { font-size: var(--text-md); line-height: 1.5; }
-    .entry { break-inside: avoid; margin-bottom: var(--space-md); }
+    .entry { break-inside: avoid; margin-bottom: var(--space-sm); }
     .entry-head { display: flex; justify-content: space-between; gap: var(--space-md); align-items: baseline; }
     .entry-meta { color: var(--color-soft); font-size: var(--text-xs); white-space: nowrap; }
     .organisation { margin: 2px 0 var(--space-xs); color: var(--color-soft); font-weight: 700; }
     ul { margin: var(--space-xs) 0 0; padding-left: 15px; }
-    li { margin: 0 0 3px; }
+    li { margin: 0 0 2px; }
     .stack { margin-top: var(--space-xs); color: var(--color-soft); font-size: var(--text-xs); }
     .skill-group { margin-bottom: var(--space-sm); }
     .skill-group strong { display: block; margin-bottom: 2px; }
@@ -63,24 +63,33 @@
     <div>
       <section>
         <h2>Profile</h2>
-        <p class="summary">Business Information Technology graduate and full-stack developer building dependable web and mobile systems with Laravel, React, Next.js and Flutter. Experienced across booking platforms, content systems, payment integrations, offline-first applications and operational dashboards for financial institutions, NGOs and growing businesses.</p>
+        <p class="summary">Business Information Technology graduate and full-stack developer building dependable web and mobile systems with Laravel, React, Next.js and Flutter. Experience includes club management workflows, booking platforms, content systems and payment integrations.</p>
       </section>
 
       <section>
         <h2>Experience</h2>
         <article class="entry">
-          <div class="entry-head"><h3>Software Developer</h3><span class="entry-meta">February 2026 — September 2026</span></div>
-          <p class="organisation">Terex Innovation Lab Limited · Blantyre, Malawi</p>
+          <div class="entry-head"><h3>Software Developer</h3><span class="entry-meta">October 2026 — Present</span></div>
+          <p class="organisation">Country Club Limbe · Limbe, Malawi</p>
           <ul>
-            <li>Develop frontend and backend systems using Laravel, PHP, JavaScript, React and Flutter.</li>
-            <li>Delivered a dual payment-gateway integration after hosting constraints required a mid-build technical pivot.</li>
-            <li>Contributed to ZikoSpace, TaxiHire/SWIFTR and the new Terex website currently under review.</li>
-            <li>Build role-specific booking, payment and content-management workflows across web and mobile interfaces.</li>
+            <li>Developing components of the Country Club Limbe Digital Ecosystem, including the Club Management System.</li>
+            <li>Building backend services and API integrations for membership and operational workflows.</li>
+            <li>Testing, troubleshooting and preparing applications for deployment; supporting technical infrastructure improvements.</li>
           </ul>
         </article>
         <article class="entry">
-          <div class="entry-head"><h3>Operations &amp; Financial Records Assistant</h3><span class="entry-meta">Ongoing</span></div>
-          <p class="organisation">Naporcas Business Center · Lilongwe, Malawi</p>
+          <div class="entry-head"><h3>Software Developer</h3><span class="entry-meta">February 2026 — September 2026</span></div>
+          <p class="organisation">Terex Innovation Lab Limited · Blantyre, Malawi</p>
+          <ul>
+            <li>Developed frontend and backend systems using Laravel, PHP, JavaScript, React and Flutter.</li>
+            <li>Delivered a dual payment-gateway integration after hosting constraints required a mid-build technical pivot.</li>
+            <li>Contributed to ZikoSpace, TaxiHire/SWIFTR and the new Terex website currently under review.</li>
+            <li>Built role-specific booking, payment and content-management workflows across web and mobile interfaces.</li>
+          </ul>
+        </article>
+        <article class="entry">
+          <div class="entry-head"><h3>Operations &amp; Financial Records Assistant</h3><span class="entry-meta">November 2025 — Present</span></div>
+          <p class="organisation">Naporcas Business Center · Lilongwe, Malawi<br>Family Business — Concurrent Role</p>
           <ul>
             <li>Manage rental fee collection and maintain accurate financial records.</li>
             <li>Track income, expenditure and payment documentation for reliable reconciliation.</li>

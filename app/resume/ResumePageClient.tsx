@@ -80,11 +80,10 @@ export default function ResumePageClient() {
               <span className="font-semibold text-paper-100">
                 dependable web and mobile systems
               </span>{" "}
-              for banks, NGOs and growing businesses — booking platforms,
-              content systems and payment integrations. Comfortable owning a
-              feature from database schema to mobile interface, and used to
-              shipping under real hosting, connectivity and payment-provider
-              constraints.
+              for organisations — club management workflows, booking platforms,
+              content systems and payment integrations. Comfortable working
+              across database, API and interface layers and adapting to hosting
+              and payment-provider constraints.
             </p>
           </div>
         </section>
@@ -98,6 +97,35 @@ export default function ResumePageClient() {
             <h2 className="text-xs font-mono uppercase tracking-widest text-signal-blue font-semibold mb-6">
               Experience
             </h2>
+
+            {/* Country Club Limbe */}
+            <div className="mb-8">
+              <div className="flex flex-wrap items-baseline justify-between gap-4 mb-2">
+                <h3 className="text-lg font-semibold text-paper-100">
+                  Software Developer
+                </h3>
+                <span className="font-mono text-xs text-paper-500 whitespace-nowrap">
+                  Oct 2026 — Present
+                </span>
+              </div>
+              <p className="text-sm text-paper-300 mb-4">
+                Country Club Limbe · Limbe, Malawi
+              </p>
+              <ul className="space-y-2 list-disc pl-5 text-sm text-paper-300">
+                <li>
+                  Developing components of the Country Club Limbe Digital
+                  Ecosystem, including the Club Management System.
+                </li>
+                <li>
+                  Building backend services and API integrations for membership
+                  and operational workflows.
+                </li>
+                <li>
+                  Testing, troubleshooting and preparing applications for
+                  deployment; supporting technical infrastructure improvements.
+                </li>
+              </ul>
+            </div>
 
             {/* Terex */}
             <div className="mb-8">
@@ -159,11 +187,12 @@ export default function ResumePageClient() {
                   Operations &amp; Financial Records Assistant
                 </h3>
                 <span className="font-mono text-xs text-paper-500 whitespace-nowrap">
-                  Ongoing
+                  Nov 2025 — Present
                 </span>
               </div>
               <p className="text-sm text-paper-300 mb-4">
-                Naporcas Business Center · Lilongwe, Malawi
+                Naporcas Business Center · Lilongwe, Malawi · Family Business —
+                Concurrent Role
               </p>
               <ul className="space-y-2">
                 <li className="text-sm text-paper-300 pl-4 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:bg-paper-500">

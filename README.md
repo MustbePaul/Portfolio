@@ -17,8 +17,9 @@ print-ready résumé route.
 
 - Five selected projects with clear ownership and contribution attribution
 - Responsive, accessible interface with reduced-motion support
-- Data-driven project, experience, qualification, and skills content
-- Client-side contact validation using React Hook Form and Zod
+- Data-driven project, experience, qualification, skill, and service content
+- Client-side contact validation, server-side Zod validation, honeypot and per-IP rate limiting
+- Downloadable PDF résumé plus a print-ready `/resume` page
 - Self-hosted Space Grotesk, IBM Plex Sans, and IBM Plex Mono fonts
 - Static rendering with canonical, Open Graph, robots, sitemap, and structured metadata
 - Automated formatting, linting, type checking, and production build commands
@@ -76,13 +77,13 @@ not yet in production**; the existing Terex website remains the production site.
 
 ## Technology
 
-| Area        | Tools                                              |
-| ----------- | -------------------------------------------------- |
-| Application | Next.js 16, React 19, TypeScript                   |
-| Interface   | CSS, Framer Motion, Lucide React                   |
-| Forms       | React Hook Form, Zod                               |
-| Quality     | ESLint, Prettier, TypeScript                       |
-| Deployment  | Static Next.js output on a Node.js-compatible host |
+| Area        | Tools                                                   |
+| ----------- | ------------------------------------------------------- |
+| Application | Next.js 16, React 19, TypeScript                        |
+| Interface   | CSS design tokens, Tailwind (résumé page), Lucide React |
+| Forms       | Client-side checks and server-side Zod validation       |
+| Quality     | ESLint, Prettier, TypeScript, Playwright, Lighthouse CI |
+| Deployment  | Next.js on Vercel with a server-side contact route      |
 
 ## Project structure
 
@@ -92,11 +93,25 @@ app/resume/          Print-ready résumé page and print action
 components/          Portfolio interface and client-side interactions
 data/                Typed portfolio content
 public/images/       Portrait and project previews
+public/resume.pdf    Downloadable résumé (generated — do not hand-edit)
 resume/              Résumé source and GitHub profile copy
+scripts/             Maintenance scripts (Lighthouse, résumé PDF)
 ```
 
 Routine portfolio content changes belong in `data/portfolio.ts`. UI behavior
 belongs in `components/Portfolio.tsx`.
+
+### Résumé PDF
+
+`public/resume.pdf` is generated from the canonical source
+`resume/paul-phiri-cv.html`. After editing that file, regenerate the PDF:
+
+```bash
+npm run resume:pdf
+```
+
+The script requires Playwright's Chromium (`npx playwright install chromium`).
+Commit the regenerated PDF so the download link `/resume.pdf` never 404s.
 
 ## Run locally
 
@@ -133,8 +148,9 @@ route handler and Resend; no database is required.
 
 ## Deployment configuration
 
-Import the repository into Vercel. If the repository contains a parent folder,
-set the Vercel root directory to `portfolio`. The site uses
+Import the repository into Vercel with its root directory set to `.`. The
+`portfolio` folder is the local checkout and is already the Git repository root.
+The site uses
 `NEXT_PUBLIC_SITE_URL` when present, falls back to Vercel's
 `VERCEL_PROJECT_PRODUCTION_URL`, and finally uses the current live URL
 `https://paul-phiri-portfolio.vercel.app` for non-Vercel production builds.
@@ -155,6 +171,10 @@ custom domain only requires changing this environment variable and redeploying.
 `CONTACT_FROM_EMAIL` in Resend before enabling production delivery. Until all
 three contact variables are configured, the API intentionally responds with
 HTTP 503 and the interface offers direct email and WhatsApp alternatives.
+
+The contact API additionally enforces a per-instance rate limit of five
+submissions per IP per ten minutes (HTTP 429 beyond that) and rejects
+request bodies above 20 KB.
 
 ## Ownership and reuse
 
