@@ -12,3 +12,4 @@
 - Added project routes to the sitemap and per-page canonical, description and Open Graph metadata.
 - Preserved the contact endpoint, existing visual identity, photograph and authentic project screenshots.
 - Added basic security response headers and a repeatable browser screenshot capture script.
+- Added a sanitised architecture flow to the Country Club Limbe case study and opened a draft review PR.

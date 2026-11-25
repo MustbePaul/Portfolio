@@ -8,7 +8,7 @@ Test results and browser evidence are recorded here after validation. The automa
 - ESLint: `npm run lint` passed after internal routes were changed to Next.js links.
 - Production build: `npm run build` passed; the homepage, catalogue, résumé, metadata routes and ten case studies were generated.
 - Playwright: 22/22 Chromium checks passed. They include form validation, mocked success/failure, API rate limiting, résumé PDF response, catalogue filters, case-study metadata and widths from 280px to 1440px.
-- Browser captures: homepage, catalogue and Serenity Hub case study at 390px, 768px and 1440px. All nine measured 0px horizontal overflow. Captures are kept outside the repository and `public/`.
+- Browser captures: homepage, catalogue, Serenity Hub and Country Club Limbe case studies at 390px, 768px and 1440px. All twelve measured 0px horizontal overflow. Captures are kept outside the repository and `public/`.
 - Lighthouse desktop homepage, local production build: performance 100, accessibility 100, best practices 100, SEO 100. This is one local run with the repository's desktop settings, not a field measurement or mobile score.
 - `npm audit --omit=dev`: zero reported production dependency vulnerabilities.
 - Verified the public PDF hash matches the approved two-page November 2026 PDF exactly.

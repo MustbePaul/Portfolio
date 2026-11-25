@@ -19,6 +19,7 @@ for (const [name, width, height] of [
     ["/", "home"],
     ["/projects", "projects"],
     ["/projects/serenity-hub", "case-study"],
+    ["/projects/country-club-limbe", "club-case-study"],
   ]) {
     await page.goto(`http://127.0.0.1:3000${route}`);
     for (const image of await page.locator("img").all())

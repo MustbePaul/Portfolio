@@ -1209,6 +1209,24 @@ footer {
 .case-narrative li + li {
   margin-block-start: var(--space-xs);
 }
+.architecture-flow {
+  display: grid;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+  counter-reset: layer;
+}
+.architecture-flow li {
+  counter-increment: layer;
+  padding: var(--space-md);
+  border: var(--rule-hair) solid var(--color-line-strong);
+  background: var(--color-bg-soft);
+}
+.architecture-flow li::before {
+  content: counter(layer, decimal-leading-zero) " / ";
+  color: var(--color-accent-bright);
+  font-family: var(--font-mono);
+}
 .case-aside {
   align-self: start;
   padding: var(--space-xl);

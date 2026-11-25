@@ -95,6 +95,27 @@ export default async function CaseStudyPage({ params }: Props) {
               <h2>My contribution</h2>
               <p>{project.role}</p>
             </section>
+            {project.objectives && (
+              <section>
+                <h2>Objectives</h2>
+                <ul>
+                  {project.objectives.map((objective) => (
+                    <li key={objective}>{objective}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {project.architecture && (
+              <section>
+                <h2>System architecture</h2>
+                <p>A sanitised view of the connected layers:</p>
+                <ol className="architecture-flow">
+                  {project.architecture.map((layer) => (
+                    <li key={layer}>{layer}</li>
+                  ))}
+                </ol>
+              </section>
+            )}
             <section>
               <h2>Implemented workflows</h2>
               <ul>
@@ -106,6 +127,11 @@ export default async function CaseStudyPage({ params }: Props) {
             <section>
               <h2>Engineering approach</h2>
               <p>{project.engineering}</p>
+              {project.challenge && (
+                <p>
+                  <strong>Technical challenge:</strong> {project.challenge}
+                </p>
+              )}
             </section>
             <section>
               <h2>Testing and release</h2>

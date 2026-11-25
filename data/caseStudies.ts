@@ -29,9 +29,12 @@ export type CaseStudy = {
   summary: string;
   problem: string;
   role: string;
+  objectives?: string[];
   features: string[];
   stack: string[];
   engineering: string;
+  challenge?: string;
+  architecture?: string[];
   quality: string;
   deployment: string;
   learning: string;
@@ -59,6 +62,19 @@ export const caseStudies: CaseStudy[] = [
     problem:
       "Club operations span members, events, tee times, tournaments, kitchen activity and financial records that need coordinated workflows.",
     role: "As a current Software Developer, I work on shared backend services, client integration, testing, security remediation and deployment preparation. The ecosystem includes work by other developers.",
+    objectives: [
+      "Coordinate club workflows through shared services",
+      "Support web and mobile clients with consistent access rules",
+      "Prepare tested changes for staged release",
+    ],
+    architecture: [
+      "Web and Flutter clients",
+      "Authenticated shared API",
+      "Membership, golf, tournament and kitchen workflows",
+      "Relational operational records",
+    ],
+    challenge:
+      "Several independently developed clients need consistent membership and operational state while release and security work continue.",
     features: [
       "Membership and authentication workflows",
       "Golf and tournament workflows",
