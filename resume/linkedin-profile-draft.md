@@ -14,7 +14,7 @@ My experience includes Laravel and React web applications, Flutter mobile client
 
 I also develop personal projects, including Serenity Hub, an academic Online Banking System prototype and an independent Billing System. I value clear attribution, careful testing and learning the engineering behind each decision.
 
-Portfolio: https://paul-phiri-portfolio.vercel.app/  
+Portfolio: https://paul-phiri-portfolio.vercel.app/
 Email: phiri6paul@gmail.com
 
 ## Experience descriptions
