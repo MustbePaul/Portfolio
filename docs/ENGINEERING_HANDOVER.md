@@ -8,7 +8,9 @@ Next.js 16 uses the App Router under `app/`. `app/layout.tsx` wraps every route,
 
 Most route files are **server components**: they run on the server or at build time and can prepare content and metadata without shipping that logic to the browser. Files marked `"use client"`, such as `components/HeaderClient.tsx`, `components/ProjectCatalogue.tsx`, `components/ContactForm.tsx` and `app/resume/ResumePageClient.tsx`, run in the browser for menus, filters and form state. Keep client components focused: moving all content into them increases JavaScript and can slow mobile devices.
 
-`data/portfolio.ts` defines typed profile, experience and skills data. `data/caseStudies.ts` defines the `CaseStudy` shape and the ten public entries, including ownership, status, scope, image alt text and optional galleries. TypeScript catches misspelled fields and missing required values at build time. It cannot verify historical facts or image rights; those still need human review. Add a project by adding a valid entry, checking the catalogue filter, route, metadata, and attribution register.
+`data/portfolio.ts` defines typed profile, experience and skills data. `data/caseStudies.ts` defines the `CaseStudy` shape and the ten public entries, including ownership, status, scope, image alt text, image captions and optional galleries. TypeScript catches misspelled fields and missing required values at build time. It cannot verify historical facts or image rights; those still need human review. Add a project by adding a valid entry, checking the catalogue filter, route, metadata, and attribution register. Banking belongs to both the personal academic relationship and the academic category; the catalogue also includes it when Personal or Academic is selected as a relationship.
+
+The Story Workshop and SWIFTR images show their public websites as captured in November 2026. Their captions distinguish the public site from Paul's specific contribution. Banking, Billing and Serenity images show labelled demos with synthetic records. Billing captures came from a disposable local clone with a separate SQLite database, development-only configuration and publication-safe branding. Keep captions accurate when replacing any image. Country Club Limbe, ZikoSpace and the Terex redesign remain text-based until a safe, authentic capture is available. Do not link a private repository as public source; review repository content and history before adding links.
 
 ## Contact request lifecycle
 
@@ -22,7 +24,7 @@ Never commit real `.env` files or put the Resend key in a `NEXT_PUBLIC_` variabl
 
 ## Quality and release path
 
-Use the feature branch `feature/portfolio-professional-refresh-2026`; `main` is production. Commit focused changes, push the branch and let PR #1 run `.github/workflows/ci.yml`. Its GitHub Actions job installs Node 24 dependencies and runs formatting, lint, TypeScript, dependency audit, build, Playwright and Lighthouse. The actions themselves use a supported Node 24 runtime. A green workflow proves those commands passed on that commit, not that every publication right or email inbox delivery is verified.
+For future maintenance, branch from `main`, commit focused changes, push the branch and open a normal pull request. `.github/workflows/ci.yml` installs Node 24 dependencies and runs formatting, lint, TypeScript, dependency audit, build, Playwright and Lighthouse. The actions themselves use a supported Node 24 runtime. Inspect the changed pages and preview before merging. A green workflow proves those commands passed on that commit; publication rights and inbox delivery still need direct review.
 
 `tests/portfolio.spec.ts` uses Playwright Chromium to check navigation, routes, metadata, filters, images, PDF response, contact validation and layout widths. Mocked contact success and failure test the UI states only. `playwright.config.ts` starts the built app and clears email credentials for tests. Run `npm run build` before `npm run test:e2e`.
 
@@ -38,6 +40,8 @@ Vercel builds a preview for the PR and deploys `main` to production after an aut
 4. With no Resend variables, submit a valid local form and inspect the network response. Submit an invalid email and a filled honeypot directly to `/api/contact`; compare 503, 422 and 429 behavior. Do not use real customer data.
 5. Run `npm run test:e2e` and read one passing test. Make a reversible UI change that breaks its assertion, observe the failure, and restore the code.
 6. Run `npm run lighthouse`, read `.lighthouseci/local-report.json`, and inspect one diagnostic behind a score. Repeat on mobile and note the device and throttling settings.
-7. Inspect PR #1 checks and preview, then find the last healthy `main` SHA and Vercel deployment ID. Write down the exact rollback target before merging.
+7. Inspect the next PR's checks and preview, then find the last healthy `main` SHA and Vercel deployment ID. Write down the exact rollback target before merging.
+
+Maintain the site without an AI assistant by editing the typed data files, using the `npm` scripts above, reading failing test output, and reviewing the Vercel preview in a browser. Consult the Next.js, Playwright and Vercel documentation for changed tooling. Keep a written release note with the merged SHA, production deployment ID, CV source version and any source-link or image-rights decisions.
 
 The downloadable `public/resume.pdf` is exported from the corrected Word CV kept in the private CV workspace. Do not regenerate it from an older HTML draft. Compare extracted PDF text against the Word CV and verify page count before each release.

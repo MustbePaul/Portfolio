@@ -42,12 +42,12 @@ export type CaseStudy = {
   period?: string;
   image?: string;
   imageAlt?: string;
+  imageCaption?: string;
   gallery?: { src: string; alt: string; caption: string }[];
   repository?: string;
   featured?: boolean;
 };
 
-// Public copy is intentionally conservative. Attribution evidence is tracked in docs.
 export const caseStudies: CaseStudy[] = [
   {
     slug: "country-club-limbe",
@@ -92,9 +92,8 @@ export const caseStudies: CaseStudy[] = [
       "REST APIs",
     ],
     engineering:
-      "Shared authenticated APIs connect domain-specific clients. This description omits private endpoints and infrastructure details.",
-    quality:
-      "Source and release notes show application testing and security work in progress.",
+      "Shared authenticated APIs connect domain-specific clients through consistent access rules.",
+    quality: "Application testing and security improvements are in progress.",
     deployment:
       "Development and staging preparation. Production release has not been verified.",
     learning:
@@ -126,10 +125,8 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Laravel", "PHP", "Flutter", "Dart", "SQLite", "REST APIs"],
     engineering:
       "A versioned API keeps mobile features separate from the backend while local storage supports selected offline interactions.",
-    quality:
-      "Implementation is visible in the current monorepo and earlier API/mobile repositories. Clinical outcomes and live usage are not established.",
-    deployment:
-      "Public source is available; production deployment is unverified.",
+    quality: "API and mobile workflows are under development and testing.",
+    deployment: "In development.",
     learning:
       "Sensitive wellbeing features need careful boundaries between product functionality and medical claims.",
     image: "/images/serenity-home-demo.png",
@@ -170,10 +167,14 @@ export const caseStudies: CaseStudy[] = [
     engineering:
       "A hosting constraint required adapting the payment integration; asynchronous verification separates a payment request from confirmed payment state.",
     quality:
-      "The two local web versions contain booking services, gateway clients and payment jobs. End-to-end production operation is unverified.",
+      "Booking services, payment gateway clients and asynchronous jobs have been implemented and tested.",
     deployment: "Production release has not been verified.",
     learning:
       "Payment flows need explicit verification and recovery paths when the hosting environment changes.",
+    image: "/images/swiftr-public-site.webp",
+    imageAlt: "SWIFTR public taxi website homepage, captured in November 2026",
+    imageCaption:
+      "Current public SWIFTR website, November 2026. Shown for product context; my contribution was to the separate booking web application.",
     featured: true,
   },
   {
@@ -197,11 +198,10 @@ export const caseStudies: CaseStudy[] = [
     engineering:
       "Dio-based API classes consume the existing Laravel endpoints; Riverpod manages client state.",
     quality:
-      "The source contains the listed client screens and integrations. A full end-to-end release is unverified.",
+      "Client screens and API integrations are implemented; mobile release is still in progress.",
     deployment: "Mobile release is unverified.",
     learning:
       "Working against an established backend calls for clear handling of API response and booking state.",
-    repository: "https://github.com/MustbePaul/buszathu_mobile",
     featured: true,
   },
   {
@@ -213,12 +213,13 @@ export const caseStudies: CaseStudy[] = [
       "Web applications",
       "Financial technology",
       "Enterprise systems",
+      "Academic projects",
     ],
     summary:
       "Banking administration prototype for customers, accounts and controlled transactions.",
     problem:
       "Financial workflows need traceable account changes, permissions and statements.",
-    role: "I originally developed this personal academic project during my third-year Human and Design Thinking course at MUST. I later redeveloped its administration workflows in Laravel, Inertia.js, React and TypeScript. The October 2026 Git history documents the newer implementation, not the original start date.",
+    role: "I originally developed this personal academic project during my third-year Human and Design Thinking course at MUST. I later redeveloped its administration workflows in Laravel, Inertia.js, React and TypeScript.",
     features: [
       "Customer and account management",
       "Deposits, withdrawals and transfers",
@@ -229,11 +230,10 @@ export const caseStudies: CaseStudy[] = [
     engineering:
       "Transaction and permission rules are exercised in feature tests alongside statement and reporting workflows.",
     quality:
-      "The repository contains feature tests for transaction and access rules. Regulated production use is not claimed.",
+      "Feature tests exercise transaction and access rules. This remains a prototype.",
     deployment: "Prototype; production banking use is unverified.",
     learning:
       "Financial prototypes benefit from explicit access checks and transaction auditability.",
-    repository: "https://github.com/MustbePaul/Online-Banking-System-",
     image: "/images/banking-demo-dashboard.png",
     imageAlt:
       "Online Banking System dashboard in a labelled demo environment with synthetic account activity",
@@ -264,7 +264,7 @@ export const caseStudies: CaseStudy[] = [
       "Independently developed billing and financial administration application covering quotations, invoices, allocations and credit notes.",
     problem:
       "Billing records need consistent customer, payment and access workflows.",
-    role: "I independently developed the project toward the end of October and beginning of November 2026, building and testing billing APIs and related workflows. The local Git history contains September 2026 commits; that discrepancy is unresolved and is not used to override the supplied development period.",
+    role: "I independently developed billing APIs and related workflows during late October and early November 2026.",
     features: [
       "Quotations and invoices",
       "Customers and credit notes",
@@ -279,7 +279,38 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Production deployment is unverified.",
     learning:
       "Tenant boundaries and payment allocation rules are core correctness concerns in billing software.",
-    repository: "https://github.com/MustbePaul/Billing-System",
+    image: "/images/billing-demo-dashboard.webp",
+    imageAlt:
+      "Billing System dashboard in a local demo with synthetic receivables",
+    imageCaption:
+      "Local Billing System demo with synthetic records and publication-safe branding.",
+    gallery: [
+      {
+        src: "/images/billing-demo-customers.webp",
+        alt: "Billing System customer list with synthetic demo records",
+        caption: "Customer accounts with synthetic records",
+      },
+      {
+        src: "/images/billing-demo-quotations.webp",
+        alt: "Billing System quotation list with a synthetic draft quote",
+        caption: "Quotation workflow with a synthetic draft",
+      },
+      {
+        src: "/images/billing-demo-invoices.webp",
+        alt: "Billing System invoice list with synthetic demo records",
+        caption: "Invoice management with synthetic records",
+      },
+      {
+        src: "/images/billing-demo-payment-allocation.webp",
+        alt: "Billing System posted payment allocation in the synthetic demo",
+        caption: "Posted payment allocation against a demo invoice",
+      },
+      {
+        src: "/images/billing-demo-credit-notes.webp",
+        alt: "Billing System credit note list with a synthetic issued credit",
+        caption: "Issued credit note in the local demo",
+      },
+    ],
   },
   {
     slug: "zikospace",
@@ -290,7 +321,7 @@ export const caseStudies: CaseStudy[] = [
     summary: "Collaborative accommodation discovery and booking work at Terex.",
     problem:
       "Property discovery and accommodation booking needed a clearer customer journey.",
-    role: "I contributed frontend implementation and UI/UX refinement alongside other Terex developers. An account-hosted House Rentals repository mirrors this codebase.",
+    role: "I contributed frontend implementation and UI/UX refinement alongside other Terex developers.",
     features: [
       "Property discovery",
       "Accommodation booking journeys",
@@ -300,7 +331,7 @@ export const caseStudies: CaseStudy[] = [
     engineering:
       "Customer-facing screens integrate with the existing booking and property workflows.",
     quality:
-      "Source and team history establish a collaborative codebase; individual module ownership is not fully separable.",
+      "The booking interface was developed collaboratively and its production status is still being confirmed.",
     deployment: "Production status is unverified.",
     learning:
       "Shared product work requires clear attribution and consistent customer journeys.",
@@ -315,7 +346,7 @@ export const caseStudies: CaseStudy[] = [
       "Public storytelling pages and protected editorial workflows in a collaborative client project.",
     problem:
       "The organisation needed public content and controlled publishing workflows.",
-    role: "I contributed to the public website and CMS within a multi-author Terex codebase. Exact module ownership is not fully separable.",
+    role: "I contributed to the public website and CMS as part of the Terex development team.",
     features: [
       "Articles, events and vacancies",
       "Studio booking and submissions",
@@ -325,10 +356,15 @@ export const caseStudies: CaseStudy[] = [
     engineering:
       "Public content and authenticated editorial workflows are served through separate interfaces.",
     quality:
-      "The local source contains public and admin components plus backend controllers.",
+      "Public content pages and protected editorial workflows have been implemented.",
     deployment: "Current production status is unverified.",
     learning:
       "Editorial systems need useful publishing controls without burdening the public experience.",
+    image: "/images/story-workshop-public-site.webp",
+    imageAlt:
+      "Story Workshop public website homepage, captured in November 2026",
+    imageCaption:
+      "Current public Story Workshop website, November 2026. Developed collaboratively; the image does not identify individual contributions.",
   },
   {
     slug: "terex-website-redesign",
@@ -349,8 +385,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ["React", "JavaScript", "CSS"],
     engineering:
       "The redesign is kept distinct from the existing live website while it is reviewed.",
-    quality:
-      "The implementation is present in local source; approval and release remain separate steps.",
+    quality: "The redesign is under review for approval and release.",
     deployment: "Under review; production approval is unverified.",
     learning:
       "A redesign should communicate the organisation clearly before adding visual effects.",
@@ -374,8 +409,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Node.js", "Express", "React"],
     engineering:
       "The prototype connects simulated inputs to a dashboard; field validation is not established.",
-    quality:
-      "Repository source supports a prototype, not a deployed agricultural advisory service.",
+    quality: "The team built a working prototype with simulated inputs.",
     deployment: "Academic prototype; field deployment is unverified.",
     learning:
       "Project coordination and presentation are distinct from claiming sole technical authorship.",

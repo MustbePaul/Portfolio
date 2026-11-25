@@ -81,9 +81,10 @@ export default async function CaseStudyPage({ params }: Props) {
               sizes="(max-width: 800px) 100vw, 80vw"
             />
             <figcaption>
-              {project.slug === "online-banking-system"
-                ? "Prototype demo environment with synthetic records."
-                : "Application screenshot from reviewed local assets."}
+              {project.imageCaption ??
+                (project.slug === "online-banking-system"
+                  ? "Prototype demo environment with synthetic records."
+                  : "Application screenshot from reviewed local assets.")}
             </figcaption>
           </figure>
         )}

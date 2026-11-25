@@ -205,6 +205,15 @@ test("project catalogue filters by category and relationship", async ({
   await expect(
     page.getByRole("heading", { name: "Online Banking System" }),
   ).toBeVisible();
+  await page.getByLabel("Project category").selectOption("Academic projects");
+  await expect(
+    page.getByRole("heading", { name: "Online Banking System" }),
+  ).toBeVisible();
+  await page.getByLabel("Project relationship").selectOption("Academic");
+  await expect(
+    page.getByRole("heading", { name: "Online Banking System" }),
+  ).toBeVisible();
+  await page.getByLabel("Project category").selectOption("All projects");
   await page
     .getByLabel("Project relationship")
     .selectOption("Personal Project");
@@ -239,6 +248,43 @@ test("banking case study loads labelled demo screenshots", async ({ page }) => {
       )
       .toBeGreaterThan(0);
     await expect(image).toHaveAttribute("alt", /demo|synthetic/i);
+  }
+});
+
+test("public website captures load with clear contribution context", async ({
+  page,
+}) => {
+  for (const [slug, label] of [
+    ["story-workshop", "Current public Story Workshop website"],
+    ["taxihire-swiftr", "Current public SWIFTR website"],
+  ]) {
+    await page.goto(`/projects/${slug}`);
+    await expect(page.locator(".case-image figcaption")).toContainText(label);
+    const image = page.locator(".case-image img");
+    await expect
+      .poll(() =>
+        image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+  }
+});
+
+test("billing case study shows six synthetic demo workflows", async ({
+  page,
+}) => {
+  await page.goto("/projects/billing-system");
+  await expect(page.locator("main img")).toHaveCount(6);
+  await expect(page.locator(".case-image figcaption")).toContainText(
+    "synthetic records",
+  );
+  for (const image of await page.locator("main img").all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+    await expect(image).toHaveAttribute("alt", /synthetic|demo/i);
   }
 });
 

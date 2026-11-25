@@ -43,7 +43,12 @@ export default function ProjectCatalogue() {
           (category === "All projects" ||
             project.categories.includes(category)) &&
           (relationship === "All relationships" ||
-            project.relationship === relationship),
+            project.relationship === relationship ||
+            (relationship === "Personal" &&
+              (project.relationship === "Personal Academic Project" ||
+                project.relationship === "Personal Project")) ||
+            (relationship === "Academic" &&
+              project.relationship === "Personal Academic Project")),
       ),
     [category, relationship],
   );
