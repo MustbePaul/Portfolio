@@ -1,0 +1,7 @@
+# Deployment readiness
+
+The work is on `feature/portfolio-professional-refresh-2026` in [PR #1](https://github.com/MustbePaul/Portfolio/pull/1). The PR is ready for review and its GitHub and Vercel checks passed at commit `67d33ae`. The user authorised the production merge on 25 November 2026, subject to final targeted checks.
+
+The user confirmed the Banking and Billing ownership, Country Club Limbe job title and personal-project screenshot rights on 25 November 2026. The source inventory and CV evidence remain outside the repository. A controlled production contact request returned HTTP 201 and the exact message was found in the recipient Inbox with the expected Reply-To header. The sender currently uses Resend's onboarding address; a verified custom domain would provide a branded sender if desired. Private repository links were removed from public copy. Story Workshop and SWIFTR public website captures are labelled as product context, with contributions stated separately.
+
+The contact endpoint has schema validation, a honeypot, a request-size check and a per-instance in-memory rate limit. Serverless instances do not share that limit, so stronger abuse protection would need a durable store. Basic security response headers are configured. No new client-side secret exposure is introduced. Previous production `main` at the start of this release was `ecb31d0`; confirm its Vercel deployment before merging so it can serve as the rollback target.

@@ -85,21 +85,19 @@ test("hero CV actions point to the résumé route and PDF", async ({ page }) => 
   ).toHaveAttribute("href", "/resume.pdf");
 });
 
-test("employment timeline matches the CV and labels NBC as concurrent", async ({
+test("employment timeline matches the CV and labels Naporcas as concurrent", async ({
   page,
 }) => {
   await page.goto("/");
   const cards = page.locator("#experience .experience-card");
   await expect(cards).toHaveCount(3);
   await expect(cards.nth(0)).toContainText("Country Club Limbe");
-  await expect(cards.nth(0)).toContainText("October 2026 — Present");
-  await expect(cards.nth(1)).toContainText("February 2026 — September 2026");
-  await expect(cards.nth(2)).toContainText("November 2025 — Present");
-  await expect(cards.nth(2)).toContainText("Family Business — Concurrent Role");
+  await expect(cards.nth(0)).toContainText("October 2026");
+  await expect(cards.nth(1)).toContainText("February 2026");
+  await expect(cards.nth(2)).toContainText("November 2025");
+  await expect(cards.nth(2)).toContainText("Family Business");
   await page.goto("/resume");
-  await expect(
-    page.getByText("Country Club Limbe · Limbe, Malawi"),
-  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Download CV/ })).toBeVisible();
 });
 
 test("desktop navigation moves to project content", async ({ page }) => {
@@ -171,7 +169,7 @@ test("mobile menu opens, closes, and navigates", async ({ page }) => {
   await expect(menu).toHaveAttribute("aria-expanded", "false");
 });
 
-test("résumé route renders with a visible print action and canonical URL", async ({
+test("résumé route presents the verified PDF and canonical URL", async ({
   page,
 }) => {
   await page.goto("/resume");
@@ -179,12 +177,115 @@ test("résumé route renders with a visible print action and canonical URL", asy
     page.getByRole("heading", { level: 1, name: "Paul Napoleon Phiri" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: /Download \/ Print PDF/i }),
+    page.getByRole("link", { name: /Download CV \(PDF\)/i }),
   ).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
     /^https:\/\/.+\/resume$/,
   );
+});
+
+test("project catalogue filters by category and relationship", async ({
+  page,
+}) => {
+  await page.goto("/projects");
+  await expect(page.getByRole("status")).toContainText("10 projects");
+  await page.getByLabel("Project category").selectOption("Mobile applications");
+  await expect(page.getByRole("status")).toContainText("3 projects");
+  await page.getByLabel("Project relationship").selectOption("Personal");
+  await expect(page.getByRole("status")).toContainText("1 project");
+  await expect(
+    page.getByRole("heading", { name: "Serenity Hub" }),
+  ).toBeVisible();
+  await page.getByLabel("Project category").selectOption("All projects");
+  await page
+    .getByLabel("Project relationship")
+    .selectOption("Personal Academic Project");
+  await expect(page.getByRole("status")).toContainText("1 project");
+  await expect(
+    page.getByRole("heading", { name: "Online Banking System" }),
+  ).toBeVisible();
+  await page.getByLabel("Project category").selectOption("Academic projects");
+  await expect(
+    page.getByRole("heading", { name: "Online Banking System" }),
+  ).toBeVisible();
+  await page.getByLabel("Project relationship").selectOption("Academic");
+  await expect(
+    page.getByRole("heading", { name: "Online Banking System" }),
+  ).toBeVisible();
+  await page.getByLabel("Project category").selectOption("All projects");
+  await page
+    .getByLabel("Project relationship")
+    .selectOption("Personal Project");
+  await expect(
+    page.getByRole("heading", { name: "Billing System" }),
+  ).toBeVisible();
+});
+
+test("case study explains attribution and release status", async ({ page }) => {
+  await page.goto("/projects/buszathu-mobile");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "BusZathu Mobile" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/not the web platform, backend or payment infrastructure/),
+  ).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    /\/projects\/buszathu-mobile$/,
+  );
+});
+
+test("banking case study loads labelled demo screenshots", async ({ page }) => {
+  await page.goto("/projects/online-banking-system");
+  const images = page.locator("main img");
+  await expect(images).toHaveCount(3);
+  for (const image of await images.all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate((element) => (element as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+    await expect(image).toHaveAttribute("alt", /demo|synthetic/i);
+  }
+});
+
+test("public website captures load with clear contribution context", async ({
+  page,
+}) => {
+  for (const [slug, label] of [
+    ["story-workshop", "Current public Story Workshop website"],
+    ["taxihire-swiftr", "Current public SWIFTR website"],
+  ]) {
+    await page.goto(`/projects/${slug}`);
+    await expect(page.locator(".case-image figcaption")).toContainText(label);
+    const image = page.locator(".case-image img");
+    await expect
+      .poll(() =>
+        image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+  }
+});
+
+test("billing case study shows six synthetic demo workflows", async ({
+  page,
+}) => {
+  await page.goto("/projects/billing-system");
+  await expect(page.locator("main img")).toHaveCount(6);
+  await expect(page.locator(".case-image figcaption")).toContainText(
+    "synthetic records",
+  );
+  for (const image of await page.locator("main img").all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+    await expect(image).toHaveAttribute("alt", /synthetic|demo/i);
+  }
 });
 
 test("validates the contact form", async ({ page }) => {
@@ -252,7 +353,7 @@ test("résumé PDF downloads from /resume.pdf", async ({ request }) => {
   expect(body.length).toBeGreaterThan(10_000);
   expect(
     (body.toString("latin1").match(/\/Type\s*\/Page\b/g) ?? []).length,
-  ).toBe(1);
+  ).toBe(2);
 });
 
 test("contact API rate-limits excessive submissions", async ({ request }) => {
@@ -273,6 +374,43 @@ test("contact API rate-limits excessive submissions", async ({ request }) => {
     expect([503, 422]).toContain(response.status());
   }
   expect(limited).toBe(true);
+});
+
+test("contact API rejects invalid fields, honeypot and oversized bodies", async ({
+  request,
+}) => {
+  const base = {
+    name: "Test Visitor",
+    email: "visitor@example.com",
+    subject: "Controlled check",
+    message: "This is a controlled validation check.",
+    website: "",
+  };
+  const headers = { "x-forwarded-for": "203.0.113.42" };
+  expect(
+    (
+      await request.post("/api/contact", {
+        data: { ...base, email: "invalid" },
+        headers,
+      })
+    ).status(),
+  ).toBe(422);
+  expect(
+    (
+      await request.post("/api/contact", {
+        data: { ...base, website: "bot" },
+        headers,
+      })
+    ).status(),
+  ).toBe(422);
+  expect(
+    (
+      await request.post("/api/contact", {
+        data: { ...base, message: "x".repeat(21_000) },
+        headers,
+      })
+    ).status(),
+  ).toBe(413);
 });
 
 for (const size of responsiveSizes) {

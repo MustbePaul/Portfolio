@@ -10,6 +10,7 @@ const rc = JSON.parse(readFileSync(resolve(root, "lighthouserc.json"), "utf8"));
 const collect = rc.ci.collect;
 const assertions = rc.ci.assert.assertions;
 const reportDir = resolve(root, ".lighthouseci");
+const mobile = process.argv.includes("--mobile");
 const profileDir = resolve(reportDir, "chrome-profile");
 const url = collect.url[0];
 const serverPort = new URL(url).port;
@@ -137,7 +138,19 @@ try {
   });
 
   const result = await lighthouse(url, {
-    ...collect.settings,
+    ...(mobile
+      ? {
+          formFactor: "mobile",
+          screenEmulation: {
+            mobile: true,
+            width: 390,
+            height: 844,
+            deviceScaleFactor: 2,
+            disabled: false,
+          },
+          throttlingMethod: "simulate",
+        }
+      : collect.settings),
     port: chrome.port,
     output: "json",
     logLevel: "error",
@@ -146,10 +159,23 @@ try {
   if (!result) throw new Error("Lighthouse did not return a result.");
 
   writeFileSync(
-    resolve(reportDir, "local-report.json"),
+    resolve(reportDir, mobile ? "mobile-report.json" : "local-report.json"),
     JSON.stringify(result.lhr, null, 2),
   );
-  assertScores(result.lhr);
+  if (mobile) {
+    for (const category of [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo",
+    ]) {
+      console.log(
+        `${category}: ${Math.round(result.lhr.categories[category].score * 100)}`,
+      );
+    }
+  } else {
+    assertScores(result.lhr);
+  }
 } finally {
   if (chrome) {
     try {

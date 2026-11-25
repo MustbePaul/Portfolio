@@ -40,6 +40,11 @@ export default function RootLayout({
     name: "Paul Napoleon Phiri",
     alternateName: "Paul Phiri",
     jobTitle: "Full-Stack Software Developer",
+    worksFor: { "@type": "Organization", name: "Country Club Limbe" },
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "Software Developer Intern",
+    },
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "Malawi University of Science and Technology",
