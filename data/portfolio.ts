@@ -22,24 +22,6 @@ export type Qualification = {
   period: string;
   detail: string;
 };
-export type Project = {
-  id: string;
-  title: string;
-  ownership: string;
-  status?: string;
-  problem: string;
-  solution: string;
-  contribution: string[];
-  engineering?: string;
-  technologies: string[];
-  image?: string;
-  imageAlt?: string;
-  imageContain?: boolean;
-  liveUrl?: string;
-  walkthroughUrl?: string;
-  caseStudyUrl?: string;
-  repositoryUrl?: string;
-};
 export type Service = {
   id: string;
   title: string;
@@ -59,7 +41,7 @@ export const profile = {
   github: "https://github.com/MustbePaul",
   linkedin: "https://www.linkedin.com/in/paul-napoleon-phiri",
   biography:
-    "Business Information Technology graduate developing full-stack web and mobile systems with Laravel, React and Flutter — from booking platforms and CMS-backed websites to payment integrations for real organisational workflows.",
+    "Business Information Technology graduate who began programming in 2023. I build web, mobile and business systems with Laravel, React, Node.js and Flutter.",
   aboutParagraphs: [
     "My Business Information Technology background shapes how I work: understand the business problem first, then build the software that solves it. That means asking what a booking clerk, a driver or an editor actually needs to get their job done before writing a line of code.",
     "I am comfortable across the whole stack — designing the database, building the Laravel API behind it, and delivering the React or Flutter interface in front of it. I care about maintainability and reliability, and I have shipped work inside team codebases under real constraints, including a mid-build payment-provider pivot.",
@@ -77,6 +59,46 @@ export const navigation = [
   "Experience",
   "Projects",
   "Contact",
+] as const;
+
+export const developmentJourney = [
+  {
+    year: "2022",
+    detail:
+      "Began Business Information Technology studies at Malawi University of Science and Technology.",
+  },
+  {
+    year: "2023",
+    detail: "Began programming and independent learning during my second year.",
+  },
+  {
+    year: "2024–2025",
+    detail:
+      "Built academic and independent development foundations across web and application work.",
+  },
+  {
+    year: "Nov 2025",
+    detail:
+      "Began a concurrent family-business role at Naporcas Business Center.",
+  },
+  {
+    year: "Feb 2026",
+    detail: "Joined Terex Innovation Lab as a Software Developer.",
+  },
+  {
+    year: "Aug 2026",
+    detail:
+      "Graduated from Malawi University of Science and Technology on 6 August.",
+  },
+  { year: "Sep 2026", detail: "Concluded employment at Terex Innovation Lab." },
+  {
+    year: "Oct 2026",
+    detail: "Joined Country Club Limbe as a Software Developer.",
+  },
+  {
+    year: "Present",
+    detail: "Continue professional and independent development.",
+  },
 ] as const;
 
 export const skillCategories: SkillCategory[] = [
@@ -98,14 +120,29 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "backend",
     title: "Backend Development",
-    technologies: ["Laravel", "PHP", "Node.js", "Sanctum"],
+    technologies: [
+      "Laravel",
+      "PHP",
+      "Node.js",
+      "Express",
+      "REST APIs",
+      "Authentication",
+      "Role-based access",
+    ],
     evidence:
       "Laravel services and authentication workflows for web and mobile products.",
   },
   {
     id: "mobile",
     title: "Mobile Application Development",
-    technologies: ["Flutter", "Dart", "Provider"],
+    technologies: [
+      "Flutter",
+      "Dart",
+      "Riverpod",
+      "Provider",
+      "Dio",
+      "Offline functionality",
+    ],
     evidence:
       "A complete mental-wellness mobile client and passenger booking experiences built on Flutter.",
   },
@@ -148,9 +185,9 @@ export const experiences: Experience[] = [
     period: "October 2026 — Present",
     current: true,
     responsibilities: [
-      "Developing and implementing components of the Country Club Limbe Digital Ecosystem, including the Club Management System.",
-      "Building backend services and API integrations for membership and operational workflows.",
-      "Testing, troubleshooting and preparing applications for deployment while supporting technical and digital infrastructure improvements.",
+      "Developing shared services and integrating web and Flutter clients for membership, golf, tournaments, kitchen and operational workflows.",
+      "Working on authentication, authorisation, financial integration and application testing across the club ecosystem.",
+      "Supporting security remediation, staging checks, hosting preparation and technical infrastructure improvements. Production release is not yet verified.",
     ],
   },
   {
@@ -160,10 +197,10 @@ export const experiences: Experience[] = [
     location: "Blantyre, Malawi",
     period: "February 2026 — September 2026",
     responsibilities: [
-      "Developed frontend and backend systems for in-house products using Laravel, PHP, JavaScript, React, Angular and Flutter.",
-      "Delivered dual payment-gateway integration (PayChangu and OneKhusa) after a hosting constraint forced a mid-build pivot.",
-      "Rebuilt authentication, routing and theme persistence for ZikoSpace and delivered its accommodation booking flow end to end.",
-      "Built role-specific passenger, driver and administrator experiences for TaxiHire / SWIFTR.",
+      "Developed Laravel and React systems for employer-owned products and contributed to collaborative client and in-house work.",
+      "Served as primary web developer for TaxiHire / SWIFTR, including ride booking, role-specific workflows and PayChangu and OneKhusa payment versions.",
+      "Contributed frontend implementation and UI/UX refinement to ZikoSpace alongside other developers.",
+      "Contributed to the Story Workshop website and CMS and Terex website redesign in collaborative codebases.",
     ],
   },
   {
@@ -189,136 +226,6 @@ export const qualifications: Qualification[] = [
     period: "2022 — August 2026",
     detail:
       "Graduated 6 August 2026 with a foundation spanning software, information systems and business technology.",
-  },
-  {
-    id: "secondary",
-    level: "Secondary education",
-    programme: "AS Level & IGCSE",
-    institution: "Kamuzu Academy",
-    period: "2015 — 2021",
-    detail: "International secondary education.",
-  },
-];
-
-export const projects: Project[] = [
-  {
-    id: "serenity-hub",
-    title: "Serenity Hub",
-    ownership: "Personal Project",
-    status: "Personal project — deployment status unverified",
-    problem:
-      "People seeking mental-wellness support need one place to discover resources, track their progress and connect with therapists.",
-    solution:
-      "Built a Flutter client and versioned Laravel API for guided audio and video sessions, mood-informed recommendations, therapist discovery, appointment booking, bookmarks and support request ticketing.",
-    contribution: [
-      "Built the Flutter mobile experience and Laravel 13 API",
-      "Implemented authentication, media playback and progress tracking",
-      "Created therapist availability, booking, mood check-in and support workflows",
-    ],
-    engineering:
-      "A versioned Laravel API separates the Flutter client from the backend and supports progress and booking workflows.",
-    technologies: [
-      "Flutter",
-      "Laravel 13",
-      "PHP 8.3",
-      "Provider",
-      "SQLite",
-      "REST API",
-    ],
-    image: "/images/serenity-hub.png",
-    imageAlt:
-      "Serenity Hub mobile welcome screen with sign-in and account creation actions",
-    imageContain: true,
-    repositoryUrl: "https://github.com/MustbePaul/Serenity-Hub",
-  },
-  {
-    id: "story-workshop",
-    title: "Story Workshop Website",
-    ownership: "Client Project — Story Workshop",
-    status: "Client project — deployment status unverified",
-    problem:
-      "A public-facing organisation needed to publish varied programme content while keeping editorial and operational workflows protected.",
-    solution:
-      "Contributed to Story Workshop's public storytelling platform and protected CMS for articles, events, vacancies, bookings, newsletters and submissions.",
-    contribution: [
-      "Public website development",
-      "Protected CMS workflows",
-      "Frontend data and motion integration",
-    ],
-    engineering:
-      "The public content interface and protected editorial workflows were separated through authenticated CMS access.",
-    technologies: [
-      "React 19",
-      "Laravel 13",
-      "Sanctum",
-      "MySQL",
-      "React Query",
-      "Framer Motion",
-    ],
-    image: "/images/story-workshop.webp",
-    imageAlt:
-      "Story Workshop website hero presenting its changing lives through storytelling mission",
-  },
-  {
-    id: "zikospace",
-    title: "ZikoSpace",
-    ownership: "Terex Innovation Lab — In-House Project",
-    status: "In-house project — deployment status unverified",
-    problem:
-      "The accommodation platform needed a more dependable sign-in journey, routing and booking experience.",
-    solution:
-      "As a Terex Innovation Lab developer, rebuilt authentication and routing, fixed persistent theming and delivered the accommodation booking flow end to end.",
-    contribution: [
-      "Authentication and routing",
-      "Booking workflow",
-      "Theme persistence",
-    ],
-    engineering:
-      "Authentication, routing and theme persistence were repaired alongside the booking flow.",
-    technologies: ["Laravel", "PHP", "JavaScript", "MySQL", "Tailwind CSS"],
-    image: "/images/zikospace.webp",
-    imageAlt: "ZikoSpace accommodation listings interface",
-  },
-  {
-    id: "swiftr",
-    title: "TaxiHire / SWIFTR",
-    ownership: "Terex Innovation Lab — In-House Project",
-    status: "In-house project — deployment status unverified",
-    problem:
-      "Passengers and operators needed a shared system for managing ride bookings and payments across distinct user roles.",
-    solution:
-      "As part of the Terex Innovation Lab team, developed passenger, driver and administrator experiences, then supported two payment gateways when hosting constraints required a mid-project pivot.",
-    contribution: [
-      "Booking flow development",
-      "Payment integration",
-      "Passenger, driver and admin experiences",
-    ],
-    engineering:
-      "A hosting constraint required a change to the payment integration approach during development.",
-    technologies: ["Flutter", "Angular", "Node.js", "PayChangu", "OneKhusa"],
-    image: "/images/taxihire.webp",
-    imageAlt: "TaxiHire route booking interface",
-  },
-  {
-    id: "terex-site",
-    title: "Terex Website Redesign",
-    ownership: "Terex Innovation Lab — In-House Project",
-    status: "Under Review — Not Yet in Production",
-    problem:
-      "The corporate website needed a clearer first impression and stronger presentation of partners and initiatives.",
-    solution:
-      "Implemented a new website experience with refreshed hero, partner and initiative content. The redesign is currently under review and awaiting production approval; the existing website remains live.",
-    contribution: [
-      "Hero redesign",
-      "Partner and initiative pages",
-      "Scroll interactions",
-    ],
-    engineering:
-      "The redesign remains under review, so this preview is clearly separated from the existing live site.",
-    technologies: ["React", "JavaScript", "CSS"],
-    image: "/images/terex-website.webp",
-    imageAlt:
-      "Preview of the new Terex Innovation Lab website currently under review",
   },
 ];
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
+import Link from "next/link";
 import HeaderClient from "@/components/HeaderClient";
 import {
   ArrowDown,
@@ -11,13 +12,14 @@ import {
   Mail,
 } from "lucide-react";
 import {
+  developmentJourney,
   experiences,
   profile,
-  projects,
   qualifications,
   services,
   skillCategories,
 } from "@/data/portfolio";
+import { caseStudies } from "@/data/caseStudies";
 
 function Hero() {
   return (
@@ -39,9 +41,9 @@ function Hero() {
             ))}
           </ul>
           <div className="button-row">
-            <a className="button primary" href="#projects">
-              View Projects <ArrowUpRight aria-hidden="true" />
-            </a>
+            <Link className="button primary" href="/projects">
+              Explore Projects <ArrowUpRight aria-hidden="true" />
+            </Link>
             <a className="button secondary" href="#contact">
               Contact Me <ArrowUpRight aria-hidden="true" />
             </a>
@@ -52,6 +54,14 @@ function Hero() {
             </a>
             <a className="text-link" href="/resume">
               View CV <ArrowUpRight aria-hidden="true" />
+            </a>
+            <a
+              className="text-link"
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View GitHub <ArrowUpRight aria-hidden="true" />
             </a>
             <div className="socials" aria-label="Professional profiles">
               <a
@@ -136,6 +146,17 @@ function About() {
           {profile.aboutParagraphs.map((paragraph) => (
             <p key={paragraph.slice(0, 24)}>{paragraph}</p>
           ))}
+        </div>
+        <div className="journey">
+          <h3>Development journey</h3>
+          <ol>
+            {developmentJourney.map((milestone) => (
+              <li key={milestone.year}>
+                <strong>{milestone.year}</strong>
+                <span>{milestone.detail}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
@@ -245,137 +266,50 @@ function Projects() {
       <div className="container">
         <SectionHead
           label="Selected systems"
-          title="Project case studies"
-          copy="The problems behind the work, the solutions delivered and the responsibilities I owned."
+          title="Work with context"
+          copy="A selection of web, mobile and business systems, with my role and the release state stated plainly."
         />
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <article key={project.id} className="glass-card project-card">
-              {project.image && project.imageAlt ? (
-                <div
-                  className={`project-image${project.imageContain ? " project-image-contain" : ""}`}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.imageAlt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-              ) : (
-                <div
-                  className="project-image project-image-text"
-                  aria-label={`${project.title} project preview`}
-                >
-                  <span>{project.title}</span>
-                  <small>Project preview</small>
-                </div>
-              )}
-              <div className="project-content">
+        <div className="featured-project-list">
+          {caseStudies
+            .filter((project) => project.featured)
+            .map((project, index) => (
+              <article key={project.slug} className="featured-project">
                 <span className="project-number">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3>{project.title}</h3>
-                <dl className="project-details">
-                  <div>
-                    <dt>Ownership</dt>
-                    <dd>{project.ownership}</dd>
-                  </div>
-                  {project.status && (
-                    <div>
-                      <dt>Status</dt>
-                      <dd>{project.status}</dd>
-                    </div>
-                  )}
-                </dl>
-                <div className="case-study-block case-study-feature">
-                  <h4>Problem</h4>
-                  <p>{project.problem}</p>
-                </div>
-                <div className="case-study-grid">
-                  <div className="case-study-block">
-                    <h4>Solution</h4>
-                    <p>{project.solution}</p>
-                  </div>
-                  <div className="case-study-block">
-                    <h4>My contribution</h4>
-                    <ul>
-                      {project.contribution.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                {project.engineering && (
-                  <div className="case-study-block project-engineering">
-                    <h4>Engineering decision</h4>
-                    <p>{project.engineering}</p>
-                  </div>
-                )}
-                <div className="tags">
-                  {project.technologies.map((technology) => (
-                    <span key={technology}>{technology}</span>
-                  ))}
-                </div>
-                {project.repositoryUrl ? (
-                  <p className="repository-note">
-                    <strong>Repository:</strong>{" "}
-                    <a
-                      href={project.repositoryUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      View public source <ArrowUpRight aria-hidden="true" />
-                    </a>
+                <div>
+                  <p className="eyebrow">
+                    {project.relationship} · {project.status}
                   </p>
-                ) : (
-                  <p className="repository-note">
-                    <strong>Repository:</strong> Private due to company/client
-                    confidentiality.
-                  </p>
-                )}
-                {(project.liveUrl ||
-                  project.walkthroughUrl ||
-                  project.caseStudyUrl) && (
-                  <div className="project-links">
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Live project <ArrowUpRight aria-hidden="true" />
-                      </a>
-                    )}
-                    {project.walkthroughUrl && (
-                      <a
-                        href={project.walkthroughUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Walkthrough <ArrowUpRight aria-hidden="true" />
-                      </a>
-                    )}
-                    {project.caseStudyUrl && (
-                      <a
-                        href={project.caseStudyUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Case study <ArrowUpRight aria-hidden="true" />
-                      </a>
-                    )}
+                  <h3>
+                    <Link href={`/projects/${project.slug}`}>
+                      {project.title}
+                    </Link>
+                  </h3>
+                  <p>{project.summary}</p>
+                  <div className="tags">
+                    {project.stack.slice(0, 4).map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
                   </div>
-                )}
-              </div>
-            </article>
-          ))}
+                </div>
+                <Link
+                  className="text-link"
+                  href={`/projects/${project.slug}`}
+                  aria-label={`Read ${project.title} case study`}
+                >
+                  Case study <ArrowUpRight aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
         </div>
+        <Link className="button secondary" href="/projects">
+          Browse all projects <ArrowUpRight aria-hidden="true" />
+        </Link>
       </div>
     </section>
   );
 }
-
 function Services() {
   return (
     <section id="services" className="section section-alt">

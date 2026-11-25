@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { navigation } from "@/data/portfolio";
 
@@ -55,20 +56,20 @@ export default function HeaderClient() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <a
-          href="#home"
+        <Link
+          href="/#home"
           className="brand"
           aria-label="Paul Napoleon Phiri, home"
         >
           PP<span>.</span>
-        </a>
+        </Link>
         <nav className="desktop-nav" aria-label="Primary">
           {headerNavigation.map((item) => {
             const id = item.toLowerCase();
             return (
               <a
                 key={item}
-                href={`#${id}`}
+                href={`/#${id}`}
                 className={active === id ? "active" : undefined}
                 aria-current={active === id ? "true" : undefined}
               >
@@ -97,7 +98,7 @@ export default function HeaderClient() {
           {headerNavigation.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`/#${item.toLowerCase()}`}
               onClick={() => setOpen(false)}
             >
               {item}
