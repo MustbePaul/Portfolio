@@ -1,18 +1,22 @@
-# Quality assurance report
+# Quality assurance report — 25 November 2026
 
-Test results and browser evidence are recorded here after validation. The automated suite covers the homepage, navigation, résumé delivery, contact validation and response states, rate limiting, project filters, project case studies and mobile overflow checks.
+## Verified local results
 
-## Recorded results
-
-- TypeScript: `npm run typecheck` passed.
-- ESLint: `npm run lint` passed after internal routes were changed to Next.js links.
-- Production build: `npm run build` passed; the homepage, catalogue, résumé, metadata routes and ten case studies were generated.
-- Playwright: 23/23 Chromium checks passed. They include form validation, mocked success/failure, API rate limiting, résumé PDF response, catalogue filters, case-study metadata, labelled demo-image loading and widths from 280px to 1440px.
-- Browser captures: homepage, catalogue, Serenity Hub, Country Club Limbe and Online Banking case studies at 390px, 768px and 1440px. All fifteen measured 0px horizontal overflow. Captures are kept outside the repository and `public/`.
-- Lighthouse desktop homepage, local production build: performance 100, accessibility 100, best practices 100, SEO 100. This is one local run with the repository's desktop settings, not a field measurement or mobile score.
+- `npm run format:check`: passed.
+- `npm run lint`: passed.
+- `npm run typecheck`: passed.
 - `npm audit --omit=dev`: zero reported production dependency vulnerabilities.
-- Verified the public PDF hash matches the approved two-page November 2026 PDF exactly.
+- `npm run build`: passed; homepage, catalogue, résumé, metadata routes and ten case studies generated.
+- `npm run test:e2e`: 24/24 Chromium checks passed. Coverage includes contact validation, mocked UI success/failure, server honeypot and size rejection, rate limiting, catalogue filters, PDF response, image loading and responsive widths.
+- `npm run lighthouse`: final desktop homepage 100 performance, 100 accessibility, 100 best practices, 100 SEO. One final local production-build run at 1440×900.
+- `npm run lighthouse:mobile`: mobile homepage performance scores across four local runs were 95, 83, 89 and 89 (median 89); accessibility, best practices and SEO were 100 each. The final run scored 89 and used 390×844 emulation, 2× device scale and simulated throttling. Reports are in the ignored `.lighthouseci/` directory. The spread shows single-run variability, especially in total blocking time.
+- Browser captures of homepage, catalogue, résumé and all ten case studies at 390px, 768px and 1440px: 39/39 had 0px horizontal overflow. Captures remain outside the repository. Manual review found the old Serenity login image too small and replaced it with a meaningful demo home image. The mobile résumé page now gives a clear PDF action instead of a blank embedded frame.
+- The committed PDF and updated external Word-export PDF have matching SHA-256 hashes. The PDF has two pages, searchable text, four link annotations, the confirmed formal title and classifications, and no excluded school reference.
+
+## Contact delivery
+
+A controlled message titled `CONTROLLED TEST 2026-11-25 portfolio delivery` was submitted to the current production endpoint. It returned HTTP 201 with `{"ok":true}`. The recipient Gmail Inbox contained that exact message, delivered at 19:37 UTC, with the expected `Reply-To: phiri6paul@gmail.com`. The configured sender currently displays as `Paul Phiri Portfolio <onboarding@resend.dev>`; use a verified custom sending domain later if a branded address is desired. Browser success/failure tests are mocked. The server checks malformed JSON, Zod fields, an empty honeypot, request size and a per-instance rate limit; the 24-test suite verifies those branches. A Vercel instance restart or multiple instances can bypass the in-memory limit as a global control.
 
 ## Limits
 
-The existing Resend delivery path cannot be end-to-end tested without sending a real message. Browser tests mock success and failure responses; API tests exercise the no-credentials branch. Production delivery depends on the existing server-side environment configuration. Automated accessibility scoring does not establish full WCAG 2.2 AA conformance; manual screen-reader review remains useful. The Lighthouse result covers the homepage only.
+Scores are synthetic measurements of the homepage, not production field data or a full accessibility audit. Employer and client screenshots lacking confirmed publication rights were removed. Banking and Serenity screenshots are authentic labelled demos with synthetic data. Other projects remain text-only until safe, authentic images are available. The new preview and its checks need review after the branch is pushed.

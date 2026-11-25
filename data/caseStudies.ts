@@ -13,7 +13,8 @@ export type ProjectRelationship =
   | "Client"
   | "Collaborative"
   | "Academic"
-  | "Repository project";
+  | "Personal Academic Project"
+  | "Personal Project";
 export type ProjectStatus =
   | "In development"
   | "Prototype"
@@ -46,7 +47,7 @@ export type CaseStudy = {
   featured?: boolean;
 };
 
-// Public copy is intentionally conservative. Evidence and unresolved ownership are tracked in docs.
+// Public copy is intentionally conservative. Attribution evidence is tracked in docs.
 export const caseStudies: CaseStudy[] = [
   {
     slug: "country-club-limbe",
@@ -62,7 +63,7 @@ export const caseStudies: CaseStudy[] = [
       "Connected membership, golf and operational workflows across shared services and several application clients.",
     problem:
       "Club operations span members, events, tee times, tournaments, kitchen activity and financial records that need coordinated workflows.",
-    role: "As a current Software Developer, I work on shared backend services, client integration, testing, security remediation and deployment preparation. The ecosystem includes work by other developers.",
+    role: "As a Software Developer Intern at Country Club Limbe, I work on shared backend services, client integration, testing, security remediation and deployment preparation. The ecosystem includes work by other developers.",
     objectives: [
       "Coordinate club workflows through shared services",
       "Support web and mobile clients with consistent access rules",
@@ -131,8 +132,16 @@ export const caseStudies: CaseStudy[] = [
       "Public source is available; production deployment is unverified.",
     learning:
       "Sensitive wellbeing features need careful boundaries between product functionality and medical claims.",
-    image: "/images/serenity-hub.png",
-    imageAlt: "Serenity Hub mobile welcome screen with sign-in actions",
+    image: "/images/serenity-home-demo.png",
+    imageAlt:
+      "Serenity Hub web demo home with a synthetic mood check-in and guided session links",
+    gallery: [
+      {
+        src: "/images/serenity-care-demo.png",
+        alt: "Serenity Hub mobile care directory with clearly fictional sample profiles",
+        caption: "Care directory with fictional profiles",
+      },
+    ],
     repository: "https://github.com/MustbePaul/Serenity-Hub",
     featured: true,
   },
@@ -165,8 +174,6 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Production release has not been verified.",
     learning:
       "Payment flows need explicit verification and recovery paths when the hosting environment changes.",
-    image: "/images/taxihire.webp",
-    imageAlt: "TaxiHire ride booking interface",
     featured: true,
   },
   {
@@ -200,7 +207,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "online-banking-system",
     title: "Online Banking System",
-    relationship: "Repository project",
+    relationship: "Personal Academic Project",
     status: "Prototype",
     categories: [
       "Web applications",
@@ -211,7 +218,7 @@ export const caseStudies: CaseStudy[] = [
       "Banking administration prototype for customers, accounts and controlled transactions.",
     problem:
       "Financial workflows need traceable account changes, permissions and statements.",
-    role: "I implemented the repository project’s customer, account and transaction workflows. Client or company ownership has not been established.",
+    role: "I originally developed this personal academic project during my third-year Human and Design Thinking course at MUST. I later redeveloped its administration workflows in Laravel, Inertia.js, React and TypeScript. The October 2026 Git history documents the newer implementation, not the original start date.",
     features: [
       "Customer and account management",
       "Deposits, withdrawals and transfers",
@@ -236,12 +243,17 @@ export const caseStudies: CaseStudy[] = [
         alt: "Online Banking System transfer form with labelled demo accounts and synthetic values",
         caption: "Transfer workflow in the demo environment",
       },
+      {
+        src: "/images/banking-demo-accounts.png",
+        alt: "Online Banking System account administration list with labelled synthetic demo accounts",
+        caption: "Account administration with synthetic records",
+      },
     ],
   },
   {
     slug: "billing-system",
     title: "Billing System",
-    relationship: "Repository project",
+    relationship: "Personal Project",
     status: "In development",
     categories: [
       "Web applications",
@@ -249,10 +261,10 @@ export const caseStudies: CaseStudy[] = [
       "Business management",
     ],
     summary:
-      "Billing workflows covering quotations, invoices, allocations and credit notes.",
+      "Independently developed billing and financial administration application covering quotations, invoices, allocations and credit notes.",
     problem:
       "Billing records need consistent customer, payment and access workflows.",
-    role: "I built and tested the repository project’s billing APIs and related workflows. Client or company ownership has not been established.",
+    role: "I independently developed the project toward the end of October and beginning of November 2026, building and testing billing APIs and related workflows. The local Git history contains September 2026 commits; that discrepancy is unresolved and is not used to override the supplied development period.",
     features: [
       "Quotations and invoices",
       "Customers and credit notes",
@@ -292,8 +304,6 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Production status is unverified.",
     learning:
       "Shared product work requires clear attribution and consistent customer journeys.",
-    image: "/images/zikospace.webp",
-    imageAlt: "ZikoSpace accommodation listing interface",
   },
   {
     slug: "story-workshop",

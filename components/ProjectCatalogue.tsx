@@ -27,7 +27,8 @@ const relationships: ("All relationships" | ProjectRelationship)[] = [
   "Client",
   "Collaborative",
   "Academic",
-  "Repository project",
+  "Personal Academic Project",
+  "Personal Project",
 ];
 
 export default function ProjectCatalogue() {

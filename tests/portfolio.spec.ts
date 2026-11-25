@@ -85,7 +85,7 @@ test("hero CV actions point to the résumé route and PDF", async ({ page }) => 
   ).toHaveAttribute("href", "/resume.pdf");
 });
 
-test("employment timeline matches the CV and labels NBC as concurrent", async ({
+test("employment timeline matches the CV and labels Naporcas as concurrent", async ({
   page,
 }) => {
   await page.goto("/");
@@ -197,6 +197,20 @@ test("project catalogue filters by category and relationship", async ({
   await expect(
     page.getByRole("heading", { name: "Serenity Hub" }),
   ).toBeVisible();
+  await page.getByLabel("Project category").selectOption("All projects");
+  await page
+    .getByLabel("Project relationship")
+    .selectOption("Personal Academic Project");
+  await expect(page.getByRole("status")).toContainText("1 project");
+  await expect(
+    page.getByRole("heading", { name: "Online Banking System" }),
+  ).toBeVisible();
+  await page
+    .getByLabel("Project relationship")
+    .selectOption("Personal Project");
+  await expect(
+    page.getByRole("heading", { name: "Billing System" }),
+  ).toBeVisible();
 });
 
 test("case study explains attribution and release status", async ({ page }) => {
@@ -216,7 +230,7 @@ test("case study explains attribution and release status", async ({ page }) => {
 test("banking case study loads labelled demo screenshots", async ({ page }) => {
   await page.goto("/projects/online-banking-system");
   const images = page.locator("main img");
-  await expect(images).toHaveCount(2);
+  await expect(images).toHaveCount(3);
   for (const image of await images.all()) {
     await image.scrollIntoViewIfNeeded();
     await expect
@@ -314,6 +328,43 @@ test("contact API rate-limits excessive submissions", async ({ request }) => {
     expect([503, 422]).toContain(response.status());
   }
   expect(limited).toBe(true);
+});
+
+test("contact API rejects invalid fields, honeypot and oversized bodies", async ({
+  request,
+}) => {
+  const base = {
+    name: "Test Visitor",
+    email: "visitor@example.com",
+    subject: "Controlled check",
+    message: "This is a controlled validation check.",
+    website: "",
+  };
+  const headers = { "x-forwarded-for": "203.0.113.42" };
+  expect(
+    (
+      await request.post("/api/contact", {
+        data: { ...base, email: "invalid" },
+        headers,
+      })
+    ).status(),
+  ).toBe(422);
+  expect(
+    (
+      await request.post("/api/contact", {
+        data: { ...base, website: "bot" },
+        headers,
+      })
+    ).status(),
+  ).toBe(422);
+  expect(
+    (
+      await request.post("/api/contact", {
+        data: { ...base, message: "x".repeat(21_000) },
+        headers,
+      })
+    ).status(),
+  ).toBe(413);
 });
 
 for (const size of responsiveSizes) {

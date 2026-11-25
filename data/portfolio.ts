@@ -93,7 +93,7 @@ export const developmentJourney = [
   { year: "Sep 2026", detail: "Concluded employment at Terex Innovation Lab." },
   {
     year: "Oct 2026",
-    detail: "Joined Country Club Limbe as a Software Developer.",
+    detail: "Joined Country Club Limbe as a Software Developer Intern.",
   },
   {
     year: "Present",
@@ -179,7 +179,7 @@ export const skillCategories: SkillCategory[] = [
 export const experiences: Experience[] = [
   {
     id: "ccl",
-    title: "Software Developer",
+    title: "Software Developer Intern",
     company: "Country Club Limbe",
     location: "Limbe, Malawi",
     period: "October 2026 — Present",

@@ -18,9 +18,17 @@ for (const [name, width, height] of [
   for (const [route, file] of [
     ["/", "home"],
     ["/projects", "projects"],
-    ["/projects/serenity-hub", "case-study"],
     ["/projects/country-club-limbe", "club-case-study"],
+    ["/projects/serenity-hub", "serenity-case-study"],
+    ["/projects/taxihire-swiftr", "taxihire-case-study"],
+    ["/projects/buszathu-mobile", "buszathu-case-study"],
     ["/projects/online-banking-system", "banking-case-study"],
+    ["/projects/billing-system", "billing-case-study"],
+    ["/projects/zikospace", "zikospace-case-study"],
+    ["/projects/story-workshop", "story-case-study"],
+    ["/projects/terex-website-redesign", "terex-case-study"],
+    ["/projects/mbewuai", "mbewuai-case-study"],
+    ["/resume", "resume"],
   ]) {
     await page.goto(`http://127.0.0.1:3000${route}`);
     for (const image of await page.locator("img").all())

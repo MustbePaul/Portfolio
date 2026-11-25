@@ -53,7 +53,11 @@ export async function POST(request: Request) {
 
   let payload: unknown;
   try {
-    payload = await request.json();
+    const body = await request.text();
+    if (new TextEncoder().encode(body).length > 20_000) {
+      return NextResponse.json({ error: "Invalid request." }, { status: 413 });
+    }
+    payload = JSON.parse(body);
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }

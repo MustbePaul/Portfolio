@@ -1283,6 +1283,18 @@ footer {
   border: var(--rule-hair) solid var(--color-line-strong);
   background: var(--color-paper);
 }
+.resume-mobile-note {
+  display: none;
+}
+@media (max-width: 51.99rem) {
+  .resume-frame {
+    display: none;
+  }
+  .resume-mobile-note {
+    display: block;
+    margin-block-start: var(--space-xl);
+  }
+}
 @media (min-width: 52rem) {
   .featured-project {
     grid-template-columns: 2.5rem minmax(0, 1fr) auto;

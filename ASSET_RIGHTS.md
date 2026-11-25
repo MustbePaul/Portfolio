@@ -7,6 +7,7 @@ branding, screenshots, artwork, interfaces, or other intellectual property.
 ## Personally owned
 
 - Serenity Hub source code and project material
+- Online Banking System and Billing System demonstration material, with synthetic records only
 - Paul Phiri's résumé and professional portfolio copy
 - Paul Phiri's personal branding
 
@@ -28,9 +29,9 @@ products and are not offered for redistribution.
 The Story Workshop material documents Paul Phiri's contribution to a client
 project. Ownership remains with Story Workshop and the relevant rights holders.
 
-## Repository project demo material
+## Personal project demo material
 
-The Online Banking System screenshots come from its local release assets and are visibly labelled as a demo environment. The account names, identifiers and amounts shown are synthetic. They document the prototype interface; they do not establish product ownership or permission to reuse the branding outside this portfolio. Confirm publication rights before production approval.
+The Online Banking System screenshots come from its local release assets and are visibly labelled as a demo environment. The account names, identifiers and amounts shown are synthetic. The owner explicitly authorised publication of personal-project screenshots on 25 November 2026. These images document the prototype interface and do not imply live banking operations.
 
 ## Third-party or separately licensed
 

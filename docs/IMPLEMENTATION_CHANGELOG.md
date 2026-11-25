@@ -1,5 +1,14 @@
 # Implementation changelog
 
+## Final release corrections — 25 November 2026
+
+- Applied the user-confirmed Country Club Limbe formal title, Software Developer Intern, across public content, structured data, CV and profile drafts while keeping Full-Stack Software Developer as overall positioning.
+- Classified Banking as a personal academic project with a distinct later redevelopment, and Billing as an independent personal project. Documented the unexplained September Billing Git history alongside the user-supplied late October–early November period.
+- Re-exported the corrected two-page Word CV to PDF, synchronised the portfolio download, and removed the obsolete HTML PDF generator that could overwrite it.
+- Added authentic sanitised Serenity and Banking demo imagery; removed employer and client images with unconfirmed publication rights.
+- Confirmed a controlled contact message reached the recipient Inbox with the expected Reply-To header. Added a body-size guard for requests without Content-Length.
+- Updated GitHub Actions to Node 24-runtime action versions, added a separate mobile Lighthouse run, and created engineering handover and LinkedIn/profile drafts.
+
 ## 25 November 2026
 
 - Created a development branch from a clean `main` worktree.

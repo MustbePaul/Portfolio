@@ -24,6 +24,9 @@ export default function ResumePageClient() {
           Explore projects
         </Link>
       </div>
+      <p className="resume-mobile-note">
+        Open or download the PDF to read the full two-page CV on a phone.
+      </p>
       <iframe
         className="resume-frame"
         title="Paul Napoleon Phiri 2026 curriculum vitae"
