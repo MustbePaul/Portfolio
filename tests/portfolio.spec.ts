@@ -213,6 +213,21 @@ test("case study explains attribution and release status", async ({ page }) => {
   );
 });
 
+test("banking case study loads labelled demo screenshots", async ({ page }) => {
+  await page.goto("/projects/online-banking-system");
+  const images = page.locator("main img");
+  await expect(images).toHaveCount(2);
+  for (const image of await images.all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate((element) => (element as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+    await expect(image).toHaveAttribute("alt", /demo|synthetic/i);
+  }
+});
+
 test("validates the contact form", async ({ page }) => {
   await page.goto("/#contact");
   await page.getByRole("button", { name: "Send message" }).click();

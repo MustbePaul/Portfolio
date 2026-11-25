@@ -41,6 +41,7 @@ export type CaseStudy = {
   period?: string;
   image?: string;
   imageAlt?: string;
+  gallery?: { src: string; alt: string; caption: string }[];
   repository?: string;
   featured?: boolean;
 };
@@ -226,6 +227,16 @@ export const caseStudies: CaseStudy[] = [
     learning:
       "Financial prototypes benefit from explicit access checks and transaction auditability.",
     repository: "https://github.com/MustbePaul/Online-Banking-System-",
+    image: "/images/banking-demo-dashboard.png",
+    imageAlt:
+      "Online Banking System dashboard in a labelled demo environment with synthetic account activity",
+    gallery: [
+      {
+        src: "/images/banking-demo-transfer.png",
+        alt: "Online Banking System transfer form with labelled demo accounts and synthetic values",
+        caption: "Transfer workflow in the demo environment",
+      },
+    ],
   },
   {
     slug: "billing-system",

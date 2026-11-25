@@ -1183,6 +1183,27 @@ footer {
   background: var(--color-image-shade);
   font-size: var(--text-xs);
 }
+.case-gallery {
+  margin-block: var(--space-3xl);
+}
+.case-gallery h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+}
+.case-gallery figure {
+  margin: var(--space-lg) 0;
+}
+.case-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: var(--rule-hair) solid var(--color-line-strong);
+}
+.case-gallery figcaption {
+  margin-block-start: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
 .case-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

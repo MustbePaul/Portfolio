@@ -28,6 +28,10 @@ products and are not offered for redistribution.
 The Story Workshop material documents Paul Phiri's contribution to a client
 project. Ownership remains with Story Workshop and the relevant rights holders.
 
+## Repository project demo material
+
+The Online Banking System screenshots come from its local release assets and are visibly labelled as a demo environment. The account names, identifiers and amounts shown are synthetic. They document the prototype interface; they do not establish product ownership or permission to reuse the branding outside this portfolio. Confirm publication rights before production approval.
+
 ## Third-party or separately licensed
 
 - Portrait photography or generated portrait material, where applicable

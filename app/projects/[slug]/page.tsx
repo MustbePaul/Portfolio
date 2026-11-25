@@ -81,9 +81,40 @@ export default async function CaseStudyPage({ params }: Props) {
               sizes="(max-width: 800px) 100vw, 80vw"
             />
             <figcaption>
-              Application screenshot from existing portfolio assets.
+              {project.slug === "online-banking-system"
+                ? "Prototype demo environment with synthetic records."
+                : "Application screenshot from reviewed local assets."}
             </figcaption>
           </figure>
+        )}
+        {project.gallery && (
+          <section
+            className="case-gallery"
+            aria-label="Application screenshots"
+          >
+            <h2>Inside the application</h2>
+            <div>
+              {project.gallery.map((shot) => (
+                <figure key={shot.src}>
+                  <a
+                    href={shot.src}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open full image: ${shot.caption}`}
+                  >
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      width={1440}
+                      height={900}
+                      sizes="(max-width: 800px) 100vw, 80vw"
+                    />
+                  </a>
+                  <figcaption>{shot.caption} · Open full image</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
         )}
         <div className="case-layout">
           <div className="case-narrative">

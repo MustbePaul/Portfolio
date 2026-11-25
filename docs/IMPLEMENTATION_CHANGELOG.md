@@ -13,3 +13,4 @@
 - Preserved the contact endpoint, existing visual identity, photograph and authentic project screenshots.
 - Added basic security response headers and a repeatable browser screenshot capture script.
 - Added a sanitised architecture flow to the Country Club Limbe case study and opened a draft review PR.
+- Added two source-authentic Banking prototype screenshots from the labelled demo environment, including a full-size linked gallery image.

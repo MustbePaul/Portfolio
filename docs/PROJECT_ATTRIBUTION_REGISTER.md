@@ -17,6 +17,8 @@ This register is sanitised for a public repository. The CV audit of 25 November 
 
 ## Excluded pending evidence
 
+The Online Banking System images are local release-asset captures explicitly labelled as a demo environment. Visible account names and values are synthetic demonstration data; they are presented as prototype screenshots, not real banking activity.
+
 Blood Bridge has no established individual implementation scope. Stonegate, Achibale, Gist MW, Pharmacy, Tricore, Pamodzi and RBM work need clearer personal scope, ownership or release evidence before public case studies. The separate House Rentals listing is excluded because it duplicates ZikoSpace. Publicly accessible repositories are not automatically portfolio entries.
 
 ## Questions to resolve
