@@ -151,6 +151,8 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/serenity-home-demo.png",
     imageAlt:
       "Serenity Hub web demo home with a synthetic mood check-in and guided session links",
+    imageCaption:
+      "Serenity Hub web home in a local demo with synthetic wellbeing content.",
     gallery: [
       {
         src: "/images/serenity-care-demo.png",
@@ -264,6 +266,8 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/buszathu-flutter-trip-demo.webp",
     imageAlt:
       "BusZathu Flutter trip details running in Chrome against a local API with synthetic trip data",
+    imageCaption:
+      "Trip details in the Flutter client using a local demonstration API and synthetic schedule data.",
     gallery: [
       {
         src: "/images/buszathu-flutter-seats-demo.webp",
@@ -313,6 +317,8 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/banking-demo-dashboard.png",
     imageAlt:
       "Online Banking System dashboard in a labelled demo environment with synthetic account activity",
+    imageCaption:
+      "Online Banking System prototype dashboard with synthetic account activity.",
     gallery: [
       {
         src: "/images/banking-demo-transfer.png",
