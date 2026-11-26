@@ -101,11 +101,23 @@ export const caseStudies: CaseStudy[] = [
       "Coordinating several clients around shared domain services requires clear API contracts and staged release checks.",
     period: "October 2026–present",
     website: "https://countryclublimbe.com/",
-    image: "/images/country-club-limbe-public-site.webp",
+    image: "/images/ccl-golf-members-demo.webp",
     imageAlt:
-      "Country Club Limbe public website homepage, captured in November 2026",
+      "Country Club Limbe golf membership operations in a labelled synthetic local showcase",
     imageCaption:
-      "Country Club Limbe's public website, November 2026. Shown for organisation context; the digital ecosystem work described below is separate.",
+      "Golf membership operations in the 5 November 2026 local synthetic showcase; integration work is shared across the team.",
+    gallery: [
+      {
+        src: "/images/ccl-kitchen-queue-demo.webp",
+        alt: "Country Club Limbe kitchen order queue with an explicitly synthetic demonstration order",
+        caption: "Kitchen order queue with a synthetic demonstration order",
+      },
+      {
+        src: "/images/ccl-tournament-gate-demo.webp",
+        alt: "Country Club Limbe tournament gate control with an explicitly synthetic participant",
+        caption: "Tournament gate control with a synthetic participant",
+      },
+    ],
     featured: true,
   },
   {
@@ -145,6 +157,16 @@ export const caseStudies: CaseStudy[] = [
         alt: "Serenity Hub mobile care directory with clearly fictional sample profiles",
         caption: "Care directory with fictional profiles",
       },
+      {
+        src: "/images/serenity-flutter-home-demo.webp",
+        alt: "Serenity Hub Flutter mobile guest home with built-in synthetic content",
+        caption: "Flutter mobile guest review home in Chrome",
+      },
+      {
+        src: "/images/serenity-flutter-care-demo.webp",
+        alt: "Serenity Hub Flutter mobile care directory with fictional sample profiles",
+        caption: "Flutter mobile care flow with fictional profiles",
+      },
     ],
     repository: "https://github.com/MustbePaul/Serenity-Hub",
     featured: true,
@@ -178,10 +200,40 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Production release has not been verified.",
     learning:
       "Payment flows need explicit verification and recovery paths when the hosting environment changes.",
-    image: "/images/swiftr-public-site.webp",
-    imageAlt: "SWIFTR public taxi website homepage, captured in November 2026",
+    image: "/images/swiftr-admin-demo.webp",
+    imageAlt:
+      "SWIFTR admin dashboard from the local Laravel and React web application with synthetic ride records",
     imageCaption:
-      "Current public SWIFTR website, November 2026. Shown for product context; my contribution was to the separate booking web application.",
+      "SWIFTR web application admin dashboard (commit c77b588, isolated local demo with seeded records).",
+    gallery: [
+      {
+        src: "/images/swiftr-passenger-previous-demo.webp",
+        alt: "SWIFTR passenger dashboard in an earlier committed web version with synthetic rides",
+        caption:
+          "Passenger dashboard in earlier web commit 5e4988f, before the move to the mobile app",
+      },
+      {
+        src: "/images/swiftr-booking-previous-demo.webp",
+        alt: "SWIFTR web ride request form and map in the earlier local demo",
+        caption: "Ride request workflow in earlier web commit 5e4988f",
+      },
+      {
+        src: "/images/swiftr-driver-previous-demo.webp",
+        alt: "TaxiHire driver dashboard in the earlier committed web version with synthetic rides",
+        caption: "Driver dashboard in earlier web commit 5e4988f",
+      },
+      {
+        src: "/images/swiftr-passenger-payments-previous-demo.webp",
+        alt: "SWIFTR passenger payment interface in the earlier local web demo",
+        caption:
+          "Passenger payment interface in earlier web commit 5e4988f; no real gateway transaction",
+      },
+      {
+        src: "/images/swiftr-payments-demo.webp",
+        alt: "SWIFTR admin payment management in the isolated local demo",
+        caption: "Admin payment management in the local SWIFTR web application",
+      },
+    ],
     featured: true,
   },
   {
@@ -209,6 +261,23 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Mobile release is unverified.",
     learning:
       "Working against an established backend calls for clear handling of API response and booking state.",
+    image: "/images/buszathu-flutter-trip-demo.webp",
+    imageAlt:
+      "BusZathu Flutter trip details running in Chrome against a local API with synthetic trip data",
+    gallery: [
+      {
+        src: "/images/buszathu-flutter-seats-demo.webp",
+        alt: "BusZathu Flutter seat selection with a synthetic fare and selected seat 1A",
+        caption:
+          "Seat selection in the local Flutter Chrome demo; fare and availability came from the disposable API",
+      },
+      {
+        src: "/images/buszathu-flutter-passenger-demo.webp",
+        alt: "BusZathu Flutter passenger details form for a synthetic booking",
+        caption:
+          "Passenger details form in the local Flutter Chrome demo; no real passenger data",
+      },
+    ],
     featured: true,
   },
   {
@@ -342,6 +411,19 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Production status is unverified.",
     learning:
       "Shared product work requires clear attribution and consistent customer journeys.",
+    image: "/images/zikospace-listings-demo.webp",
+    imageAlt:
+      "ZikoSpace property search and sample listings in a local Laravel demo",
+    imageCaption:
+      "ZikoSpace local development version with synthetic listings and Unsplash sample photography.",
+    gallery: [
+      {
+        src: "/images/zikospace-details-demo.webp",
+        alt: "ZikoSpace sample accommodation details and booking access controls",
+        caption:
+          "Sample accommodation details and booking access controls in the local demo",
+      },
+    ],
   },
   {
     slug: "story-workshop",
@@ -367,11 +449,23 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Current production status is unverified.",
     learning:
       "Editorial systems need useful publishing controls without burdening the public experience.",
-    image: "/images/story-workshop-public-site.webp",
+    image: "/images/story-workshop-local-home.webp",
     imageAlt:
-      "Story Workshop public website homepage, captured in November 2026",
+      "Story Workshop public homepage served from the collaborative local React source",
     imageCaption:
-      "Current public Story Workshop website, November 2026. Developed collaboratively; the image does not identify individual contributions.",
+      "Public homepage from the local collaborative React implementation (commit 1ae6e3b).",
+    gallery: [
+      {
+        src: "/images/story-workshop-local-cms-demo.webp",
+        alt: "Story Workshop CMS dashboard with an empty synthetic demo database",
+        caption: "Protected CMS dashboard in an isolated local demo",
+      },
+      {
+        src: "/images/story-workshop-local-editor-demo.webp",
+        alt: "Story Workshop article editor filled with fictional demonstration copy",
+        caption: "Article editing workflow with an unsaved fictional draft",
+      },
+    ],
   },
   {
     slug: "terex-website-redesign",
@@ -396,6 +490,18 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Under review; production approval is unverified.",
     learning:
       "A redesign should communicate the organisation clearly before adding visual effects.",
+    image: "/images/terex-redesign-home-demo.webp",
+    imageAlt:
+      "Terex Innovation Lab proposed redesign homepage running from the local Laravel and React source",
+    imageCaption:
+      "Proposed Terex website redesign running locally from commit 8b51b24; production approval remains unverified.",
+    gallery: [
+      {
+        src: "/images/terex-redesign-services-demo.webp",
+        alt: "Services page from the local Terex website redesign",
+        caption: "Services page in the proposed local redesign",
+      },
+    ],
   },
   {
     slug: "mbewuai",
@@ -420,5 +526,22 @@ export const caseStudies: CaseStudy[] = [
     deployment: "Academic prototype; field deployment is unverified.",
     learning:
       "Project coordination and presentation are distinct from claiming sole technical authorship.",
+    image: "/images/mbewuai-overview-demo.webp",
+    imageAlt:
+      "MbewuAI academic team prototype dashboard with simulated farm data",
+    imageCaption:
+      "Academic team prototype dashboard running locally with simulated sensor data.",
+    gallery: [
+      {
+        src: "/images/mbewuai-fields-demo.webp",
+        alt: "MbewuAI field monitoring with simulated sensor readings",
+        caption: "Field monitoring with simulated sensor readings",
+      },
+      {
+        src: "/images/mbewuai-risk-demo.webp",
+        alt: "MbewuAI crop-risk predictions in the simulated prototype",
+        caption: "Crop-risk predictions from the simulated prototype",
+      },
+    ],
   },
 ];
