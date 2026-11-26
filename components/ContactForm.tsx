@@ -1,15 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  ArrowUpRight,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  MessageCircle,
-} from "lucide-react";
-import { profile } from "@/data/portfolio";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ContactForm() {
   const [delivery, setDelivery] = useState<
@@ -85,159 +77,91 @@ export default function ContactForm() {
     }
   };
 
-  const whatsApp = `https://wa.me/265997765664?text=${encodeURIComponent("Hello Paul, I found your portfolio and would like to discuss a project.")}`;
-
   return (
-    <section id="contact" className="section section-alt">
-      <div className="container">
-        <div className="section-head">
-          <p className="eyebrow">Contact</p>
-          <h2>Let&apos;s build something useful</h2>
-          <p>
-            Tell me what you are working on, where it is stuck and what a good
-            outcome looks like.
-          </p>
-        </div>
-        <div className="contact-grid">
-          <div className="contact-details">
-            <div className="detail">
-              <Mail />
-              <div>
-                <span>Email</span>
-                <a href={`mailto:${profile.email}`}>{profile.email}</a>
-              </div>
-            </div>
-            <div className="detail">
-              <MapPin />
-              <div>
-                <span>Location</span>
-                <p>{profile.location}</p>
-              </div>
-            </div>
-            <div className="quick-actions">
-              <a className="button secondary" href={`mailto:${profile.email}`}>
-                Quick email <Mail />
-              </a>
-              <a
-                className="button secondary"
-                href={whatsApp}
-                target="_blank"
-                rel="noreferrer"
-              >
-                WhatsApp <MessageCircle />
-              </a>
-            </div>
-            <div className="socials">
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-              >
-                <Github />
-              </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-              >
-                <Linkedin />
-              </a>
-            </div>
-          </div>
-          <form
-            className="glass-card contact-form"
-            onSubmit={(event) => {
-              void submit(event);
-            }}
-            noValidate
-          >
-            <div className="field">
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                name="name"
-                autoComplete="name"
-                maxLength={80}
-                aria-invalid={!!errors.name}
-                aria-describedby="name-error"
-              />
-              <p id="name-error" className="field-message">
-                {errors.name}
-              </p>
-            </div>
-            <div className="field">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                maxLength={254}
-                aria-invalid={!!errors.email}
-                aria-describedby="email-error"
-              />
-              <p id="email-error" className="field-message">
-                {errors.email}
-              </p>
-            </div>
-            <div className="field">
-              <label htmlFor="subject">Subject</label>
-              <input
-                id="subject"
-                name="subject"
-                autoComplete="off"
-                maxLength={120}
-                aria-invalid={!!errors.subject}
-                aria-describedby="subject-error"
-              />
-              <p id="subject-error" className="field-message">
-                {errors.subject}
-              </p>
-            </div>
-            <div className="field">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={6}
-                maxLength={5000}
-                aria-invalid={!!errors.message}
-                aria-describedby="message-error"
-              />
-              <p id="message-error" className="field-message">
-                {errors.message}
-              </p>
-            </div>
-            <div className="honeypot" aria-hidden="true">
-              <label htmlFor="website">Website</label>
-              <input
-                id="website"
-                name="website"
-                tabIndex={-1}
-                autoComplete="off"
-              />
-            </div>
-            <button
-              className="button primary submit"
-              disabled={isSubmitting}
-              type="submit"
-            >
-              {isSubmitting ? "Sending..." : "Send message"} <ArrowUpRight />
-            </button>
-            <p
-              className={`form-note ${delivery.state === "error" ? "form-note-error" : ""}`}
-              role={delivery.state === "error" ? "alert" : "status"}
-              aria-live="polite"
-            >
-              {delivery.state === "idle"
-                ? "Your message is delivered securely by email."
-                : delivery.message}
-            </p>
-          </form>
-        </div>
+    <form
+      className="glass-card contact-form"
+      onSubmit={(event) => {
+        void submit(event);
+      }}
+      noValidate
+    >
+      <div className="field">
+        <label htmlFor="name">Name</label>
+        <input
+          id="name"
+          name="name"
+          autoComplete="name"
+          maxLength={80}
+          aria-invalid={!!errors.name}
+          aria-describedby="name-error"
+        />
+        <p id="name-error" className="field-message">
+          {errors.name}
+        </p>
       </div>
-    </section>
+      <div className="field">
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          maxLength={254}
+          aria-invalid={!!errors.email}
+          aria-describedby="email-error"
+        />
+        <p id="email-error" className="field-message">
+          {errors.email}
+        </p>
+      </div>
+      <div className="field">
+        <label htmlFor="subject">Subject</label>
+        <input
+          id="subject"
+          name="subject"
+          autoComplete="off"
+          maxLength={120}
+          aria-invalid={!!errors.subject}
+          aria-describedby="subject-error"
+        />
+        <p id="subject-error" className="field-message">
+          {errors.subject}
+        </p>
+      </div>
+      <div className="field">
+        <label htmlFor="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows={6}
+          maxLength={5000}
+          aria-invalid={!!errors.message}
+          aria-describedby="message-error"
+        />
+        <p id="message-error" className="field-message">
+          {errors.message}
+        </p>
+      </div>
+      <div className="honeypot" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+      </div>
+      <button
+        className="button primary submit"
+        disabled={isSubmitting}
+        type="submit"
+      >
+        {isSubmitting ? "Sending..." : "Send message"} <ArrowUpRight />
+      </button>
+      <p
+        className={`form-note ${delivery.state === "error" ? "form-note-error" : ""}`}
+        role={delivery.state === "error" ? "alert" : "status"}
+        aria-live="polite"
+      >
+        {delivery.state === "idle"
+          ? "Your message is delivered securely by email."
+          : delivery.message}
+      </p>
+    </form>
   );
 }

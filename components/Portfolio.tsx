@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ContactForm from "@/components/ContactForm";
+import ContactSection from "@/components/ContactSection";
 import Link from "next/link";
 import HeaderClient from "@/components/HeaderClient";
 import {
@@ -357,7 +357,7 @@ export default function Portfolio() {
         <Qualifications />
         <Projects />
         <Services />
-        <ContactForm />
+        <ContactSection />
       </main>
       <footer>
         <div className="container footer-inner">

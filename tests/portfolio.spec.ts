@@ -170,6 +170,23 @@ test("mobile menu opens, closes, and navigates", async ({ page }) => {
   await expect(menu).toHaveAttribute("aria-expanded", "false");
 });
 
+test("direct contact anchor reaches the form after deferred section layout", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/#contact");
+  await expect
+    .poll(
+      async () => (await page.locator("#contact").boundingBox())?.y ?? 9999,
+      {
+        timeout: 10_000,
+      },
+    )
+    .toBeLessThan(844);
+  await page.locator("#name").focus();
+  await expect(page.locator("#name")).toBeFocused();
+});
+
 test("résumé route presents the verified PDF and canonical URL", async ({
   page,
 }) => {
