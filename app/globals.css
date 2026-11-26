@@ -75,6 +75,19 @@ img {
 .section-alt {
   background: var(--color-bg-soft);
 }
+#skills,
+#experience,
+#qualification,
+#projects,
+#services,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 48rem;
+}
+main:has(.section:target)
+  :is(#skills, #experience, #qualification, #projects, #services, #contact) {
+  content-visibility: visible;
+}
 .site-header {
   position: fixed;
   inset: var(--space-sm) 0 auto;
