@@ -1116,7 +1116,7 @@ footer {
   overflow: hidden;
 }
 .catalogue-image img {
-  object-fit: cover;
+  object-fit: contain;
 }
 .catalogue-card-body {
   padding: clamp(1.25rem, 3vw, 2rem);

@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { caseStudies } from "../data/caseStudies";
 
 const responsiveSizes = [
   { width: 280, height: 640 },
@@ -251,41 +252,52 @@ test("banking case study loads labelled demo screenshots", async ({ page }) => {
   }
 });
 
-test("public website captures load with clear contribution context", async ({
+test("case studies do not present unrelated public websites as project evidence", async ({
   page,
 }) => {
-  for (const [slug, label] of [
-    ["story-workshop", "Current public Story Workshop website"],
-    ["taxihire-swiftr", "Current public SWIFTR website"],
+  for (const slug of [
+    "story-workshop",
+    "taxihire-swiftr",
+    "country-club-limbe",
   ]) {
     await page.goto(`/projects/${slug}`);
-    await expect(page.locator(".case-image figcaption")).toContainText(label);
-    const image = page.locator(".case-image img");
-    await expect
-      .poll(() =>
-        image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
-      )
-      .toBeGreaterThan(0);
+    await expect(page.locator('img[src*="public-site"]')).toHaveCount(0);
   }
 });
 
-test("Country Club Limbe uses the correct public domain and contextual capture", async ({
-  page,
-}) => {
+test("Country Club Limbe uses the correct public domain", async ({ page }) => {
   await page.goto("/projects/country-club-limbe");
   await expect(
     page.getByRole("link", { name: "Visit public website" }),
   ).toHaveAttribute("href", "https://countryclublimbe.com/");
-  await expect(page.locator(".case-image figcaption")).toContainText(
-    "digital ecosystem work described below is separate",
-  );
-  const image = page.locator(".case-image img");
-  await image.scrollIntoViewIfNeeded();
-  await expect
-    .poll(() =>
-      image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
-    )
-    .toBeGreaterThan(0);
+});
+
+test("every published case-study image loads on desktop and mobile", async ({
+  page,
+}) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const study of caseStudies) {
+      await page.goto(`/projects/${study.slug}`);
+      const images = page.locator(
+        "main .case-image img, main .case-gallery img",
+      );
+      const expectedCount =
+        (study.image ? 1 : 0) + (study.gallery?.length ?? 0);
+      await expect(images, `${study.slug} at ${width}px`).toHaveCount(
+        expectedCount,
+      );
+      for (const image of await images.all()) {
+        await image.scrollIntoViewIfNeeded();
+        await expect
+          .poll(() =>
+            image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
+          )
+          .toBeGreaterThan(0);
+      }
+      await expect(page.locator('main img[src*="public-site"]')).toHaveCount(0);
+    }
+  }
 });
 
 test("billing case study shows six synthetic demo workflows", async ({
