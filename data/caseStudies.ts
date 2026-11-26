@@ -45,6 +45,7 @@ export type CaseStudy = {
   imageCaption?: string;
   gallery?: { src: string; alt: string; caption: string }[];
   repository?: string;
+  website?: string;
   featured?: boolean;
 };
 
@@ -99,6 +100,12 @@ export const caseStudies: CaseStudy[] = [
     learning:
       "Coordinating several clients around shared domain services requires clear API contracts and staged release checks.",
     period: "October 2026–present",
+    website: "https://countryclublimbe.com/",
+    image: "/images/country-club-limbe-public-site.webp",
+    imageAlt:
+      "Country Club Limbe public website homepage, captured in November 2026",
+    imageCaption:
+      "Country Club Limbe's public website, November 2026. Shown for organisation context; the digital ecosystem work described below is separate.",
     featured: true,
   },
   {

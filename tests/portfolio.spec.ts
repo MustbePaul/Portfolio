@@ -269,6 +269,25 @@ test("public website captures load with clear contribution context", async ({
   }
 });
 
+test("Country Club Limbe uses the correct public domain and contextual capture", async ({
+  page,
+}) => {
+  await page.goto("/projects/country-club-limbe");
+  await expect(
+    page.getByRole("link", { name: "Visit public website" }),
+  ).toHaveAttribute("href", "https://countryclublimbe.com/");
+  await expect(page.locator(".case-image figcaption")).toContainText(
+    "digital ecosystem work described below is separate",
+  );
+  const image = page.locator(".case-image img");
+  await image.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() =>
+      image.evaluate((node) => (node as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+});
+
 test("billing case study shows six synthetic demo workflows", async ({
   page,
 }) => {

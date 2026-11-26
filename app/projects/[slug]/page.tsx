@@ -192,6 +192,16 @@ export default async function CaseStudyPage({ params }: Props) {
                 View public source ↗
               </a>
             )}
+            {project.website && (
+              <a
+                className="text-link"
+                href={project.website}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Visit public website ↗
+              </a>
+            )}
           </aside>
         </div>
         <nav className="case-next" aria-label="More projects">
